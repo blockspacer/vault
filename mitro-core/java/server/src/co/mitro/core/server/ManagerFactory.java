@@ -23,6 +23,8 @@
  *******************************************************************************/
 package co.mitro.core.server;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -82,14 +84,14 @@ public class ManagerFactory implements LifeCycle.Listener {
         logger.error("unknown error processing logs", e);
       }
     }
-    
+
   }
-  
+
   // TODO: this may not need to be synchronized.
   public synchronized void transactionComplete(String txnId) {
     logProcessor.execute(new BackgroundAuditProcessor(txnId));
   }
-  
+
   // TODO: Remove this; Inject ManagerFactory everywhere instead
   public static String DATABASE_URL = "jdbc:postgresql://localhost:5432/mitro";
 
@@ -97,7 +99,7 @@ public class ManagerFactory implements LifeCycle.Listener {
   private static ManagerFactory INSTANCE = new ManagerFactory();
 
   public static ManagerFactory getInstance() {
-	  return INSTANCE;
+    return INSTANCE;
   }
 
   // TODO: Figure out a better way to inject this
@@ -109,8 +111,8 @@ public class ManagerFactory implements LifeCycle.Listener {
 
   // For testing; remove this! It is thread unsafe
   public static void unsafeRecreateSingleton(ConnectionMode mode) {
-	  INSTANCE = new ManagerFactory(ManagerFactory.DATABASE_URL, new Manager.Pool(),
-	      IDLE_TXN_POLL_SECONDS, TimeUnit.SECONDS, mode);
+    INSTANCE = new ManagerFactory(ManagerFactory.DATABASE_URL, new Manager.Pool(),
+        IDLE_TXN_POLL_SECONDS, TimeUnit.SECONDS, mode);
   }
 
   private final String databaseUrl;
@@ -149,12 +151,33 @@ public class ManagerFactory implements LifeCycle.Listener {
   }
 
   private static String getDatabaseUrl(){
-    return System.getProperty("database_url", ManagerFactory.DATABASE_URL);
+    String databaseUrl = System.getenv("DATABASE_URL");
+    if (databaseUrl == null) {
+      databaseUrl = ManagerFactory.DATABASE_URL;
+    }
+    return databaseUrl;
+  }
+
+  private JdbcConnectionSource createJdbcConnectionSource(String url) throws SQLException {
+    URI dbUri;
+    try {
+      dbUri = new URI(url);
+    } catch (URISyntaxException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+      return null;
+    }
+
+    String username = dbUri.getUserInfo().split(":")[0];
+    String password = dbUri.getUserInfo().split(":")[1];
+    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+
+    return new JdbcConnectionSource(dbUrl, username, password);
   }
 
   private void tryCreateTables() {
     try {
-      JdbcConnectionSource connectionSource = new JdbcConnectionSource(databaseUrl);
+      JdbcConnectionSource connectionSource = createJdbcConnectionSource(databaseUrl);
       try {
         Manager.createTablesIfNotExists(connectionSource);
       } finally {
@@ -172,12 +195,13 @@ public class ManagerFactory implements LifeCycle.Listener {
    * TODO: Rethink the Manager/Factory/Pool interfaces; it is hard to use
    * pooled Managers correctly: technically, this should be locked/unlocked
    * when used, since the Pool periodically checks for idle managers.
+   * @throws URISyntaxException 
    */
   public Manager newManager() throws SQLException {
     // TODO: Use a different DB for the auditConnection?
-    JdbcConnectionSource connection = new JdbcConnectionSource(databaseUrl);
+    JdbcConnectionSource connection = createJdbcConnectionSource(databaseUrl);
     // we use a separate connection so it is a different transaction
-    JdbcConnectionSource auditConnection = new JdbcConnectionSource(databaseUrl);
+    JdbcConnectionSource auditConnection = createJdbcConnectionSource(databaseUrl);
 
     // TODO: support creating unpooled connections?
     Manager m = new Manager(pool, connection, auditConnection, mode);
