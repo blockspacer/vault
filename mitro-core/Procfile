@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -Dhttp_port=$PORT -jar build/mitrocore.jar $JAR_OPTS
