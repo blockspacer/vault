@@ -107,7 +107,7 @@ LRUCache.prototype.getItem = function(key) {
     // retrieve the item from the cache
     var item = this.items[key];
     
-    if (item !== null) {
+    if (item !== undefined) {
         if (!this._isExpired(item)) {
             // if the item is not expired
             // update its last accessed date
@@ -121,7 +121,7 @@ LRUCache.prototype.getItem = function(key) {
     
     // return the item value (if it exists), or null
     var returnVal = null;
-    if (item !== null) {
+    if (item !== undefined) {
         returnVal = item.value;
         this.stats.hits++;
     } else {
@@ -162,18 +162,18 @@ LRUCache.prototype.setItem = function(key, value, options) {
             throw new Error("key cannot be null or empty");
         this.key = k;
         this.value = v;
-        if (o === null)
+        if (o === undefined)
             o = {};
-        if (o.expirationAbsolute !== null)
+        if (o.expirationAbsolute !== undefined)
             o.expirationAbsolute = o.expirationAbsolute.getTime();
-        if (o.priority === null)
+        if (o.priority === undefined)
             o.priority = LRUCachePriority.Normal;
         this.options = o;
         this.lastAccessed = new Date().getTime();
     }
 
     // add a new cache item to the cache
-    if (this.items[key] !== null)
+    if (this.items[key] !== undefined)
         this._removeItem(key);
     this._addItem(new LRUCacheItem(key, value, options));
     
@@ -248,7 +248,7 @@ LRUCache.prototype._removeItem = function(key) {
     this.count--;
     
     // if there is a callback function, call it at the end of execution
-    if (item.options.callback !== null) {
+    if (item.options.callback !== undefined) {
         var callback = function() {
             item.options.callback(item.key, item.value);
         };
