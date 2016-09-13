@@ -57,3 +57,28 @@ We have a set of tests that use NodeJS to verify the JS client library and serve
 * Start Postgres: `postgres -D build/postgres`
 * Run the test: `cd js/cli && ./runtests.sh`
 * When it completes, scroll up and look for the word `SUCCESS`, above the Java stack trace.
+
+Heroku Deployment
+---------------
+
+A fairly manual process for now.
+
+1. Build jar file
+```
+$ cd mitro-core
+$ ant jar
+```
+2. Copy keyczar secrets (generate if needed, see README)
+```
+$ cp -r production/ansible/mitrocore_secrets build/
+```
+3. Copy Heroku Procfile
+```
+$ cp Procfile build/
+```
+4. Deploy jar to heroku
+```
+$ cd build
+$ heroku deploy:jar mitrocore.jar --includes mitrocore_secrets --app [APP_NAME]
+```
+Doing it this way ensures files and jar are deployed with the right directory structure.
