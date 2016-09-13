@@ -168,11 +168,22 @@ public class ManagerFactory implements LifeCycle.Listener {
       return null;
     }
 
-    String username = dbUri.getUserInfo().split(":")[0];
-    String password = dbUri.getUserInfo().split(":")[1];
-    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+    String username = null;
+    String password = null;
+    String dbUrl = null;
+    if (dbUri.getUserInfo() != null) {
+      username = dbUri.getUserInfo().split(":")[0];
+      password = dbUri.getUserInfo().split(":")[1];
+      dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+    } else {
+      dbUrl = dbUri.toString();
+    }
 
-    return new JdbcConnectionSource(dbUrl, username, password);
+    if (username != null && password != null) {
+      return new JdbcConnectionSource(dbUrl, username, password);
+    } else {
+      return new JdbcConnectionSource(dbUrl);
+    }
   }
 
   private void tryCreateTables() {
