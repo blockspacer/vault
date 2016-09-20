@@ -40,7 +40,7 @@ import com.google.gson.reflect.TypeToken;
 public class OldJsonData {
   // hack for gson
   static final Type LIST_OF_SERVICES_TYPE = new TypeToken<List<OldJsonService>>() {}.getType();
-  static final String STATIC_HOSTNAME = "https://www.mitro.co";
+  static final String STATIC_HOSTNAME = "https://www.vaultapp.xyz";
 
   public static class OldJsonService {
     String auth_type;

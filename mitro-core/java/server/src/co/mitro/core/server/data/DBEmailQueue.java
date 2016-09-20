@@ -145,7 +145,7 @@ public class DBEmailQueue {
       hashParams.put("u", recipientAddress);
       hashParams.put("p",  generatedPassword);
 
-      String invitationUrl = Util.buildUrl("https://www.mitro.co",
+      String invitationUrl = Util.buildUrl("https://www.vaultapp.xyz",
                 INVITE_USER_PATH + "#" + Util.urlEncode(hashParams), null);
 
       Map<String, String> emailParams = new HashMap<String, String>();

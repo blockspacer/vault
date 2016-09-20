@@ -124,7 +124,7 @@ public class SecretsSharedWithUserEmailer extends BaseEmailAlerter {
     emailParams.put("username", "UNKNOWN");
     emailParams.put("numsecrets", Integer.toString(numSharedSecrets));
     // TODO: this should probably point to the specific secret or something?
-    emailParams.put("secreturl", "https://www.mitro.co");
+    emailParams.put("secreturl", "https://www.vaultapp.xyz");
     logger.info("ignoring share email about ", emailParams.get("fullname"));
       //enqueueEmail(ac, emailParams, DBEmailQueue.Type.MANDRILL_SHARE_SECRET);
     

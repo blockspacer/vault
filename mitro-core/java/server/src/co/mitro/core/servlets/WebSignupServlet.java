@@ -43,7 +43,7 @@ public class WebSignupServlet extends MitroWebServlet {
   protected static final Gson gson = new Gson();
   
   public static final String WEB_SERVER_SCHEME = "https";
-  public static final String WEB_SERVER_HOST = "www.mitro.co";
+  public static final String WEB_SERVER_HOST = "www.vaultapp.xyz";
   public static final int WEB_SERVER_PORT = 443;
   public static final String INSTALL_PATH = "/static/html/install.html";
 
