@@ -1,8 +1,8 @@
 {
-  "name": "Mitro Login Manager",
+  "name": "Vault Login Manager",
   "short_name": "Mitro",
   "manifest_version": 2,
-  "version": "0.10.58",
+  "version": "0.1",
   "background": {
     "scripts": []
   },
@@ -16,7 +16,7 @@
       "19": "img/mitro_logo_gray-19.png",
       "38": "img/mitro_logo_gray-38.png"
     },
-    "default_title": "Mitro Login Manager",
+    "default_title": "Vault Login Manager",
     "default_popup": "html/popup.html"
   },
   "content_scripts": [

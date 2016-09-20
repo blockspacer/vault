@@ -25,11 +25,11 @@
  */
 
 var debugMode = false;
-var MITRO_HOST = 'www.mitro.co';
+var MITRO_HOST = 'api.vaultapp.xyz';
 var MITRO_PORT = 443;
-var MITRO_AGENT_HOST = 'mitroaccess.com';
-var MITRO_AGENT_PORT = 443;
-var FAILOVER_MITRO_HOST = 'secondary.mitro.ca';
+var MITRO_AGENT_HOST = null;
+var MITRO_AGENT_PORT = null;
+var FAILOVER_MITRO_HOST = 'api.vaultapp.xyz';
 var FAILOVER_MITRO_PORT = 443;
 var FIREFOX;
 var CHROME;
