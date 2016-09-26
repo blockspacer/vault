@@ -73,6 +73,9 @@ public class DBEmailQueue {
   @DatabaseField(columnName="attempted_time")
   private Date attemptedTime;
 
+  @DatabaseField(columnName="sent_time")
+  private Date sentTime;
+
   public int getId() {
     return id;
   }
@@ -83,8 +86,26 @@ public class DBEmailQueue {
     return t;
   }
 
+  public static String[] decodeArguments(String args) {
+    return gson.fromJson(args, String[].class);
+  }
+
+  public class DeviceVerificationArguments {
+    public Long timestampMs;
+    public String deviceId;
+
+    public DeviceVerificationArguments(Long timestampMs, String deviceId) {
+      this.timestampMs = timestampMs;
+      this.deviceId = deviceId;
+    }
+  }
+
+  public static DeviceVerificationArguments decodeDeviceVerificationArguments(String argString_) {
+    return gson.fromJson(argString_, DeviceVerificationArguments.class);
+  }
+
   public String[] getArguments() {
-    return gson.fromJson(argString, String[].class);
+    return decodeArguments(argString);
   }
 
   public  void setArguments(String... args) {

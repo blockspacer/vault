@@ -26,6 +26,7 @@ package co.mitro.core.servlets;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -46,17 +47,20 @@ import co.mitro.core.server.data.DBIdentity;
 import co.mitro.core.server.data.RPC;
 import co.mitro.core.server.data.RPC.GetMyPrivateKeyRequest;
 import co.mitro.core.server.data.RPC.MitroRPC;
+import co.mitro.core.servlets.MitroServlet.MitroRequestContext;
 import co.mitro.twofactor.CryptoForBackupCodes;
 import co.mitro.twofactor.TwoFactorCodeChecker;
 import co.mitro.twofactor.TwoFactorSigningService;
 
 import com.google.common.base.Strings;
+import com.j256.ormlite.stmt.QueryBuilder;
 
 
 @WebServlet("/api/GetMyPrivateKey")
 public class GetMyPrivateKey extends MitroServlet {
   private static final Logger logger = LoggerFactory.getLogger(MitroServlet.class);
   private static final long serialVersionUID = 1L;
+  private static final long newDeviceVerificationEmailTimeout = 1000 * 60 * 15L;  // 15 mins
 
   public static final String DEMO_ACCOUNT = "mitro.demo@gmail.com";
   public static boolean doEmailVerification = true;
@@ -221,7 +225,8 @@ public class GetMyPrivateKey extends MitroServlet {
       String token = makeLoginTokenString(identity, in.extensionId, in.deviceId);
       String tokenSignature = TwoFactorSigningService.signToken(token);
 
-      if (!context.manager.isReadOnly()) {
+      if (!isEmailQueued(in, context, identity) && 
+          !context.manager.isReadOnly()) {
         DBEmailQueue email = DBEmailQueue.makeNewDeviceVerification(identity.getName(), token, tokenSignature, context.platform, context.requestServerUrl);
         context.manager.emailDao.create(email);
         context.manager.commitTransaction();
@@ -234,6 +239,38 @@ public class GetMyPrivateKey extends MitroServlet {
     }
   }
 
+  /***
+   * Checks to see if a new device verification email is already queued.
+   * @param in
+   * @param context
+   * @param identity
+   * @throws SQLException 
+   */
+  private boolean isEmailQueued(GetMyPrivateKeyRequest in, MitroRequestContext context, DBIdentity identity) throws SQLException {
+    QueryBuilder<DBEmailQueue, Integer> queryBuilder = context.manager.emailDao.queryBuilder();
+    queryBuilder.where()
+      .eq("type_string", DBEmailQueue.Type.LOGIN_ON_NEW_DEVICE.getValue())
+      .and()
+      .like("arg_string", "%" + identity.getName() + "%");
+    List<DBEmailQueue> queuedEmails = context.manager.emailDao.query(queryBuilder.prepare());
+
+    final long now = System.currentTimeMillis();
+
+    // Checks for a matching receipient email and a matching device id
+    // If email is over 15 minutes old, we allow a new email to be sent
+    for (DBEmailQueue email : queuedEmails) {
+      String[] args = email.getArguments();
+      String recipient = args[0];
+      DBEmailQueue.DeviceVerificationArguments deviceArgs = DBEmailQueue.decodeDeviceVerificationArguments(args[1]);
+      if (recipient.equals(identity.getName()) && 
+          deviceArgs.deviceId != null && deviceArgs.deviceId.equals(in.deviceId) &&
+          (now - deviceArgs.timestampMs) < newDeviceVerificationEmailTimeout) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
   public static String makeLoginTokenString(DBIdentity identity, String extensionId, String deviceId) {
     // TODO: add device id in here.
     RPC.LoginToken lt = new RPC.LoginToken();
