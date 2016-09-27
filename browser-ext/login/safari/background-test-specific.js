@@ -97,7 +97,7 @@ addContentScripts(getFullUrls(['js/config.js',
                                'js/passwords.js',
                                'js/client.js',
                                'js/helpers.js',
-                               'js/popup.js']), ['http://selenium.vaultapp.xyz/html/popup.html', 'http://selenium.vaultapp.xyz/html/signup.html', 'http://selenium.vaultapp.xyz/html/change-password.html'], [], true, false, false);
+                               'js/popup.js']), ['http://selenium.vaultapp.xyz/html/popup', 'http://selenium.vaultapp.xyz/html/signup', 'http://selenium.vaultapp.xyz/html/change-password.html'], [], true, false, false);
 
 // services.html
 addContentScripts(getFullUrls(['js/config.js',
@@ -115,7 +115,7 @@ addContentScripts(getFullUrls(['js/config.js',
                                'js/helpers.js',
                                'js/template.js',
                                'js/services.js',
-                               'js/add-service.js']), ['http://selenium.vaultapp.xyz/html/services.html'], [], true, false, false);
+                               'js/add-service.js']), ['http://selenium.vaultapp.xyz/html/services'], [], true, false, false);
 
 // groups.html
 addContentScripts(getFullUrls(['js/config.js',
@@ -132,7 +132,7 @@ addContentScripts(getFullUrls(['js/config.js',
                                "js/client.js",
                                'js/helpers.js',
                                'js/template.js',
-                               'js/groups.js']), ['http://selenium.vaultapp.xyz/html/groups.html'], [], true, false, false);
+                               'js/groups.js']), ['http://selenium.vaultapp.xyz/html/groups'], [], true, false, false);
 
 // the terms.html and privacy.html
 addContentScripts(getFullUrls(['js/config.js',
@@ -148,4 +148,4 @@ addContentScripts(getFullUrls(['js/config.js',
                                'js/admin-common.js',
                                "js/client.js",
                                'js/helpers.js',
-                               'js/template.js']), ['http://selenium.vaultapp.xyz/html/terms.html', 'http://selenium.vaultapp.xyz/html/privacy.html'], [], true, false, false);
+                               'js/template.js']), ['http://selenium.vaultapp.xyz/html/terms', 'http://selenium.vaultapp.xyz/html/privacy'], [], true, false, false);
