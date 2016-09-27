@@ -2,9 +2,9 @@
 # *****************************************************************************
 # Copyright (c) 2012, 2013, 2014 Lectorius, Inc.
 # Authors:
-# Vijay Pandurangan (vijayp@mitro.co)
-# Evan Jones (ej@mitro.co)
-# Adam Hilss (ahilss@mitro.co)
+# Vijay Pandurangan
+# Evan Jones
+# Adam Hilss
 #
 #
 #     This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#     You can contact the authors at inbound@mitro.co.
+#     You can contact the authors at team@vaultapp.xyz.
 # *****************************************************************************
 
 """
@@ -48,7 +48,7 @@ sys.path.append(
 
 from common import init_webdriver
 
-arg_parser = argparse.ArgumentParser('Mitro helpers test')
+arg_parser = argparse.ArgumentParser('Vault helpers test')
 arg_parser.add_argument('--browser', required=True,
                         help='The options are: chrome, safari, firefox')
 arg_parser.add_argument('--selenium-server-host', required=False, default='localhost',
@@ -83,7 +83,7 @@ RESULTS_TIMEOUT = 30
 def result_ready_condition(driver):
     """
     Selenium WebDriverWait method to wait for test results
-    
+
     """
     for handle in driver.window_handles:
         driver.switch_to_window(handle)
@@ -92,13 +92,13 @@ def result_ready_condition(driver):
             return True
         except:
             continue
-    
+
     return False
 
 
 def main():
     browsers_to_test = args.browser.split(',')
-    
+
     # starting the static server to power up the 'external' pages we need for our tests
     subprocesses.append(subprocess.Popen([STATIC_SERVER_PATH, '--static-root',
                                       STATIC_SERVER_ROOT, '--port', STATIC_SERVER_PORT]))
@@ -114,11 +114,11 @@ def main():
                 driver = init_webdriver.firefox(FIREFOX_EXTENSION_PATH)
             else:
                 raise Exception("Unknown browser %" % browser)
-            
+
             # wait for test results
             wait = ui.WebDriverWait(driver, RESULTS_TIMEOUT)
             wait.until(result_ready_condition)
-            
+
             # save result
             results[browser] = driver.find_element_by_id('summary').text
         except Exception as e:
@@ -128,20 +128,20 @@ def main():
             try:
                 driver.quit()
             except: pass
-    
+
     # add some space
     for i in range(4): print ''
-    
+
     # print results
     print "#################################"
     print "Test results:"
     print ''
-    
+
     for key, value in results.items():
         print "%s: %s" % (key, value)
 
     print "#################################"
-        
+
     # terminating subprocesses
     for process in subprocesses:
         process.kill()

@@ -2,9 +2,9 @@
  * *****************************************************************************
  * Copyright (c) 2012, 2013, 2014 Lectorius, Inc.
  * Authors:
- * Vijay Pandurangan (vijayp@mitro.co)
- * Evan Jones (ej@mitro.co)
- * Adam Hilss (ahilss@mitro.co)
+ * Vijay Pandurangan
+ * Evan Jones
+ * Adam Hilss
  *
  *
  *     This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You can contact the authors at inbound@mitro.co.
+ *     You can contact the authors at team@vaultapp.xyz.
  * *****************************************************************************
  */
 
@@ -102,7 +102,7 @@ helpers_background.BackgroundHelper = function() {
             chrome.tabs.update(tabId, {url: url});
         }
     };
-    
+
     this.getClientIdentifier = function(){
         var clientIdentifier;
         try {
@@ -111,10 +111,10 @@ helpers_background.BackgroundHelper = function() {
             console.log('could not read chrome extension info');
             clientIdentifier = 'unknown';
         }
-        
+
         return clientIdentifier;
     };
-    
+
     /**
      * Activate context menu features
      */
@@ -122,7 +122,7 @@ helpers_background.BackgroundHelper = function() {
         // Create menu group
         chrome.contextMenus.create({
             id: 'mitro_context_group',
-            title: 'Mitro',
+            title: 'Vault',
             contexts: ['selection']
         });
 
@@ -141,14 +141,14 @@ helpers_background.BackgroundHelper = function() {
             parentId: 'mitro_context_group'
         });
     };
-    
+
     /**
      * Deactivate context menu features
      */
     this.removeContextMenu = function() {
         chrome.contextMenus.remove('mitro_context_group');
     };
-    
+
     this.bindClient = function(client){
         chrome.extension.onMessage.addListener(function(request, sender, sendResponse){
             var message = request;

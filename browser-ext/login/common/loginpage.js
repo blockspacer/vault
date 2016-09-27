@@ -2,9 +2,9 @@
  * *****************************************************************************
  * Copyright (c) 2012, 2013, 2014 Lectorius, Inc.
  * Authors:
- * Vijay Pandurangan (vijayp@mitro.co)
- * Evan Jones (ej@mitro.co)
- * Adam Hilss (ahilss@mitro.co)
+ * Vijay Pandurangan
+ * Evan Jones
+ * Adam Hilss
  *
  *
  *     This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You can contact the authors at inbound@mitro.co.
+ *     You can contact the authors at team@vaultapp.xyz.
  * *****************************************************************************
  */
 
@@ -109,7 +109,7 @@ var getMaximumElement = function (elements, scoreFunc) {
 };
 
 // Score a username input field.  Field type is the most important criteria.
-// Having a non-empty value is useful to determine the username when saving a 
+// Having a non-empty value is useful to determine the username when saving a
 // form.
 var usernameScoreFunc = function (a, passwordFieldHint) {
     var score = 0;
@@ -149,10 +149,10 @@ var guessUsernameField = function (elements, passwordFieldHint) {
 };
 
 // Score a password input field.  Field type is the most important criteria.
-// Having a non-empty value is useful to determine the username when saving a 
+// Having a non-empty value is useful to determine the username when saving a
 // form.  Non-password fields are heavily penalized.
 var passwordScoreFunc = function (a) {
-    if (evaluateServerHintsForEntity('password', a) < 0) {  
+    if (evaluateServerHintsForEntity('password', a) < 0) {
         console.log('password: rejected ', a, ' due to server hint');
         return -LARGE_SCORE_VALUE;
     }
@@ -267,8 +267,8 @@ var createFieldDict = function(fields) {
         } else if ($field.is('a')) {
             rval.push({
                 name: $field.attr('id') || $field.attr('class'),
-                id: $field.attr('id'),  
-                'class':$field.attr('class'),              
+                id: $field.attr('id'),
+                'class':$field.attr('class'),
                 type: 'a',
                 value: $field.text(),
                 pointer: $field,
@@ -277,7 +277,7 @@ var createFieldDict = function(fields) {
         } else {
             rval.push({
                 name: $field.attr('name'),
-                id: $field.attr('id'),                
+                id: $field.attr('id'),
                 'class':$field.attr('class'),
                 value: ($field.attr('type') === 'image') ? $field.attr('alt') : $field.prop('value'),
                 type: $field.attr('type') || 'text',
@@ -291,7 +291,7 @@ var createFieldDict = function(fields) {
 };
 
 // Returns a login form dict if input form is a login form, or null otherwise.
-// Setting requireFieldVisibility only considers visible form fields when 
+// Setting requireFieldVisibility only considers visible form fields when
 // looking for username/password/submit fields (default: true).
 var getLoginForm = function (form, requireFieldVisibility) {
     console.log('trying to get login form from ', $(form));
@@ -315,10 +315,10 @@ var getLoginForm = function (form, requireFieldVisibility) {
                 rect.bottom >= 0 && rect.right >= 0
 
                 // TODO: enabling these will ignore login forms that are not in the viewport,
-                // but that's not quite right, because sometimes login forms may 
+                // but that's not quite right, because sometimes login forms may
                 // be outside the user's vision.  What should we do about this?
 
-                // && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) 
+                // && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
                 // && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
                 ) {
                $fields.push(elem);
@@ -371,7 +371,7 @@ var getLoginForm = function (form, requireFieldVisibility) {
             console.log('rejected ', fieldDict, ' due to server hint');
             return null;
         }
- 
+
         return {usernameField: usernameField,
                 passwordField: passwordField,
                 submitField: submitField,
@@ -456,18 +456,18 @@ var countFieldsOfType = function (fields, type) {
     }
     return count;
 };
-        
+
 // Finds best match for a login form in the current document, or null if no
 // login form is found.
 var guessLoginForm = function (hints) {
     var loginFormScoreFunc = function (formDict) {
         // TODO:
-        
+
         if (evaluateServerHintsForEntity('form', formDict.formDict) < 0) {
             console.log('rejected ', formDict.formDict, ' due to server hint');
             return -LARGE_SCORE_VALUE;
         }
-        
+
 
         if (!formDict) {
             return 0;
@@ -478,7 +478,7 @@ var guessLoginForm = function (hints) {
         if (hints &&
             formDict.usernameField &&
             formDict.usernameField.name === hints.clientData.usernameField &&
-            formDict.passwordField && 
+            formDict.passwordField &&
             formDict.passwordField.name === hints.clientData.passwordField) {
             score += 100;
         }
@@ -486,7 +486,7 @@ var guessLoginForm = function (hints) {
             score += usernameScoreFunc(formDict.usernameField);
         }
         if (!formDict.passwordField && formDict.usernameField.emptyPasswordPermitted) {
-            
+
         } else {
             score += passwordScoreFunc(formDict.passwordField);
         }
@@ -542,7 +542,7 @@ function isLoginPageForService(service) {
     return serviceHost === curHost && isLoginPage();
 }
 
-// TODO: We should verify that the message has come from mitro using signatures
+// TODO: We should verify that the message has come from Vault using signatures
 // TODO: We should verify that the the window location matches before inserting username / password
 // TODO: We shxould verify that user and password forms that we've guessed are the same form;
 //       if multiple forms, we should pick the best one that has both un/pw fields.

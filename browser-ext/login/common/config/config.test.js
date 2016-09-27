@@ -2,9 +2,9 @@
  * *****************************************************************************
  * Copyright (c) 2012, 2013, 2014 Lectorius, Inc.
  * Authors:
- * Vijay Pandurangan (vijayp@mitro.co)
- * Evan Jones (ej@mitro.co)
- * Adam Hilss (ahilss@mitro.co)
+ * Vijay Pandurangan
+ * Evan Jones
+ * Adam Hilss
  *
  *
  *     This program is free software: you can redistribute it and/or modify
@@ -20,12 +20,12 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You can contact the authors at inbound@mitro.co.
+ *     You can contact the authors at team@vaultapp.xyz.
  * *****************************************************************************
  */
 
 var debugMode = true;
-var MITRO_HOST = 'dev.mitro.co';
+var MITRO_HOST = 'dev.vaultapp.xyz';
 var MITRO_PORT = 443;
 var FAILOVER_MITRO_HOST = null;
 var FAILOVER_MITRO_PORT = null;

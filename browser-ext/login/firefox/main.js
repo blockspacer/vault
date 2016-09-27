@@ -2,9 +2,9 @@
  * *****************************************************************************
  * Copyright (c) 2012, 2013, 2014 Lectorius, Inc.
  * Authors:
- * Vijay Pandurangan (vijayp@mitro.co)
- * Evan Jones (ej@mitro.co)
- * Adam Hilss (ahilss@mitro.co)
+ * Vijay Pandurangan
+ * Evan Jones
+ * Adam Hilss
  *
  *
  *     This program is free software: you can redistribute it and/or modify
@@ -20,30 +20,30 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You can contact the authors at inbound@mitro.co.
+ *     You can contact the authors at team@vaultapp.xyz.
  * *****************************************************************************
  */
 
 /**
- * The main script is a heart of the firefox addon. 
- * In case of mitro, it is the second heart, because we've
+ * The main script is a heart of the firefox addon.
+ * In case of Vault, it is the second heart, because we've
  * already have one - the background page.
- * 
+ *
  * The thing is that the firefox addons environment doesn't
  * provide the background page functionality in its chrome
  * of safari meaning. The main script is its closest analogue,
  * but it has a number of valuable differences as listed below:
- *   *the main script is a CommonJs thing (http://en.wikipedia.org/wiki/CommonJS). 
+ *   *the main script is a CommonJs thing (http://en.wikipedia.org/wiki/CommonJS).
  *    It is running in a special sandbox, not within the window object
  *   *you can not load/connect/import external scripts to the main.js
  *    like you can do it in the background page. The scripts
  *    are required to be imported as the js modules instead
- * 
+ *
  * The things listed above make the main script operate
  * in a totally different way then the background page does.
  * That's why we still have the background page in firefox, but also
  * have to provide the main script support for it.
- * 
+ *
  * The firefox background page is implemented using the page-worker module
  * (See https://addons.mozilla.org/en-US/developers/docs/sdk/latest/modules/sdk/page-worker.html)
  * The main thing about it is that it doesn't have that browser-level access privileges
@@ -104,9 +104,9 @@ var POPUP_START_HEIGHT = 378 + popupExtraHeight;
  * Get scripts mapping dictionary
  * from the json file
  * and convert relative paths to absolute ones
- * 
+ *
  * @param jsonPath {string} Json file relative path
- * @returns {object} 
+ * @returns {object}
  */
 function getPaths(jsonPath) {
     var json = JSON.parse(data.load(jsonPath));
@@ -115,13 +115,13 @@ function getPaths(jsonPath) {
             json[key][i] = data.url(json[key][i]);
         }
     }
-    
+
     return json;
 }
 
 /**
  * Delete the page object from the given list, if present
- * 
+ *
  * @param page {Worker} https://addons.mozilla.org/en-US/developers/docs/sdk/latest/modules/sdk/content/worker.html
  * @param trackingArray {array}
  */
@@ -139,7 +139,7 @@ function detachPage(page, trackingArray) {
 
 /**
  * The firefox ajax implementation
- * 
+ *
  * See BackgroundHelper.ajax
  */
 var ajax = function(params, callback){
@@ -171,7 +171,7 @@ var serializeValue = function(value) {
 
 var mitroStorage = helpers_common.storage(ss.storage, parseValue, serializeValue);
 
- // TODO test that the object returned if the value is not found does 
+ // TODO test that the object returned if the value is not found does
  // not contain the key, even if the value is undefined.
 var storageGet = mitroStorage.get;
 var storageSet = mitroStorage.set;
@@ -180,7 +180,7 @@ var storageRemove = mitroStorage.remove;
 
 /**
  * Firefox analogue to the chrome.cookies.get
- * 
+ *
  * See BackgroundHelper.cookies.get
  */
 var cookiesGet = function(params, callback){
@@ -193,7 +193,7 @@ var cookiesGet = function(params, callback){
             var parts = entry.split('=');
             var name = parts[0];
             var value = parts.slice(1).join('=');
-            
+
             if(name === params.name){
                 callback({
                     name: name,
@@ -211,7 +211,7 @@ var cookiesGet = function(params, callback){
 
 /**
  * Sends the message to the tab by the given tab id
- * 
+ *
  * See BackgroundHelper.tabs.sendMessage
  */
 var tabsSendMessage = function(tabId, message){
@@ -223,7 +223,7 @@ var tabsSendMessage = function(tabId, message){
 //            console.log('MESSAGING sending message ', JSON.stringify(message), ' ', tabId, ' ', i);
             page.postMessage(message);
             break;
-        } else {    
+        } else {
           console.log('MESSAGING not sending message due to page mismatch or staleness');
         }
       }  catch (e) {
@@ -237,7 +237,7 @@ var tabsSendMessage = function(tabId, message){
 
 /**
  * Creates the new tab with the given parameters
- * 
+ *
  * See BackgroundHelper.tabs.create
  */
 var createTab = function(params, callback){
@@ -268,7 +268,7 @@ var removeTab = function(tabId, callback) {
     if(!tab_found) {
         console.log('Can not remove tab #' + tabId + '. Not found.');
     }
-    
+
     if (typeof(callback) === 'function') {
         callback();
     }
@@ -276,7 +276,7 @@ var removeTab = function(tabId, callback) {
 
 /**
  * Updates the popup height
- * 
+ *
  * See BackgroundHelper.setPopupHeight
  */
 var setPopupHeight = function(newHeight){
@@ -285,7 +285,7 @@ var setPopupHeight = function(newHeight){
 
 /**
  * Makes the popup hide
- * 
+ *
  * See BackgroundHelper.hidePopup
  */
 var hidePopup = function() {
@@ -293,7 +293,7 @@ var hidePopup = function() {
 };
 
 /**
- * Helper for creating a mitro tab object from a firefox tab object.
+ * Helper for creating a Vault tab object from a firefox tab object.
  */
 var _createMitroTab = function(firefoxTab) {
     var tab = new helpers_common.MitroTab(firefoxTab.id);
@@ -308,7 +308,7 @@ var _createMitroTab = function(firefoxTab) {
 /**
  * Invokes the callback function with the
  * currently active tab as an argument
- * 
+ *
  * See BackgroundHelper.tabs.getSelected
  */
 var getSelectedTab = function(callback){
@@ -347,7 +347,7 @@ var setTabUrl = function(tabId, url) {
 
 var clipboardSet = function(value, callback) {
     clipboard.set(value);
-    
+
     if (typeof(callback) !== 'undefined') {
         callback();
     }
@@ -366,7 +366,7 @@ client.initRemoteCalls('background', 'addSecretFromSelection');
 /**
  * Redirects currengly active tab
  * to the new location
- * 
+ *
  * @param url {string} New url
  */
 var redirectActiveTab = function(url) {
@@ -394,7 +394,7 @@ var addContextMenu = function() {
         }
     });
     menu = cm.Menu({
-        label: "Mitro",
+        label: "Vault",
         image: DATA_PREFIX + "img/mitro_logo-16.png",
         items: [child],
     	context: cm.SelectionContext()
@@ -501,11 +501,11 @@ popup.on('hide', function() {
  * extension pages functionality. In other words,
  * the firefox doesn't associate the extension pages
  * with the extension itself. The scripts, if attached
- * using the <script> tag from within the page, 
+ * using the <script> tag from within the page,
  * do not have access to the extension functionality
  * even if the page is hosted inside the extension folder.
- * 
- * That's why we have to programmatically bind the scripts 
+ *
+ * That's why we have to programmatically bind the scripts
  * we need on that pages . This is also the reason
  * why every extension html file is being cleaned
  * of the <script> tags for the firefox builds
@@ -524,12 +524,12 @@ var extensionPages = [];
 
 for (var fileName in mappingData) {
     var fileScripts = mappingData[fileName];
-    
+
     var matchingPaths = [HTML_PREFIX + fileName,
                          HTML_PREFIX + fileName + '#*',
                          HTML_PREFIX + fileName + '?*'];
 
-    
+
     pageMod.PageMod({
         include: matchingPaths,
         contentScriptFile: fileScripts,
@@ -553,7 +553,7 @@ for (var fileName in mappingData) {
                     var new_message = client.composeResponse(this, data);
                     worker.postMessage(new_message);
                 };
-                
+
                 client.processIncoming(message);
             });
         }
@@ -581,7 +581,7 @@ pageMod.PageMod({
         }
 //        console.log('MESSAGING!! ADDING CONTENT LISTENER FOR ', worker.tab.id);
         contentPages[worker.tab.id].push(worker);
-        
+
         worker.on("message", function(message){
             // bind client
             message.sender = {
@@ -591,7 +591,7 @@ pageMod.PageMod({
             };
             client.processIncoming(message);
         });
-        
+
         worker.on("error", function(error) {
             console.log(error.message);
         });
@@ -643,12 +643,12 @@ popup.on('message', function(message){
     message.sender = {
         id: 'popup'
     };
-    
+
     message.sendResponse = function(data){
         var new_message = client.composeResponse(this, data);
         popup.postMessage(new_message);
     };
-    
+
     client.processIncoming(message);
 });
 
@@ -676,7 +676,7 @@ if (firefoxVersion >= 30) {
 
     toolbarButton = toggle.ToggleButton({
         id: 'mitro-toolbar-button',
-        label: 'Mitro',
+        label: 'Vault',
         icon: {
             '16': data.url('img/mitro_logo_gray-32.png')
         },
@@ -695,7 +695,7 @@ if (firefoxVersion >= 30) {
     toolbarButton = require('toolbarwidget').ToolbarWidget({
         toolbarID: 'nav-bar',
         id: 'mitro-toolbar-button',
-        label: 'Mitro',
+        label: 'Vault',
         contentURL: data.url('button.html'),
         contentScriptFile: data.url('button.js'),
         contentScriptWhen: 'ready',

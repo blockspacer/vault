@@ -59,7 +59,7 @@
         </dict>
         <key>Blacklist</key>
         <array>
-            <string>http://selenium.mitro.co/*</string>
+            <string>http://selenium.vaultapp.xyz/*</string>
             <string>safari-extension://*/*</string>
         </array>
     </dict>
@@ -76,8 +76,8 @@
         </dict>
     </dict>
     <key>Update Manifest URL</key>
-    <string>https://www.mitro.co/safari/update-manifest.plist</string>
+    <string>https://www.vaultapp.xyz/safari/update-manifest.plist</string>
     <key>Website</key>
-    <string>https://www.mitro.co</string>
+    <string>https://www.vaultapp.xyz</string>
 </dict>
 </plist>
