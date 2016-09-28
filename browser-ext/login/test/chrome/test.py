@@ -2,9 +2,9 @@
 # *****************************************************************************
 # Copyright (c) 2012, 2013, 2014 Lectorius, Inc.
 # Authors:
-# Vijay Pandurangan (vijayp@mitro.co)
-# Evan Jones (ej@mitro.co)
-# Adam Hilss (ahilss@mitro.co)
+# Vijay Pandurangan
+# Evan Jones
+# Adam Hilss
 #
 #
 #     This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#     You can contact the authors at inbound@mitro.co.
+#     You can contact the authors at team@vaultapp.xyz.
 # *****************************************************************************
 
 import argparse
@@ -94,13 +94,13 @@ class MitroExtensionTester(unittest.TestCase):
         self._manual_passwords_number = 0;
         self._automatic_passwords_number = 0;
         subprocesses = [];
-        
-        
+
+
 
     def sleep(self, seconds):
         logging.info('SLEEP %s seconds' % seconds)
         time.sleep(seconds)
-    
+
     def loadURL(self, url):
         logging.info('LOAD %s' % url)
         self._driver.get(url)
@@ -122,29 +122,29 @@ class MitroExtensionTester(unittest.TestCase):
         username_element = self._driver.find_element_by_name('username')
         password_element = self._driver.find_element_by_name('password')
         submit_button = self._driver.find_element_by_id('mitro-login-form-button')
-        
+
         #performing log-in actions
         username_element.clear()
         username_element.send_keys(self.username)
         password_element.send_keys(self.password)
         submit_button.click()
-        
+
         #making sure we're logged in
         logging.info('WAIT for the successful login marker')
         self._wait.until(conditions.visibility_of_element_located([By.ID, 'logged-in']))
         logging.info('** Logged in')
-    
+
     def log_out(self):
         logging.info('* Logging out')
         self.loadURL(self.get_url(LOGIN_PATH))
         logout_link = self._driver.find_element_by_id('logout')
         logout_link.click()
-        
+
         #making sure we've apeared on the home screen logged out
         logging.info('Waiting for the successful logout marker')
         self._wait.until(conditions.visibility_of_element_located([By.ID, 'logged-out']))
         logging.info('** Logged out')
-    
+
     #extension toolbar helpers
     def get_extension_frame(self):
         logging.info('* Switching to the infobar frame')
@@ -168,9 +168,9 @@ class MitroExtensionTester(unittest.TestCase):
             button_text = button.text.strip()
             button_key = button_text.lower().replace(' ', '_')
             buttons[button_key] = button
-        
+
         return buttons
-    
+
     #Custom conditions to wait for the test forms markers.
     #The standard conditions fail for some reason after
     #switching driver to/from extension iframe
@@ -179,23 +179,23 @@ class MitroExtensionTester(unittest.TestCase):
             self._driver.find_element_by_id('login-form-marker')
         except:
             return False
-        
+
         return True
-    
+
     def condition_login_success(self, driver):
         try:
             self._driver.find_element_by_id('login-success-marker')
         except:
             return False
-        
+
         return True
-    
+
     def condition_login_fail(self, driver):
         try:
             self._driver.find_element_by_id('login-fail-marker')
         except:
             return False
-        
+
         return True
 
     #teams functions
@@ -204,29 +204,29 @@ class MitroExtensionTester(unittest.TestCase):
         The function to find the team elements in the list
         """
         team_elements = self._driver.find_elements_by_class_name('team-item')
-        
+
         return team_elements
-    
+
     def verify_teams_number(self, driver):
         """
         The function to verify the right teams number in the list
         """
         return len(self.find_team_elements()) == self._teams_number
-    
+
     def verify_team_present(self, team_name):
         """
         This function takes the team name and searches
         the teams list for the element containing that name
-        
+
         Returns True if the name is found. Otherwise returns False
         """
         for team_element in self.find_team_elements():
             title = team_element.find_element_by_class_name('title').text.strip()
             if title == team_name:
                 return True
-         
+
         return False
-    
+
     def open_team_edit_modal(self, add=False):
         logging.info('* Opening the team edition modal')
         if add:
@@ -237,12 +237,12 @@ class MitroExtensionTester(unittest.TestCase):
             #otherwise we're hitting the first edit button in the list
             edit_button = self._driver.find_element_by_class_name('edit-team-button')
             edit_button.click()
-        
+
         #waiting for the modal to open
         logging.info('WAIT for the team edition modal')
         self._wait.until(conditions.visibility_of_element_located([By.ID, 'addedit-group-modal']))
         self.sleep(1)
-        
+
         #returning elements we're going to use
         return {
             'name_field': self._driver.find_element_by_name('name'),
@@ -251,7 +251,7 @@ class MitroExtensionTester(unittest.TestCase):
             'add_button': self._driver.find_element_by_class_name('add-team-member-button'),
             'delete_link': self._driver.find_element_by_id('delete-group-link')
         }
-    
+
     def toggle_team_access(self, note_context, team_name):
         #going to the services page
         self.loadURL(self.get_url(SERVICES_PATH))
@@ -273,14 +273,14 @@ class MitroExtensionTester(unittest.TestCase):
                 #toggling the checkbox
                 element.find_element_by_tag_name('input').click()
                 break
-        
+
         #we expect the target team to be found
         self.assertTrue(team_found, 'The team is not present among the participants')
         #hitting 'save' and waiting for refresh
         m['save_button'].click()
         self.wait_for_refresh(note_context)
         logging.info('OK toggle team access')
-    
+
     def wait_for_teams_refresh(self):
         logging.info('WAIT for the teams list to refresh:')
         body = self._driver.find_element_by_tag_name('body')
@@ -288,7 +288,7 @@ class MitroExtensionTester(unittest.TestCase):
         self._wait.until(conditions.staleness_of(body))
         logging.info('WAIT for the right teams count')
         self._wait.until(self.verify_teams_number)
-    
+
     #secure items functions
     def get_secure_elements(self, context):
         """
@@ -307,13 +307,13 @@ class MitroExtensionTester(unittest.TestCase):
         """
         Funtion to verify if the last item in the list
         contains the right content
-        
+
         Returns the item element
         """
         logging.info('* Verifying the last secure item')
         #we're always using the last item in the list for our tests
         last_secure_element = self.get_secure_elements(context)[-1]
-        
+
         #getting the modal opened
         view_button = last_secure_element.find_element_by_tag_name('button')
         view_button.click()
@@ -321,21 +321,21 @@ class MitroExtensionTester(unittest.TestCase):
         logging.info('WAIT for the modal')
         self._wait.until(conditions.visibility_of(modal))
         self.sleep(1)#waiting for transition
-        
+
         if context.type == context.NOTE:
             #secure notes specific actions
             #getting the actual note title and text
             note_title = modal.find_element_by_class_name('secure-note-name').text.strip()
             note_text_element = modal.find_element_by_name('note_text')
             note_text = note_text_element.get_attribute('value')
-        
+
             #locating the buttons we're going to use
             copy_button = modal.find_element_by_class_name('copy-note')
-        
+
             #checking the correctness of the title and the text
             self.assertEqual(note_title, context.content['title'], 'Note title is not correct')
             self.assertEqual(note_text, context.content['text'], 'Note text is not correct')
-        
+
             #testing the 'Copy' button
             copy_button.click()
             self.assertEqual(pyperclip.paste(), unicode(context.content['text']),
@@ -349,12 +349,12 @@ class MitroExtensionTester(unittest.TestCase):
             url_href = url_element.get_attribute('href')
             password_hidden_field = modal.find_element_by_class_name('auth-manual-password')
             password_shown_field = modal.find_element_by_class_name('shown-password')
-            
+
             #locating the buttons we're going to use
             copy_username_btn = modal.find_element_by_class_name('copy-username')
             toggle_password_btn = modal.find_element_by_class_name('reveal-password')
             copy_password_btn = modal.find_element_by_class_name('copy-password')
-            
+
             #checking the item content correctness
             self.assertEqual(title, context.content['title'])
             self.assertEqual(url_href, context.content['url'])
@@ -366,7 +366,7 @@ class MitroExtensionTester(unittest.TestCase):
                 'toggle_password_btn': toggle_password_btn,
             }
             self.test_password_toggle(context, elements)
-            
+
             #checking the copy functionality
             #copying username
             copy_username_btn.click()
@@ -377,15 +377,15 @@ class MitroExtensionTester(unittest.TestCase):
             toggle_password_btn.click()
             copy_password_btn.click()
             self.assertEqual(pyperclip.paste(), unicode(context.content['password']))
-        
+
         #closing the modal
         modal.find_element_by_link_text('Close').click()
         logging.info('WAIT until the modal gets hidden')
         self._wait.until(conditions.invisibility_of_element_located([By.ID, context.view_modal_id]))
         logging.info('OK last secure item verified')
-        
+
         return last_secure_element
-    
+
     def secure_item_configuration_modal(self, context, item_element):
         """
         Returns the modal's useful elements
@@ -397,7 +397,7 @@ class MitroExtensionTester(unittest.TestCase):
         logging.info('WAIT for the modal')
         self._wait.until(conditions.visibility_of(modal))
         self.sleep(1)#waiting for transition
-        
+
         if context.type == context.NOTE:
             return {
                 'modal': modal,
@@ -421,7 +421,7 @@ class MitroExtensionTester(unittest.TestCase):
                 'delete_link': modal.find_element_by_class_name('delete-service-link'),
                 'cancel_button': modal.find_element_by_link_text('Cancel')
             }
-    
+
     def update_secure_item(self, context, edit_modal_elements):
         logging.info('* Updating the secure item')
         m = edit_modal_elements #the shortcut
@@ -447,16 +447,16 @@ class MitroExtensionTester(unittest.TestCase):
             c['password_shown_field'].clear()
             c['password_shown_field'].send_keys(context.content['password'])
             c['done_button'].click()
-            
+
             #the hack to let the manual passwords edition pass the test
             #as the url edition functionality doesn't seem to be implemented
             if context.type == context.MANUAL_PASSWORD:
                 context.content['query_string'] = context.previose_content['query_string']
             context.content['url'] = context.previose_content['url']
-        
+
         logging.info('WAIT for the modal')
         self._wait.until(conditions.invisibility_of_element_located([By.ID, context.edit_detail_modal_id]))
-        
+
         #updating the item title
         m['title_element'].clear()
         m['title_element'].send_keys(context.content['title'])
@@ -466,14 +466,14 @@ class MitroExtensionTester(unittest.TestCase):
         logging.info('WAIT for the participants list')
         self._wait.until(lambda driver: len(self._driver.find_element_by_class_name('team-member-list').\
                          find_elements_by_tag_name('li')) == 2)
-        
+
         #saving the updated item
         m['save_button'].click()
-            
+
         #waiting for the items list to refresh
         self.wait_for_refresh(context)
         logging.info('OK secure item updated')
-    
+
     def test_password_toggle(self, context, elements):
         """
         The function to test the password show/hide actions
@@ -482,7 +482,7 @@ class MitroExtensionTester(unittest.TestCase):
         """
         logging.info('* Testing the passwords toggling')
         e = elements #the shortcut
-        
+
         #checking if the password is hidden by default
         self.assertTrue(e['password_hidden_field'].is_displayed())
         self.assertFalse(e['password_shown_field'].is_displayed())
@@ -502,7 +502,7 @@ class MitroExtensionTester(unittest.TestCase):
         self.assertFalse(e['password_shown_field'].is_displayed())
         self.assertFalse(e['password_shown_field'].get_attribute('value'))
         logging.info('OK passwords toggling')
-    
+
     def test_remove_participant(self, context, target_element):
         """
         The function to test removing participant from access list
@@ -520,13 +520,13 @@ class MitroExtensionTester(unittest.TestCase):
         self.assertEqual(participants_number, float(2))
         #making sure the new participant is among those two
         self.assertTrue(participant_present)
-        
+
         #deleting the participant using the same config modal
         participant_checkbox.click()
         m['save_button'].click()
         #waiting for the items list to refresh
         self.wait_for_refresh(context)
-        
+
         #verifying the participants list
         m = self.secure_item_configuration_modal(context, self.get_secure_elements(context)[-1])
         (participants_number, participant_present, participant_checkbox) = self.verify_participants(
@@ -535,17 +535,17 @@ class MitroExtensionTester(unittest.TestCase):
         self.assertEqual(participants_number, float(1))
         #making sure the participant left is not the one we've deleted
         self.assertFalse(participant_present)
-        
+
         #closing the modal
         m['cancel_button'].click()
         logging.info('WAIT until the modal is hidden')
         self._wait.until(conditions.invisibility_of_element_located([By.ID, context.configuration_modal_id]))
         logging.info('OK participants removal')
-    
+
     def verify_automatic_password(self, context, target_element):
         """
         Function to verify the automatic password item data correctness
-        
+
         Returns configuration modal elements
         """
         logging.info('* Verifying the automatic password')
@@ -568,24 +568,24 @@ class MitroExtensionTester(unittest.TestCase):
         #testing the username copying
         c['copy_username_btn'].click()
         self.assertTrue(pyperclip.paste(), 'Copying the username does not work')
-        
+
         #testing password toggling and copying
         self.test_password_toggle(context, c)
-        
+
         #closing the details edition modal
         c['done_button'].click()
         logging.info('wAIT until the modal is hidden')
         self._wait.until(conditions.invisibility_of_element_located\
                          ([By.ID, context.edit_detail_modal_id]))
         logging.info('OK verifyin the automatic password')
-        
+
         #returning the config modal elements for further usage
         return m
-    
+
     def wait_for_refresh(self, context, page_refresh=True):
         """
         Function to wait for secure items list to refresh
-        
+
         The 'selector' argument is the indicator element selector
         like [By.ID, 'some_id']
         """
@@ -600,7 +600,7 @@ class MitroExtensionTester(unittest.TestCase):
             self._wait.until(conditions.presence_of_element_located(context.refresh_indicator))#let it show
         else:
             self.sleep(2) #if there's no items to wait for we still have to give it some time
-    
+
     def verify_participants(self, modal, context):
         """
         The function to verify secure item participants number
@@ -611,7 +611,7 @@ class MitroExtensionTester(unittest.TestCase):
         participant_present = False
         participants_number = 0
         participant_checkbox = False
-        
+
         #processing the participants list
         for element in modal.find_element_by_class_name('team-member-list').\
                 find_elements_by_tag_name('li'):
@@ -623,15 +623,15 @@ class MitroExtensionTester(unittest.TestCase):
                     participant_checkbox = element.find_element_by_tag_name('input')
                 else:
                     raise Exception('New participant name is shown more than once')
-        
+
         logging.info('OK participants verified')
         return (participants_number, participant_present, participant_checkbox)
-    
+
     def secure_item_edit_details_modal(self, context):
         """
         The function to find all the useful elements
         of the details edition modal
-        
+
         Returns the elements dict
         """
         logging.info('* Opening details modal')
@@ -655,7 +655,7 @@ class MitroExtensionTester(unittest.TestCase):
                 'toggle_password_btn': modal.find_element_by_class_name('reveal-password'),
                 'done_button': modal.find_element_by_class_name('save-credentials-button'),
             }
-    
+
     def test_password_links(self, context, target_element_finder):
         """
         The function to test the password elements links
@@ -666,7 +666,7 @@ class MitroExtensionTester(unittest.TestCase):
         link_element = target_element_finder().find_element_by_class_name('host')\
                 .find_element_by_tag_name('a')
         self.assertTrue(link_element.get_attribute('href') == context.content['url'])
-        
+
         #the link in the config modal
         self.loadURL(self.get_url(SERVICES_PATH))
         tabs_list = self._driver.find_element_by_id('service-tabs')
@@ -677,13 +677,13 @@ class MitroExtensionTester(unittest.TestCase):
                         target_element_finder())
         expected_url = 'http://%s/' % urlparse(context.content['url']).netloc
         self.assertTrue(expected_url == m['url_link'].get_attribute('href'))
-        
+
         self.loadURL(self.get_url(SERVICES_PATH))
         tabs_list = self._driver.find_element_by_id('service-tabs')
         tabs_list.find_element_by_id(context.tab_id).click()
         logging.info('WAIT for the right secure items number')
         self._wait.until(self.verify_secure_items_number(context))
-            
+
         if context.type == context.MANUAL_PASSWORD:
             #for the manual password we test the link in the view modal
             view_button = target_element_finder().find_element_by_tag_name('button')
@@ -724,7 +724,7 @@ class MitroExtensionTester(unittest.TestCase):
         self.loadURL(self.get_url(SERVICES_PATH))
         tabs_list = self._driver.find_element_by_id('service-tabs')
         tabs_list.find_element_by_id(context.tab_id).click()
-        
+
         logging.info('WAIT for the right items number')
         self._wait.until(self.verify_secure_items_number(context))
         #locating the desired secure item list element
@@ -751,14 +751,14 @@ class MitroExtensionTester(unittest.TestCase):
         delete_modal.find_element_by_link_text('Delete').click()
         context.items_number -= 1
         self.wait_for_refresh(context)
-        
+
         self.verify_secure_items_number(context)
-        
+
         #making sure the item we've deleted is not among those left
         for item in self.get_secure_elements(context):
             title = item.find_element_by_class_name('title').text.strip()
             self.assertNotEqual(title, context.content['title'])
-        
+
         logging.info('OK item deletion')
 
     #the tests:
@@ -771,24 +771,24 @@ class MitroExtensionTester(unittest.TestCase):
             'password2_element': self._driver.find_element_by_name('password2'),
             'submit_button': self._driver.find_element_by_id('mitro-signup-form-button'),
         }
-        
+
         self.loadURL(self.get_url(SIGNUP_PATH))
-        
+
         #testing the cancel button
         cancel_link = self._driver.find_element_by_class_name('form-link')
         cancel_link.click()
         self.sleep(1)
         page_title = self._driver.find_element_by_class_name('popup-title')
         self.assertEqual(page_title.text.strip(),
-                         'Mitro Login Manager', 'Cancel button does not work')
+                         'Vault Login Manager', 'Cancel button does not work')
         logging.info('OK Login form cancel button')
-        
+
         #going back to the signup page
         self.loadURL(self.get_url(SIGNUP_PATH))
-        
+
         #finding all the elements we'll interact with
         el = get_elements()
-        
+
         #testing the empty login error
         el['submit_button'].click()
         self.assertEqual(error_message(), 'Please enter your email address',
@@ -810,14 +810,14 @@ class MitroExtensionTester(unittest.TestCase):
         self.assertEqual(error_message(), 'Password is too weak',
                          'Short password error is not shown')
         logging.info('OK password too short error')
-        
+
         #testing the password missmatch error
         el['password_element'].send_keys(self.password)
         el['submit_button'].click()
         self.assertEqual(error_message(), 'Passwords do not match',
                          'Passwords mismatch error is not shown')
         logging.info('OK passwords mismatch error')
-        
+
         #testing the incorrect email error
         el['username_element'].clear()
         el['username_element'].send_keys(random_string(10))
@@ -839,7 +839,7 @@ class MitroExtensionTester(unittest.TestCase):
         logging.info('WAIT for the successful login marker')
         self._wait.until(conditions.visibility_of_element_located([By.ID, 'logged-in']))
         logging.info('OK successfully signed up')
-        
+
         #test the 'user exists' error
         self.log_out()
         #trying signing up using the same credentials
@@ -854,7 +854,7 @@ class MitroExtensionTester(unittest.TestCase):
         self._wait.until(conditions.text_to_be_present_in_element([By.CLASS_NAME, 'text-error'], 'Error during signup'),
                     'No error has been raised while trying to sign up with the same credentials for the second time')
         logging.info('OK "user exists" error')
-        
+
         # test that username is filled in from hash tag
         self.loadURL(self.get_url(SIGNUP_PATH + '#u=' + self.username))
 
@@ -862,7 +862,7 @@ class MitroExtensionTester(unittest.TestCase):
         self.assertEqual(self.username, el['username_element'].get_attribute('value'),
                     'The username in the field does not match the one passed via the hash parameter')
         logging.info('OK passing username via the hash parameter')
-        
+
         #logging back in for the next test
         self.log_in()
         logging.info('>>>>> SUCCESS signup test \n\n\n')
@@ -876,16 +876,16 @@ class MitroExtensionTester(unittest.TestCase):
         username_element = self._driver.find_element_by_name('username')
         password_element = self._driver.find_element_by_name('password')
         submit_button = self._driver.find_element_by_id('mitro-login-form-button')
-        
+
         #testing the empty login error
         username_element.clear()
         submit_button.click()
         self.assertEqual(error_message(), 'Please enter your email address',
                          'Empty login error is not shown')
         logging.info('OK empty login error')
-        
+
         username_element.send_keys(self.username)
-        
+
         #testing the incorrect password error
         password_element.send_keys(random_string(16))
         submit_button.click()
@@ -893,7 +893,7 @@ class MitroExtensionTester(unittest.TestCase):
         self._wait.until(conditions.text_to_be_present_in_element([By.ID, 'login-error'], 'Login error'),
                                         'The "password incorrect" error has not been raised')
         logging.info('OK incorrect password error')
-        
+
         #testing the successful login
         password_element.clear()
         password_element.send_keys(self.password)
@@ -901,7 +901,7 @@ class MitroExtensionTester(unittest.TestCase):
         logging.info('WAIT for the successfull login marker')
         self._wait.until(conditions.visibility_of_element_located([By.ID, 'logged-in']))
         logging.info('OK logged in')
-        
+
         #testing the case when the login and the password are supplied via the url hash parameters
         self.log_out() #logging out
         self.loadURL(self.get_url(SIGNUP_PATH))#and leaving current page
@@ -918,7 +918,7 @@ class MitroExtensionTester(unittest.TestCase):
         self._wait.until(conditions.visibility_of_element_located([By.ID, 'logged-in']))
         logging.info('OK logged in')
         logging.info('>>>>> SUCCESS passed the login test \n\n\n')
-    
+
     def test_logout_login_screen(self):
         logging.info('* Testing logging out from the login screen')
         self.loadURL(self.get_url(LOGIN_PATH))
@@ -927,22 +927,22 @@ class MitroExtensionTester(unittest.TestCase):
         self._wait.until(conditions.visibility_of(logout_link))
         logging.info('OK Logout link display')
         logout_link.click()
-        
+
         logging.info('WAIT for the successful logout marker')
         self._wait.until(conditions.visibility_of_element_located([By.ID, 'logged-out']))
         logging.info('OK logged out from the login screen')
         self.sleep(2)
-    
+
     def test_logout_services_page(self):
         logging.info('* Testing logging out from the services page')
         self.loadURL(self.get_url(SERVICES_PATH))
-        
+
         #finding all the elements we'll use
         dropdown_toggle_parent = self._driver.find_element_by_id('account-menu')
-        
+
         dropdown_toggle = dropdown_toggle_parent.find_element_by_tag_name('a')
         logout_link = dropdown_toggle_parent.find_element_by_class_name('logout-link')
-        
+
         #activating the dropdown
         dropdown_toggle.click()
         logging.info('WAIT for the logout link to show')
@@ -953,7 +953,7 @@ class MitroExtensionTester(unittest.TestCase):
         logging.info('WAIT for the successfull logout marker')
         self._wait.until(conditions.visibility_of_element_located([By.ID, 'logged-out']))
         logging.info('OK logged out')
-        
+
     def test_logout(self):
         logging.info('<<<<< START logout test')
         #testing logging out from the log in page
@@ -962,7 +962,7 @@ class MitroExtensionTester(unittest.TestCase):
         self.log_in()
         #testing logging out from the services page
         self.test_logout_services_page()
-        
+
         #checking if we have the right username in the corresponding box
         username_element = self._driver.find_element_by_name('username')
         #self.assertEqual(username_element.get_attribute('value'), self.username,
@@ -999,13 +999,13 @@ class MitroExtensionTester(unittest.TestCase):
         self._wait.until(conditions.visibility_of(modal))
         # Sleep for modal fade-in
         self.sleep(1)
-        
+
         if context.items_number: context.generate_content()
         if context.type == context.NOTE:
             #secure note specific actions
             name_element = modal.find_element_by_name('name')
             text_element = modal.find_element_by_name('note_text')
-            
+
             name_element.send_keys(context.content['title'])
             text_element.send_keys(context.content['text'])
         elif context.type == context.MANUAL_PASSWORD:
@@ -1014,12 +1014,12 @@ class MitroExtensionTester(unittest.TestCase):
             url_field = modal.find_element_by_name('login_url')
             username_field = modal.find_element_by_name('username')
             password_field = modal.find_element_by_name('password')
-            
+
             name_field.send_keys(context.content['title'])
             url_field.send_keys(context.content['url'])
             username_field.send_keys(context.content['username'])
             password_field.send_keys(context.content['password'])
-    
+
         submit_button = modal.find_element_by_class_name('save-secret-button')
         submit_button.click()
 
@@ -1046,89 +1046,89 @@ class MitroExtensionTester(unittest.TestCase):
         """
         #we're using the last added item as a target item
         target_element_finder = lambda: self.get_secure_elements(context)[-1]
-        
+
         self.loadURL(self.get_url(SERVICES_PATH))
         tabs_list = self._driver.find_element_by_id('service-tabs')
         tabs_list.find_element_by_id(context.tab_id).click()
-        
+
         #adding three new secure items
         for i in range(3):
             self.test_add_secure_item(context)
-        
+
         #verifying the last added item
         self.verify_last_secure_item(context)
-        
+
         #altering the last added item
         target_element = target_element_finder()
         m = self.secure_item_configuration_modal(context, target_element)
         self.update_secure_item(context, m)
-            
+
         #verifying the last added item
         target_element = self.verify_last_secure_item(context)
         #testing item participants
         self.test_remove_participant(context, target_element)
-        
+
         if context.type == context.MANUAL_PASSWORD:
             #testing the url link
-            
+
             tabs_list = self._driver.find_element_by_id('service-tabs')
             tabs_list.find_element_by_id(context.tab_id).click()
             self.test_password_links(context, target_element_finder)
-        
+
         #testing items deletion
         self.test_delete_item(context, target_element_finder)
-    
+
     def test_secure_notes(self):
         logging.info('<<<<< START secure notes test')
         self.test_secure_items(Context(self, Context.NOTE))
         logging.info('>>>>> SUCCESS secure notes test \n\n\n')
-    
+
     def test_manual_passwords(self):
         logging.info('<<<<< START manual passwords test')
         self.test_secure_items(Context(self, Context.MANUAL_PASSWORD))
         logging.info('>>>>> SUCCESS manual password test \n\n\n')
-        
+
     def test_change_password(self):
         error_message = lambda: self._driver.find_element_by_id('password-error').text.strip()
         self.loadURL(self.get_url(CHANGE_PASSWORD_PATH))
-        
+
         #testing the cancel button
         cancel_button = self._driver.find_element_by_id('change-password-cancel')
         cancel_button.click()
         page_title = self._driver.find_element_by_class_name('popup-title')
         self.assertEqual(page_title.text.strip(),
-                         'Mitro Login Manager', 'Cancel button does not work')
-        
+                         'Vault Login Manager', 'Cancel button does not work')
+
         #getting back to the password change screen
         self.loadURL(self.get_url(CHANGE_PASSWORD_PATH))
-        
+
         #finding all the elements we need
         old_password_element = self._driver.find_element_by_name('old-password')
         new_password_element = self._driver.find_element_by_name('new-password')
         new_password2_element = self._driver.find_element_by_name('new-password2')
         submit_button = self._driver.find_element_by_id('mitro-password-form-button')
-        
+
         #we'll use this for batch actions
         password_elements = [new_password_element, new_password2_element, old_password_element]
-        
+
         #generating password strings we'll use in the test
         short_new_password = random_string(7)
         new_password = random_string(16)
-        
+
         #testing the too-short-password error
         new_password_element.send_keys(short_new_password)
         new_password2_element.send_keys(short_new_password)
         submit_button.click()
         self.assertEqual(error_message(), 'Password is too weak',
                          'Short password error is not shown')
-        
+
         #testing the password missmatch error
         new_password_element.clear()
         new_password_element.send_keys(new_password)
         submit_button.click()
         self.assertEqual(error_message(), 'Passwords do not match',
                          'Passwords missmatch error is not shown')
-        
+
         #testing wrong old password error
         new_password2_element.clear()
         new_password2_element.send_keys(new_password)
@@ -1136,7 +1136,7 @@ class MitroExtensionTester(unittest.TestCase):
         submit_button.click()
         self._wait.until(conditions.text_to_be_present_in_element\
                          ([By.ID,'password-error'], 'Error changing password'))
-        
+
         #testing the case when new password matches the old one
         for element in password_elements:
             element.clear()
@@ -1144,7 +1144,7 @@ class MitroExtensionTester(unittest.TestCase):
         submit_button.click()
         self._wait.until(conditions.text_to_be_present_in_element\
                          ([By.ID,'password-error'], 'New password must be different from old password'))
-        
+
         #testing the successful password change
         for element in password_elements: element.clear()
         new_password_element.send_keys(new_password)
@@ -1153,25 +1153,25 @@ class MitroExtensionTester(unittest.TestCase):
         submit_button.click()
         #making sure we've apeared on the home screen
         self._wait.until(conditions.visibility_of_element_located([By.ID, 'logged-in']))
-        
+
         #setting the new password to be used in the tests
         self.password = new_password
-        
+
         #testing the case when the old password is supplied via url hash parameter
         self.loadURL(self.get_url(SERVICES_PATH)) # we need to leave current page first
         self.loadURL(self.get_url('%s#u=username&p=%s' % (CHANGE_PASSWORD_PATH, self.password)))
         self.assertFalse(self._driver.find_element_by_name('old-password').is_displayed(),
                         'The old password field is not hidden')
-    
+
     def test_issue_reporting(self):
         logging.info('<<<<< START issue reporting test')
         report_link = lambda: self._driver.find_element_by_link_text('Report an Issue')
-        
+
         #testing report link while logged in
         self.loadURL(self.get_url(LOGIN_PATH))
         self.assertEqual(report_link().get_attribute('href'), str(self.get_url(ISSUE_PATH)),
                          'Issue link seems to be wrong when signed in')
-        
+
         #logging out and testing the report link in logged-out state
         self.log_out()
         self.assertEqual(report_link().get_attribute('href'), str(self.get_url(ISSUE_PATH)),
@@ -1179,11 +1179,11 @@ class MitroExtensionTester(unittest.TestCase):
         logging.info('OK report link does work')
         #now let's go to the issue page and test it's functionality
         self.loadURL(self.get_url(ISSUE_PATH))
-        
+
         #getting the elements we'll need
         type_select_element = self._driver.find_element_by_name('type')
         submit_button = self._driver.find_element_by_id('submit_button')
-        
+
         #testing the empty issue type error
         submit_button.click()
         logging.info('WAIT for the modal')
@@ -1192,14 +1192,14 @@ class MitroExtensionTester(unittest.TestCase):
         error_message = self._driver.find_element_by_class_name('error-message')
         self.assertEqual(error_message.text.strip(), 'Please select an issue type')
         logging.info('OK no issue type specified error')
-        
+
         #closing the error modal
         ok_button = self._driver.find_element_by_class_name('modal')\
                 .find_element_by_link_text('OK')
         ok_button.click()
         logging.info('WAIT for the modal')
         self._wait.until(conditions.invisibility_of_element_located([By.CLASS_NAME, 'modal']))
-        
+
         #testing the successful submission reporting
         select = ui.Select(type_select_element)
         select.select_by_value('other')
@@ -1207,24 +1207,24 @@ class MitroExtensionTester(unittest.TestCase):
         logging.info('WAIT for the successful submission marker')
         self._wait.until(conditions.text_to_be_present_in_element([By.TAG_NAME, 'span'], 'Thanks! Issue submitted'))
         logging.info('>>>>> SUCCESS issue reporting test \n\n\n')
-        
+
         #logging back in to let the next tests do their job
         self.log_in()
-    
+
     def test_teams_add(self):
         logging.info('* Testing teams addition')
         self.loadURL(self.get_url(GROUPS_PATH))
         if self._teams_number:
             logging.info('WAIT for the right teams number')
             self._wait.until(self.verify_teams_number)
-        
+
         new_team_name = random_string(16)
-        
+
         #submitting new team
         m = self.open_team_edit_modal(add=True)
         m['name_field'].send_keys(new_team_name)
         m['done_button'].click()
-        
+
         #verifying the operation was successful
         #verifying the right teams number
         self._teams_number += 1
@@ -1233,16 +1233,16 @@ class MitroExtensionTester(unittest.TestCase):
         #making sure our new team name is present in the list
         self.assertTrue(self.verify_team_present(new_team_name))
         logging.info('OK adding a team')
-    
+
     def test_teams_change_name(self):
         m = self.open_team_edit_modal()
-        
+
         #submitting the new team name
         new_team_name = random_string(16)
         m['name_field'].clear()
         m['name_field'].send_keys(new_team_name)
         m['done_button'].click()
-        
+
         #making sure the operation was successful
         logging.info('WAIT for the modal to dissapear')
         self._wait.until(conditions.invisibility_of_element_located([By.ID, 'addedit-group-modal']))
@@ -1257,20 +1257,20 @@ class MitroExtensionTester(unittest.TestCase):
         #checking the changed title is present in the list
         self.assertTrue(self.verify_team_present(new_team_name))
         logging.info('OK changing the team name')
-        
+
         return new_team_name
-    
+
     def test_teams_members(self):
         logging.info('* Checking the teams members')
         team_members_number = 1 #we've got 1 member per team by default
-        
+
         #function to find the team member elements
         team_member_elements = lambda: self._driver.find_element_by_class_name('team-member-list')\
                                             .find_elements_by_tag_name('li')
 
         #function to verify the team members number
         verify_members_number = lambda driver: len(team_member_elements()) == team_members_number
-        
+
         #adding 3 new team members
         for i in range(3):
             #getting the modal ready
@@ -1278,17 +1278,17 @@ class MitroExtensionTester(unittest.TestCase):
             m = self.open_team_edit_modal()
             logging.info('WAIT for the right teams number')
             self._wait.until(verify_members_number)
-    
+
             #submitting new team member
             new_team_member = random_string(6) + '@' + random_string(6)
             m['new_member_input'].send_keys(new_team_member)
             m['add_button'].click()
             m['done_button'].click()
             team_members_number += 1
-            
+
             #waiting for the page to refresh
             self.wait_for_teams_refresh()
-            
+
             #verifying the operation
             m = self.open_team_edit_modal()
             self._wait.until(verify_members_number)
@@ -1302,12 +1302,12 @@ class MitroExtensionTester(unittest.TestCase):
             #did we find him?
             self.assertTrue(team_member_is_present)
             logging.info('OK adding the team member')
-            
+
             #closing the modal
             m['done_button'].click()
             #waiting for the list to refresh
             self.wait_for_teams_refresh()
-        
+
         #now let's delete two team members
         m = self.open_team_edit_modal()
         team_members_to_delete = team_member_elements()[-2:]
@@ -1318,26 +1318,26 @@ class MitroExtensionTester(unittest.TestCase):
         #waiting for the list to refresh
         self.wait_for_teams_refresh()
         team_members_number -= 2
-        
+
         #verifying the deletion was successfull
         m = self.open_team_edit_modal()
         logging.info('WAIT for the right members number')
         self._wait.until(verify_members_number)
         logging.info('OK teams members')
-        
+
     def test_teams_deletion(self, team_name):
         #the context object we'll need for manipulating the secure notes
         logging.info('* Testing teams deletion')
         context = Context(self, Context.NOTE)
-        
+
         #giving the team access to the secure note
         self.toggle_team_access(context, team_name)
-        
+
         #going to the teams page
         self.loadURL(self.get_url(GROUPS_PATH))
         logging.info('WAIT for the teams list to refresh')
         self._wait.until(conditions.presence_of_element_located([By.CLASS_NAME, 'team-item']))
-        
+
         #checking for the error we expect to be shown
         #when we try to delete the team having access to the secure note
         m = self.open_team_edit_modal()
@@ -1365,10 +1365,10 @@ class MitroExtensionTester(unittest.TestCase):
         #closing the error modal
         self._driver.find_element_by_class_name('error-dialog')\
                 .find_element_by_link_text('OK').click()
-        
+
         #removing the team access to the secure note
         self.toggle_team_access(context, team_name)
-        
+
         #going back to the teams page
         self.loadURL(self.get_url(GROUPS_PATH))
         logging.info('WAIT for the teams list')
@@ -1384,7 +1384,7 @@ class MitroExtensionTester(unittest.TestCase):
         #here we expect for the teams list to be refreshed
         #after the successfull deletion
         self.wait_for_teams_refresh()
-        
+
         #let's search the teams and make sure the team we've deleted
         #is not among those left
         team_found = False #the flag
@@ -1395,18 +1395,18 @@ class MitroExtensionTester(unittest.TestCase):
         #it shouldn't be there
         self.assertFalse(team_found)
         logging.info('OK teams deletion')
-            
+
     def test_teams(self):
         logging.info('<<<<< START teams test')
         self.sleep(3)
         for i in range(3):
             self.test_teams_add()
-        
+
         team_new_name = self.test_teams_change_name()
         self.test_teams_members()
         self.test_teams_deletion(team_new_name)
         logging.info('>>>>> SUCCESS teams test \n\n\n')
-    
+
     def test_automatic_passwords(self):
         logging.info('<<<< START automaric passwords')
         errors_count = 0
@@ -1418,13 +1418,13 @@ class MitroExtensionTester(unittest.TestCase):
 
         #going to the test forms list page
         self.loadURL(TEST_FORMS_URL)
-        
+
         #getting all of the test form paths
         test_forms_paths = []
         for list_item in self._driver.find_elements_by_tag_name('li'):
             path = list_item.find_elements_by_tag_name('a')[0]\
                     .get_attribute('href')
-            
+
             #this is because the auth popup doesn't let the script proceed
             #until successfull login and the basic auth successfull login
             #is only possible on the local runs
@@ -1439,20 +1439,20 @@ class MitroExtensionTester(unittest.TestCase):
                 self.loadURL(path)
                 logging.info('WAIT for the login form')
                 self._wait.until(self.condition_login_form_loaded)
-                
+
                 #the user has to manually input the login
                 #datat after the form is loaded
-                
+
                 #waiting for successful login
                 logging.info('WAIT for the successfull login marker')
                 self._wait.until(self.condition_login_success)
-                
+
                 #hitting the extension's 'Save password' button
                 self.switch_to_extension()
                 self.get_extension_buttons()['save_password'].click()
                 self._driver.switch_to_default_content()
                 self.sleep(2)#let the extension perform it's actions
-                
+
                 #going back to the login form page
                 self.loadURL(path)
                 logging.info('WAIT for the login form')
@@ -1461,11 +1461,11 @@ class MitroExtensionTester(unittest.TestCase):
                 self.switch_to_extension()
                 self.get_extension_buttons()['log_in'].click()
                 self._driver.switch_to_default_content()
-                
+
                 #chcking if the logging in succeeded
                 logging.info('WAIT for the successfull login marker')
                 self._wait.until(self.condition_login_success)
-                
+
                 #testing the credentials view/edit
                 #getting context passing the manually created content dict
                 parsed_path = urlparse(path)
@@ -1476,59 +1476,59 @@ class MitroExtensionTester(unittest.TestCase):
                 }
                 context = Context(self, Context.AUTOMATIC_PASSWORD, content)
                 context.items_number += 1#we already have one item at the moment
-                
+
                 #going to the services page
-                
+
                 #that's the hack actually...
                 self.loadURL(self.get_url(SERVICES_PATH))
                 self.sleep(1)
                 self.loadURL(self.get_url(SERVICES_PATH))
                 #EOF hack
-                
+
                 self.wait_for_refresh(context, page_refresh=False)
-                
+
                 #verifying the item content and the copy features
                 if context.items_number:
                     self.verify_secure_items_number(context)
-                
+
                 #verifying the item content
                 m = self.verify_automatic_password(context, target_element)
-                
+
                 #updating the item content, adding new participant
                 self.update_secure_item(context, m)
-                
+
                 #making sure the new content had been saved correctly
                 m = self.verify_automatic_password(context, target_element)
-                
+
                 #closing the modal
                 m['cancel_button'].click()
                 logging.info('WAIT for the config modal')
                 self._wait.until(conditions.invisibility_of_element_located\
                                  ([By.ID, context.configuration_modal_id]))
-                
+
                 #testing removing participant
                 self.test_remove_participant(context, target_element())
-                
+
                 #testing the url links and the 'Log in' button
                 self.test_password_links(context, target_element)
-                
+
                 self.test_delete_item(context, target_element)
             except:
                 print 'Automatic password test failed on %s' % path
                 print traceback.print_exc()
                 errors_count += 1
-            
+
             if not errors_count:
                 status = 'SUCCESS'
             else:
                 status = 'FAIL'
-                
+
             logging.info('>>>>> %s automatic passwords test \n\n\n' % status)
-    
+
     def test_info_links(self):
         logging.info('<<<<< START infolinks test')
         links_to_test = ['Privacy Policy', 'Terms of Service']
-        
+
         for link_text in links_to_test:
             self.loadURL(self.get_url(SERVICES_PATH))
             #locating the dropdown menu
@@ -1541,7 +1541,7 @@ class MitroExtensionTester(unittest.TestCase):
             #we should apear on the page with the same h1 title
             #as the target link text
             self._wait.until(conditions.text_to_be_present_in_element([By.TAG_NAME, 'h1'], link_text))
-        
+
         logging.info('>>>>> SUCCESS infolinks test \n\n\n')
 
 
@@ -1553,7 +1553,7 @@ class Context(object):
     NOTE = 1
     MANUAL_PASSWORD = 2
     AUTOMATIC_PASSWORD = 3
-    
+
     content = {}
 
     def __init__(self, tester, _type, content={}):
@@ -1561,11 +1561,11 @@ class Context(object):
         self.type = _type
         #the new participant's id to test granting/removing access
         self.additional_participant = '%s@%s' % tuple((random_string(5) for i in range(2)))
-        
+
         #generating content to be usen for adding/altering the items
         #or just assigning it if the content is given
         self.generate_content(content)
-        
+
         #setting the item related elements selectors
         if self.type == self.NOTE:
             self.container_id = 'secure-notes-list'
@@ -1624,7 +1624,7 @@ class Context(object):
                 })
         else:
             self.content = content
-            
+
     def get_items_number(self):
         """
         Items number getter
@@ -1646,7 +1646,7 @@ class Context(object):
             self.tester._manual_passwords_number = value
         elif self.type == self.AUTOMATIC_PASSWORD:
             self.tester._automatic_passwords_number = value
-        
+
 
     items_number = property(get_items_number, set_items_number)
 
@@ -1667,21 +1667,21 @@ def create_chromedriver(webdriver_path, extension_paths):
 def get_extension_base_url(driver, extension_title):
     if driver.name == 'chrome':
         driver.get('chrome://extensions-frame/')
-    
+
         extensions = driver.find_elements_by_class_name('extension-list-item-wrapper')
-    
+
         for extension_item in extensions:
             title_elements = extension_item.find_elements_by_class_name('extension-title')
-    
+
             if len(title_elements) != 1:
                 raise Exception, 'wrong number of title elements'
-    
+
             title = title_elements[0].get_attribute('innerHTML')
             if title == extension_title:
                 return "chrome-extension://%s" % extension_item.get_attribute('id')
-    
+
     elif driver.name == 'safari':
-        return 'http://selenium.mitro.co:8012';
+        return 'http://selenium.vaultapp.xyz:8012';
 
     return ''
 
@@ -1707,13 +1707,13 @@ def main():
     else:
         raise Exception('Please specify the browser name. The options are: chrome, safari')
 
-    
+
     base_url = get_extension_base_url(driver, _MITRO_EXTENSION_TITLE)
     if not base_url:
-        raise Exception, 'Mitro extension base url had not been obtained'
+        raise Exception, 'Vault extension base url had not been obtained'
 
     logging.info('base_url: %s' % base_url)
-    
+
     tester = MitroExtensionTester(driver, base_url)
 
     username = random_string(6) + '@' + random_string(6)
@@ -1726,7 +1726,7 @@ def main():
         #setting login and password to be used in the tests
         tester.username = username
         tester.password = password
-        
+
         #now let's run the tests
         tester.test_signup()
         tester.test_logout()

@@ -55,8 +55,8 @@ FIREFOX_RELEASE_SUBDIRS=$(foreach sub,$(SUBDIRS),$(FIREFOX_RELEASE_DIR)/data/$(s
 FIREFOX_DEBUG_DIR=$(FIREFOX_BUILD_DIR)/debug
 FIREFOX_DEBUG_SUBDIRS=$(foreach sub,$(SUBDIRS),$(FIREFOX_DEBUG_DIR)/data/$(sub)) $(FIREFOX_DEBUG_DIR)/data $(FIREFOX_DEBUG_DIR)/lib
 
-FIREFOX_UPDATE_LINK="https://www.mitro.co/firefox/downloads/mitro-login-latest.xpi"
-FIREFOX_UPDATE_URL="https://www.mitro.co/firefox/update_rdf"
+FIREFOX_UPDATE_LINK="https://www.vaultapp.xyz/firefox/downloads/mitro-login-latest.xpi"
+FIREFOX_UPDATE_URL="https://www.vaultapp.xyz/firefox/update_rdf"
 
 WEBPAGE_BUILD_DIR=$(BUILD_DIR)/webpage
 WEBPAGE_RELEASE_DIR=$(WEBPAGE_BUILD_DIR)/release

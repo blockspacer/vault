@@ -2,9 +2,9 @@
  * *****************************************************************************
  * Copyright (c) 2012, 2013, 2014 Lectorius, Inc.
  * Authors:
- * Vijay Pandurangan (vijayp@mitro.co)
- * Evan Jones (ej@mitro.co)
- * Adam Hilss (ahilss@mitro.co)
+ * Vijay Pandurangan
+ * Evan Jones
+ * Adam Hilss
  *
  *
  *     This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You can contact the authors at inbound@mitro.co.
+ *     You can contact the authors at team@vaultapp.xyz.
  * *****************************************************************************
  */
 
@@ -97,7 +97,7 @@ addContentScripts(getFullUrls(['js/config.js',
                                'js/passwords.js',
                                'js/client.js',
                                'js/helpers.js',
-                               'js/popup.js']), ['http://selenium.mitro.co/html/popup.html', 'http://selenium.mitro.co/html/signup.html', 'http://selenium.mitro.co/html/change-password.html'], [], true, false, false);
+                               'js/popup.js']), ['http://selenium.vaultapp.xyz/html/popup', 'http://selenium.vaultapp.xyz/html/signup', 'http://selenium.vaultapp.xyz/html/change-password.html'], [], true, false, false);
 
 // services.html
 addContentScripts(getFullUrls(['js/config.js',
@@ -115,7 +115,7 @@ addContentScripts(getFullUrls(['js/config.js',
                                'js/helpers.js',
                                'js/template.js',
                                'js/services.js',
-                               'js/add-service.js']), ['http://selenium.mitro.co/html/services.html'], [], true, false, false);
+                               'js/add-service.js']), ['http://selenium.vaultapp.xyz/html/services'], [], true, false, false);
 
 // groups.html
 addContentScripts(getFullUrls(['js/config.js',
@@ -132,7 +132,7 @@ addContentScripts(getFullUrls(['js/config.js',
                                "js/client.js",
                                'js/helpers.js',
                                'js/template.js',
-                               'js/groups.js']), ['http://selenium.mitro.co/html/groups.html'], [], true, false, false);
+                               'js/groups.js']), ['http://selenium.vaultapp.xyz/html/groups'], [], true, false, false);
 
 // the terms.html and privacy.html
 addContentScripts(getFullUrls(['js/config.js',
@@ -148,4 +148,4 @@ addContentScripts(getFullUrls(['js/config.js',
                                'js/admin-common.js',
                                "js/client.js",
                                'js/helpers.js',
-                               'js/template.js']), ['http://selenium.mitro.co/html/terms.html', 'http://selenium.mitro.co/html/privacy.html'], [], true, false, false);
+                               'js/template.js']), ['http://selenium.vaultapp.xyz/html/terms', 'http://selenium.vaultapp.xyz/html/privacy'], [], true, false, false);

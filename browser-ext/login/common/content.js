@@ -2,9 +2,9 @@
  * *****************************************************************************
  * Copyright (c) 2012, 2013, 2014 Lectorius, Inc.
  * Authors:
- * Vijay Pandurangan (vijayp@mitro.co)
- * Evan Jones (ej@mitro.co)
- * Adam Hilss (ahilss@mitro.co)
+ * Vijay Pandurangan
+ * Evan Jones
+ * Adam Hilss
  *
  *
  *     This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You can contact the authors at inbound@mitro.co.
+ *     You can contact the authors at team@vaultapp.xyz.
  * *****************************************************************************
  */
 
@@ -67,7 +67,7 @@ var FRAME_ID = IS_TOP_FRAME ? '' : randomString(20);
             infobar = null;
         };
 
-        var buttons = [{text: 'Log in to Mitro', action: loginAction}];
+        var buttons = [{text: 'Log in to Vault', action: loginAction}];
 
         infobar = displayInfobar(message, [], buttons, closeAction);
     };
@@ -86,7 +86,7 @@ var FRAME_ID = IS_TOP_FRAME ? '' : randomString(20);
         if (isInfobarShown()) {
             return;
         }
-        var message = 'Do you want Mitro to replace your password for \'' + username + '\'?';
+        var message = 'Do you want Vault to replace your password for \'' + username + '\'?';
         var replaceAction = function (selection) {
             formData.secretId = replacedSecretData.secretId;
             if (isNaN(formData.orgId)) {
@@ -117,7 +117,7 @@ var FRAME_ID = IS_TOP_FRAME ? '' : randomString(20);
         if (isInfobarShown()) {
             return;
         }
-        var message = 'Do you want Mitro to save your password for \'' + username + '\'?';
+        var message = 'Do you want Vault to save your password for \'' + username + '\'?';
 
         var saveAction = function (selection) {
             formData.orgId = parseInt(selection ? selection.value : null, 10);
@@ -171,7 +171,7 @@ var FRAME_ID = IS_TOP_FRAME ? '' : randomString(20);
         }
 
         console.log('login infobar', selectOptions);
-        var message = 'Log in with Mitro as:';
+        var message = 'Log in with Vault as:';
 
         var loginAction = function(selection) {
             console.log('--> loginAccepted', selection.value);
@@ -358,15 +358,15 @@ var FRAME_ID = IS_TOP_FRAME ? '' : randomString(20);
         });
     };
 
-    // Listen for initial messages only on mitro.co and localhost
-    // the regexp matches mitro.co, foo.mitro.co, but not foomitro.co or mitro.com
-    if (window.location.hostname.match(/(^|\.)mitro\.co$/) ||
+    // Listen for initial messages only on vaultapp.xyz and localhost
+    // the regexp matches vaultapp.xyz, foo.vaultapp.xyz, but not foovaultapp.xyz or vaultapp.com
+    if (window.location.hostname.match(/(^|\.)vaultapp\.xyz$/) ||
             (debugMode && (window.location.hostname === 'localhost'))) {
         cs.activatePageMessages(client);
 
         // Convert the 'get started' button into a 'sign in' button.
         $(function() {
-            if (window.location.hostname.match(/(^|\.)mitro\.co$/) ||
+            if (window.location.hostname.match(/(^|\.)vaultapp\.xyz$/) ||
                     (debugMode && (window.location.hostname === 'localhost'))) {
                 var $signinButton = $('#signin-button');
                 if ($signinButton.length > 0) {
@@ -376,27 +376,27 @@ var FRAME_ID = IS_TOP_FRAME ? '' : randomString(20);
                         console.log('trying to redirect.....');
                         helper.redirectTo(helper.getURL(HOME_PATH));
                     });
-                    
+
                 }
             }
         });
-        
-        if (window.location.hostname.match(/(^|\.)mitro\.co$/)) {
+
+        if (window.location.hostname.match(/(^|\.)vaultapp\.xyz$/)) {
             // TODO: Remove /static/html version once deployed
             var REMOTE_SERVICES_PATHS = {'/extension_services.html': true};
             var REMOTE_ADMIN_SYNC_PATH = '/extension_admin_sync.html';
             var REMOTE_ORG_PATH = '/extension_organizations.html';
             var path = window.location.pathname;
-        
+
             if (isInstallPage(window.location.href)) {
                 var redirectUrl = getInstallRedirectUrl(window.location.href);
                 helper.redirectTo(redirectUrl);
             }
 
-            if ((path in REMOTE_SERVICES_PATHS) || (window.location.href.match('^https://www[.]mitro[.]co/$'))) {
+            if ((path in REMOTE_SERVICES_PATHS) || (window.location.href.match('^https://www[.]vaultapp[.]xyz/$'))) {
                 helper.redirectTo(helper.getURL(SERVICES_PATH));
             }
-            
+
             if (path === REMOTE_ADMIN_SYNC_PATH) {
                 helper.redirectTo(helper.getURL(ADMIN_SYNC_PATH));
             }
@@ -429,8 +429,8 @@ var FRAME_ID = IS_TOP_FRAME ? '' : randomString(20);
         '};'
         ].join('\n');
 
-    
-    
+
+
     var hasBeenInjected = {};
     var injectScriptIntoPage = function (scriptString) {
         if (hasBeenInjected[scriptString]) {
@@ -527,7 +527,7 @@ var FRAME_ID = IS_TOP_FRAME ? '' : randomString(20);
             maybeShowLoginInfobar(serviceInstances);
             $(document).off('click', 'form', bindToForm);
         };
-        
+
         $(document).on('click', 'form', bindToForm);
 
 
@@ -644,4 +644,3 @@ var FRAME_ID = IS_TOP_FRAME ? '' : randomString(20);
             }
         });
     };
-

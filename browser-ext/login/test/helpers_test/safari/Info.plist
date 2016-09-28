@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Author</key>
-	<string>Lectorius, Inc.</string>
+	<string>Aquarious, Inc.</string>
 	<key>Builder Version</key>
 	<string>534.57.2</string>
 	<key>CFBundleDisplayName</key>
@@ -53,7 +53,7 @@
 	<dict>
 		<key>Blacklist</key>
 		<array>
-			<string>http://selenium.mitro.co/*</string>
+			<string>http://selenium.vaultapp.xyz/*</string>
 			<string>safari-extension://*/*</string>
 		</array>
 		<key>Scripts</key>
@@ -75,6 +75,6 @@
 		</dict>
 	</dict>
 	<key>Website</key>
-	<string>https://www.mitro.co</string>
+	<string>https://www.vaultapp.xyz</string>
 </dict>
 </plist>

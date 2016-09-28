@@ -2,9 +2,9 @@
  * *****************************************************************************
  * Copyright (c) 2012, 2013, 2014 Lectorius, Inc.
  * Authors:
- * Vijay Pandurangan (vijayp@mitro.co)
- * Evan Jones (ej@mitro.co)
- * Adam Hilss (ahilss@mitro.co)
+ * Vijay Pandurangan
+ * Evan Jones
+ * Adam Hilss
  *
  *
  *     This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *     You can contact the authors at inbound@mitro.co.
+ *     You can contact the authors at team@vaultapp.xyz.
  * *****************************************************************************
  */
 
@@ -32,7 +32,7 @@ var SIGNUP_PATH = 'html/signup.html';
 var isInstallPage = function(url) {
   var uri = new URI(url);
   return uri && uri.getAuthority() && uri.getPath() &&
-         uri.getAuthority().match(/(^|\.)mitro\.co$/) &&
+         uri.getAuthority().match(/(^|\.)vaultapp\.xyz$/) &&
          uri.getPath() === REMOTE_INSTALL_PATH;
 };
 
