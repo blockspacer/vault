@@ -25,7 +25,7 @@
  */
 
 /*general styles */
-body {font-size: 16px; color: #4c5961; background: #ebedf1;}
+body {font-size: 16px; color: #4c5961; background: #ececec;}
 a { outline: none; color: #24abf8;}
 button, .btn:focus {outline: none;}
 .link a, .link2 a:hover, .link3 a:hover, a.under:hover, a.link2:hover {text-decoration: none;}
@@ -117,7 +117,7 @@ h3 {font-size: 18px; font-weight: normal; margin: 0 0 5px;}
 }
 
 /*buttons */
-.btn {border: none;padding: 8px 24px;font-weight: bold; color: #4c5961; font-weight: normal;background: #ebedf1; border: solid 1px #ebedf1; }
+.btn {border: none;padding: 8px 24px;font-weight: bold; color: #4c5961; font-weight: normal;background: #ececec; border: solid 1px #ebedf1; }
 .btn-primary {background: #24abf8; color: #fff; font-weight: bold;border: solid 1px #24abf8;}
 .btn-primary:hover {background: #3d96da;border: solid 1px #3d96da;}
 .btn-white {background: #fff; color: #24abf8; border: solid 1px #eaeaea; }
@@ -175,7 +175,7 @@ form .buttons {margin-top: 30px; border-top: solid 1px #e1e1e1; padding-top: 15p
 
 
 /* header */
-.navbar {background: #4c5961; border-radius: 0; height: 80px; margin-bottom: 0;}
+.navbar {background: #afafaf; border-radius: 0; height: 80px; margin-bottom: 0;}
 .navbar-brand {padding: 0 10px;}
 .header {width: 950px; margin: 0 auto;}
 .header .menu {color: #fff; font-weight: bold; font-size: 13px;margin-top: 10px; margin-right: 10px;}

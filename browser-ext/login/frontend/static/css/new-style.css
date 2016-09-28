@@ -390,7 +390,7 @@ header .top {
 }
 
 /* header */
-.navbar {background: #4c5961; border-radius: 0; height: 44px;}
+.navbar {background: #afafaf; border-radius: 0; height: 44px;}
 .navbar-brand {padding: 10px 20px;}
 
 .menu a {
@@ -564,7 +564,7 @@ footer {
 .panel .panel-footer .btn {margin: 0; padding: 10px 27px; font-size: 18px;}
 .panel .form-control {height: 32px;}
 
-.val-box {position: absolute;background: #4c5961; padding: 15px;color: #e3e4e5; font-size: 12px;left: -262px;top: -1px; width: 240px;}
+.val-box {position: absolute;background: #afafaf; padding: 15px;color: #e3e4e5; font-size: 12px;left: -262px;top: -1px; width: 240px;}
 .val-box h3 {color: #fff; font-size: 16px;margin: 0 0 10px;}
 .val-box ul {margin: 0;padding: 0;}
 .val-box li {list-style: none; background: url(../img/signup-icons.png) no-repeat 0 -76px; margin-bottom: 6px; padding-left: 30px; line-height: 18px;}
