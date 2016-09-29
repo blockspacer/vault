@@ -181,14 +181,14 @@ form .buttons {margin-top: 30px; border-top: solid 1px #e1e1e1; padding-top: 15p
 .header .menu {color: #fff; font-weight: bold; font-size: 13px;margin-top: 10px; margin-right: 10px;}
 .header .menu a {color: #fff; text-decoration: none;}
 .header .caret {border-top-color: #fff;border-bottom-color: #fff;}
-.header .dropdown-menu {background: #fafafb;min-width: 190px;}
+.header .dropdown-menu {background: #fafafa;min-width: 190px;}
 .header .dropdown-menu li a {color: #4c5961; border-top: solid 1px #eeeeef; font-size: 12px; font-weight: bold;}
 .header .dropdown-menu li:first-child a {border: none;}
 
 /* main content */
-.main {margin: -30px auto 10px; width: 950px; z-index: 10;background: #fafafb; position: relative; -webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;}
+.main {margin: -30px auto 10px; width: 950px; z-index: 10;background: #fafafa; position: relative; -webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;}
 
-.left-col {background: #fafafb; float: left;width: 227px; height: 780px; position: relative;
+.left-col {background: #fafafa; float: left;width: 227px; height: 780px; position: relative;
     -webkit-border-top-left-radius: 6px;-webkit-border-bottom-left-radius: 6px;-moz-border-radius-topleft: 6px;-moz-border-radius-bottomleft: 6px;
     border-top-left-radius: 6px;border-bottom-left-radius: 6px;}
 .left-col .user {padding: 15px; border-bottom: solid 1px #e5e8e9;}
@@ -251,7 +251,7 @@ border-bottom-right-radius: 6px; -moz-border-bottom-right-radius: 6px; -webkit-b
 .team-group .link2 {margin-top: 13px;}
 .team-group .dropdown {margin-top: 16px;}
 .team-group .remove {margin-top: 11px;}
-.team-group .actions button {height: 76px;border: none;border-left: solid 1px #e1e1e1; width: 36px;background: #fafafb; margin: -12px 0 -9px 15px;}
+.team-group .actions button {height: 76px;border: none;border-left: solid 1px #e1e1e1; width: 36px;background: #fafafa; margin: -12px 0 -9px 15px;}
 
 .secret .text, .member .text {float: left; width: 168px; text-align: left;margin-left: 8px;}
 .text-full {width: 440px!important; overflow: hidden}
@@ -298,7 +298,7 @@ border-bottom-right-radius: 6px; -moz-border-bottom-right-radius: 6px; -webkit-b
 .member-main .form-control {color: #000;}
 
 /* wells */
-.well {background: #fafafb; border-radius: 0; padding: 15px; font-size: 14px; border: none; margin: 0;}
+.well {background: #fafafa; border-radius: 0; padding: 15px; font-size: 14px; border: none; margin: 0;}
 .well-border {border: solid 1px #e8e9ed; }
 .well-border .btn-white {background: transparent; border-color: #b7b7b7; margin-top: 6px;}
 .well-border .btn-white:hover {background: #24abf8;}
@@ -317,7 +317,7 @@ border-bottom-right-radius: 6px; -moz-border-bottom-right-radius: 6px; -webkit-b
 
 /* modals */
 .modal-dialog {width: 492px; padding: 150px 0 0;}
-.modal-header {background: #fafafb; border-bottom: solid 1px #e5e8e9;-webkit-border-top-left-radius: 6px;-webkit-border-top-right-radius: 6px;
+.modal-header {background: #fafafa; border-bottom: solid 1px #e5e8e9;-webkit-border-top-left-radius: 6px;-webkit-border-top-right-radius: 6px;
     -moz-border-radius-topleft: 6px;-moz-border-radius-topright: 6px;border-top-left-radius: 6px;border-top-right-radius: 6px; padding: 15px 20px;}
 .close {font-size: 30px;font-weight: normal;}
 .modal-content {-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);}
@@ -328,7 +328,7 @@ border-bottom-right-radius: 6px; -moz-border-bottom-right-radius: 6px; -webkit-b
 
 /* tutorial */
 #tutorial {font-size: 18px;}
-#tutorial .modal-body {background: #fafafb; height: 290px; position: relative; -webkit-border-top-left-radius: 6px;-webkit-border-top-right-radius: 6px;
+#tutorial .modal-body {background: #fafafa; height: 290px; position: relative; -webkit-border-top-left-radius: 6px;-webkit-border-top-right-radius: 6px;
     -moz-border-radius-topleft: 6px;-moz-border-radius-topright: 6px;border-top-left-radius: 6px;border-top-right-radius: 6px;}
 #tutorial .modal-footer {height: 61px;}
 #tutorial h2 {font-weight: bold; margin-bottom: 10px;}

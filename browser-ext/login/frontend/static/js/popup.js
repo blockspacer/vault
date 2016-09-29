@@ -244,7 +244,7 @@ $(document).ready(function() {
     $wrapEl.addClass('web-wrap');
     $htmlEl.addClass('web');
     $logoEl.wrap('<header class="simple-header"></header>');
-    $('<h1>Sign In</h1>').insertAfter($logoEl);
+    $('<h1 style="color: #000;">Sign In</h1>').insertAfter($logoEl);
     $signUpBtn.insertAfter($loginFormEl);
     $signUpBtn.find('a').removeAttr('target').removeClass('button');
     $signUpBtn.prepend('Don\'t have an account?');

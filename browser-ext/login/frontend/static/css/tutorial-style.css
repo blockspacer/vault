@@ -27,7 +27,7 @@
 
 /* tutorial */
 #tutorial-modal {font-size: 18px;}
-#tutorial-modal .modal-body {background: #fafafb; height: 290px; position: relative; -webkit-border-top-left-radius: 6px;-webkit-border-top-right-radius: 6px;
+#tutorial-modal .modal-body {background: #fafafa; height: 290px; position: relative; -webkit-border-top-left-radius: 6px;-webkit-border-top-right-radius: 6px;
     -moz-border-radius-topleft: 6px;-moz-border-radius-topright: 6px;border-top-left-radius: 6px;border-top-right-radius: 6px;}
 #tutorial-modal .modal-footer {height: 61px;}
 #tutorial-modal h2 {font-weight: bold; margin-bottom: 10px;}

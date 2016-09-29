@@ -45,8 +45,8 @@
 }
 
 .arrow-down(@width, @color) {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: @width solid transparent;
   border-right: @width solid transparent;
   border-top: @width solid @color;
@@ -222,14 +222,14 @@ input {
     border: 1px solid @tertiary;
   }
   &[type="password"] {
-    font-family: @diamond;
+    // font-family: @diamond;
     font-size: 20px;
     .placeholder-font-family-weight(@pt-sans-regular, 16px, lighter);
   }
   &[readonly] {
     .user-select(none);
     background-color: @bg-color-light;
-    .montserrat-font(); 
+    .montserrat-font();
     &:focus {
       border: none;
     }
@@ -276,8 +276,8 @@ form {
   &:hover {
     .transition(background-color 100ms);
     background-color: @hover-bg-color;
-    color: @hover-color;    
-  } 
+    color: @hover-color;
+  }
 }
 
 .button-size(@width, @line-height, @font-size, @padding, @height) {
@@ -307,14 +307,14 @@ button, a.button {
   &:focus {
     .transition(background-color 100ms);
     color: @text-light;
-    background-color: darken(@brand-color, 15%); 
+    background-color: darken(@brand-color, 15%);
   }
   &:active {
     color: @text-light;
-    background-color: darken(@brand-color, 20%); 
+    background-color: darken(@brand-color, 20%);
   }
   &.reset {
-    .button-color(@tertiary, darken(red, 20%), @text-light, @text-light);   
+    .button-color(@tertiary, darken(red, 20%), @text-light, @text-light);
   }
   &.button-light {
     .button-color(fade(@lt-gray, 90%), darken(@lt-gray, 15%), fade(@text-dark, 80%), @text-dark);
@@ -323,7 +323,7 @@ button, a.button {
     .button-color(darken(@primary, 10%), darken(@primary, 15%), @text-light, @text-light);
   }
   &.button-gray {
-    .button-color(@bg-color-dark, darken(@bg-color-dark, 15%), @text-light, @text-light);  
+    .button-color(@bg-color-dark, darken(@bg-color-dark, 15%), @text-light, @text-light);
   }
   &.button-sm {
     .button-size(130px, 12px, 12px, 10px 0px, 30px);
@@ -332,7 +332,7 @@ button, a.button {
     .button-size(180px, 14px, 14px, 12px 0px, 36px);
   }
   &.button-lg {
-    .button-size(250px, 14px, 14px, 14px 0px, 40px);  
+    .button-size(250px, 14px, 14px, 14px 0px, 40px);
   }
 }
 
@@ -436,14 +436,14 @@ body {
         cursor: pointer;
         &:hover, &.selected {
           .sidebar-list-item-settings();
-          color: @text-light;     
+          color: @text-light;
         }
         &:hover {
           background-color: fade(@primary, 50%);
         }
         &.selected {
-          background-color: @primary;      
-        }   
+          background-color: @primary;
+        }
       }
     }
     /* Sidebar Top Section - Profile */
@@ -491,10 +491,10 @@ body {
               .sidebar-list-item-settings(@padding-left: 75px);
             }
             &:hover {
-              background-color: lighten(@text-hybrid, 20%);  
+              background-color: lighten(@text-hybrid, 20%);
             }
             &.selected {
-              background-color: @bg-color-light;  
+              background-color: @bg-color-light;
             }
           }
         }
@@ -519,7 +519,7 @@ body {
           .acct-name {
             background-color: @primary;
             color: @text-light;
-            .sidebar-list-item-settings();     
+            .sidebar-list-item-settings();
           }
           .acct-info {
             display: block;
@@ -635,7 +635,7 @@ body {
     pointer-events: auto;
   }
   &.in {
-    opacity: 1;  
+    opacity: 1;
   }
   &.out {
     opacity: 0;
@@ -656,7 +656,7 @@ body {
       float: left;
       margin: 20px 10px 0px;
       &.close {
-        .button-color(@tertiary, darken(@tertiary, 20%), @text-light, @text-light); 
+        .button-color(@tertiary, darken(@tertiary, 20%), @text-light, @text-light);
       }
     }
     a.modal-close {
@@ -816,7 +816,7 @@ body {
           margin-left: 5px;
         }
       }
-    }    
+    }
   }
   &.secret-list {
     .item {
@@ -881,7 +881,7 @@ body {
           float: right;
           margin: 0;
           .button-size(80px, 0px, 10px, 12px 0px, auto);
-          background-color: fade(lighten(@quinary, 10%), 70%);          
+          background-color: fade(lighten(@quinary, 10%), 70%);
           &:hover {
             background-color: @quinary;
           }
@@ -910,7 +910,7 @@ body {
           }
           background-color: fade(@quinary, 40%);
         }
-      }      
+      }
     }
   }
 }
@@ -976,7 +976,7 @@ body {
     select {
       font-size: 30px;
     }
-  }  
+  }
   &.left {
     /* border-right: 1px solid @tertiary; */
   }
@@ -991,7 +991,7 @@ body {
   #remove-list-wrapper {
     .submit-btn {
       width: 320px;
-    }   
+    }
   }
 }
 
@@ -1064,7 +1064,7 @@ body {
         color: @text-dark;
         .montserrat-font();
         &:hover {
-          background-color: @lt-gray;  
+          background-color: @lt-gray;
         }
         &.selected {
           background-color: @quaternary;
@@ -1186,7 +1186,7 @@ body {
   white-space: nowrap;
   &:hover {
     background-color: lighten(@text-hybrid, 20%);
-    color: @text-dark;    
+    color: @text-dark;
   }
 }
 .ui-tabs .ui-tabs-nav li.ui-tabs-active {
@@ -1380,7 +1380,7 @@ body {
         }
         .arrow-down {
           .arrow-down(6px, @text-light);
-        }    
+        }
       }
       &.headerSortDown {
         .arrow-down {
@@ -1403,7 +1403,7 @@ body {
         }
       }
     }
-  } 
+  }
 }
 
 #password-import-table {
@@ -1521,7 +1521,7 @@ body {
   border:  5px solid #fff;
   left: -5px;
   background: #fff;
-  
+
   /*fix other elements on the page moving (on Chrome)*/
   -webkit-transform: translatez(0);
   -moz-transform: translatez(0);

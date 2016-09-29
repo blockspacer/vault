@@ -14,7 +14,7 @@
 
 {{$header}}
     {{<header-basic-template}}
-    {{$header-title}}Sign up{{/header-title}}
+    {{$header-title}}<span style='color: #000;'>Sign up</span>{{/header-title}}
     {{/header-basic-template}}
 {{/header}}
 
@@ -57,13 +57,21 @@
             </div>
             <div class="progress-msg">&nbsp;</div>
           </div>
-          <div class="form-group">
+          <div>
+            <label id="remember-me" for="remember-me">
+              <div class="checkbox checked">
+                <input id="remember-me-input" name="remember-me" class="remember-me" type="checkbox" checked="">
+              </div>
+              <div class="label">Stay logged in.</div>
+            </label>
+          </div>
+          <!-- <div class="form-group">
             <div id="remember-me" class="checkbox" tabindex="4">
-              <div id="remember-me-icon" class="checkbox-icon icon-logomini"></div>
+              <div id="remember-me-icon" class="checkbox-icon"></div>
               <input id="remember-me-input" name="remember-me" type="checkbox">
             </div>
             <label for="remember-me">stay logged in</label>
-          </div>
+          </div> -->
           <div id="remember-me-alert" class="alert-box">
             <em>If you stay logged in, anyone with access to your computer can access your passwords.</em>
           </div>

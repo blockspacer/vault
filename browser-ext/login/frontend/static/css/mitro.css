@@ -3200,12 +3200,12 @@ button.close {
      -moz-border-radius: 6px;
           border-radius: 6px;
   color: #ffffff;
-  background-color: #4d5961;
+  background-color: #afafaf;
 }
 
 .btn-large:hover {
   color: #ffffff;
-  background-color: #4d5961;
+  background-color: #afafaf;
  }
 
 .btn-large [class^="icon-"],
@@ -4246,7 +4246,7 @@ input[type="submit"].btn.btn-mini {
   min-height: 40px;
   padding-right: 57px;
   padding-left: 57px;
-  background-color: #4d5961;
+  background-color: #afafaf;
   border: 0;
   *zoom: 1;
 }
@@ -4599,7 +4599,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav li.dropdown.active > .dropdown-toggle,
 .navbar .nav li.dropdown.open.active > .dropdown-toggle {
   color: #fff;
-  background-color: #4d5961;
+  background-color: #afafaf;
 }
 
 .navbar .nav li.dropdown > .dropdown-toggle .caret {

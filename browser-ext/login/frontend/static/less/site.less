@@ -101,7 +101,7 @@ input {
     border: 1px solid @tertiary;
   }
   &[type="password"] {
-    font-family: @diamond;
+    // font-family: @diamond;
     font-size: 20px;
     .placeholder-font-family-weight(@pt-sans-regular, 16px, lighter);
   }
@@ -142,11 +142,11 @@ button, a.button {
   &:hover, &:focus {
     .transition(background-color 100ms);
     color: @text-light;
-    background-color: darken(@brand-color, 10%); 
+    background-color: darken(@brand-color, 10%);
   }
   &:active {
     color: @text-light;
-    background-color: darken(@brand-color, 15%); 
+    background-color: darken(@brand-color, 15%);
   }
   &.button-light {
     background-color: fade(@lt-gray, 90%);
@@ -154,8 +154,8 @@ button, a.button {
     &:hover {
       .transition(background-color 100ms);
       background-color: @lt-gray;
-      color: @text-dark;      
-    } 
+      color: @text-dark;
+    }
   }
   &.button-dark {
     background-color: darken(@primary, 10%);
@@ -163,8 +163,8 @@ button, a.button {
     &:hover {
       .transition(background-color 100ms);
       background-color: darken(@primary, 15%);
-      color: @text-light;   
-    }   
+      color: @text-light;
+    }
   }
   &.button-sm {
     width: 120px;;
@@ -180,7 +180,7 @@ button, a.button {
     font-size: 14px;
     letter-spacing: 2px;
     padding: 12px 0px;
-    height: 36px;   
+    height: 36px;
   }
   &.button-lg {
     width: 250px;
@@ -188,7 +188,7 @@ button, a.button {
     font-size: 14px;
     letter-spacing: 2px;
     padding: 14px 0px;
-    height: 40px;   
+    height: 40px;
   }
   &.install-extension {
     border: 2px @bg-color-light solid;
@@ -280,7 +280,7 @@ button, a.button {
     background: @quinary;
     color: @text-white;
     .arrow-left {
-      border-right:12px solid @quinary; 
+      border-right:12px solid @quinary;
     }
     .arrow-right {
       border-left: 12px solid @quinary;
@@ -293,8 +293,8 @@ button, a.button {
     width: 0;
     height: 0;
     border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent; 
-    border-right: 12px solid @secondary; 
+    border-bottom: 12px solid transparent;
+    border-right: 12px solid @secondary;
   }
   .arrow-right {
     position: absolute;
@@ -339,7 +339,7 @@ body {
     &:after {
       content: "";
       display: block;
-      height: 80px;   
+      height: 80px;
     }
     #content {
       padding-top: 60px;
@@ -364,7 +364,7 @@ body {
             text-decoration: none;
             margin: 0px auto;
           }
-        }     
+        }
       }
       .bordered-content {
         margin-top: 30px;
@@ -401,7 +401,7 @@ body {
             .transition(background-color 100ms);
             background-color: @bg-color-blue;
             cursor: pointer;
-          }       
+          }
         }
         ol {
           margin: 0px 20px;
@@ -493,20 +493,23 @@ header {
         text-transform: none;
         font-family: @pt-sans-regular;
         letter-spacing: 0px;
-      }   
+      }
     }
   }
   &.simple-header {
     padding-top: 70px;
     #logo {
-      width: 120px;
+      background: url('../img/logo-sign-in-up.png');
+      background-size: cover;
+      width: 196px;
+      height: 62px;
       margin: 0px auto 30px;
       font-size: 72px;
       display: block;
     }
     h1 {
       font-size: 32px;
-    }   
+    }
   }
 }
 
@@ -529,7 +532,7 @@ footer {
       padding: 16px 25px;
       text-transform: uppercase;
       letter-spacing: 1px;
-      font-family: @montserrat-regular;     
+      font-family: @montserrat-regular;
       font-size: 12px;
       a {
         margin: 0px 12px;
@@ -561,7 +564,7 @@ footer {
         display: none;
       }
     }
-  } 
+  }
 }
 
 .simple-container {
@@ -617,18 +620,42 @@ footer {
     right: -270px;
     top: 0px;
   }
-  #remember-me {
-    margin-top: 5px;
-    #remember-me-icon {
-      display: none;
+  label#remember-me {
+    .clear;
+    cursor: pointer;
+    display: block;
+    font-size: 13px;
+    margin-top: 11px;
+    .checkbox {
+      background-color: rgba(150, 150, 150, .5);
+      border: 1px solid rgba(0, 0, 0, 0);
+      .border-radius(3px);
+      float: left;
+      height: 22px;
+      overflow: hidden;
+      width: 22px;
+      &.checked {
+        background-image: @sprite;
+        background-size: @sprite-background-size;
+        background-position: -48px -497px;
+      }
+      input {
+        margin-left: -99999px;
+      }
     }
-    &.checked {
-      #remember-me-icon {
-        display: block;
+    .label {
+      float: left;
+      margin: 2px 0 0 5px;
+    }
+    &:hover, &:focus {
+      .checkbox {
+        background-color: rgba(100, 100, 100, .5);
+        border: 1px solid rgba(0, 0, 0, 0);
       }
     }
   }
   #remember-me-alert {
+    margin-top: 15px;
     display: none;
   }
   #signup-error, #password-error {
@@ -838,7 +865,7 @@ footer {
     #social {
       padding: 0px 25px 8px;
     }
-  } 
+  }
   body {
     font-size: 12px;
     #wrap {
@@ -870,7 +897,7 @@ footer {
         width: 90%;
         text-align: center;
       }
-    }      
+    }
     a.button {
       font-size: 14px;
       padding: 6px 0px;

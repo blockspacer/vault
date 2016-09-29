@@ -29,10 +29,12 @@
   }
 
   #logo {
+    background: url('../img/logo-sign-in-up.png');
+    background-size: cover;
+    width: 196px;
+    height: 62px;
     font-size: 55px;
-    height: 55px;
     margin: 0 auto 20px;
-    width: 56px;
   }
 
   .sign-up {
@@ -85,7 +87,7 @@
         font-size: 13px;
         margin-top: 11px;
         .checkbox {
-          background-color: rgba(red(#203248), green(#203248), blue(#203248), 0.6);
+          background-color: rgba(50, 50, 50, 0.6);
           border: solid 1px rgba(red(@text-light), green(@text-light), blue(@text-light), 0.6);
           .border-radius(3px);
           float: left;
@@ -107,7 +109,7 @@
         }
         &:hover, &:focus {
           .checkbox {
-            background-color: rgba(red(#203248), green(#203248), blue(#203248), 0.8);
+            background-color: rgba(50, 50, 50, 0.8);
             border: solid 1px rgba(red(@off-white), green(@off-white), blue(@off-white), 0.8);
           }
         }
@@ -153,7 +155,7 @@
       text-transform: uppercase;
     }
     #logo {
-      height: auto;      
+      height: auto;
     }
     .sign-up {
       border-bottom: none;
@@ -203,11 +205,11 @@
           &:hover, &:focus {
             .transition(background-color 100ms);
             color: @text-light;
-            background-color: darken(@brand-color, 10%); 
+            background-color: darken(@brand-color, 10%);
           }
           &:active {
             color: @text-light;
-            background-color: darken(@brand-color, 15%); 
+            background-color: darken(@brand-color, 15%);
           }
         }
       }

@@ -82,7 +82,7 @@
         var csvArray = exportsecrets.convertToLastPassCSVArray(exportedSecrets);
         var csvText = csvutil.toCSV(csvArray);
 
-        downloadTextFile(csvText, 'mitro-passwords.csv');
+        downloadTextFile(csvText, 'vault-passwords.csv');
       }).fail(alertOnError).done(function() {
         $('#exporting-msg').hide(); // hide loading message
         $('#export-complete-msg').show(); // show loading complete message
