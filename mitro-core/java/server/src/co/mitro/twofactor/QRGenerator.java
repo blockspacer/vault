@@ -43,7 +43,7 @@ import com.google.common.base.Preconditions;
 @WebServlet("/TwoFactorAuth/QRGenerator")
 public class QRGenerator extends HttpServlet {
   private static final long serialVersionUID = 1L;
-  private static final String ISSUER = "Mitro";
+  private static final String ISSUER = "Vault";
 
   private static String urlEncode(String input) {
     try {
