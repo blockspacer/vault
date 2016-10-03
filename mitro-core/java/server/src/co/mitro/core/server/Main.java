@@ -48,15 +48,12 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.Slf4jRequestLog;
 import org.eclipse.jetty.server.SslConnectionFactory;
-import org.eclipse.jetty.server.handler.ContextHandler;
 import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.server.handler.RequestLogHandler;
-import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.component.LifeCycle;
 import org.eclipse.jetty.util.log.Log;
-import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -369,15 +366,7 @@ public class Main {
     for (HttpServlet servlet : servlets) {
       registerServlet(context, servlet);
     }
-    
-    // Used to serve static content like css
-    // TODO: move this functionality to web frontend
-    ResourceHandler resourceHandler = new ResourceHandler();
-    resourceHandler.setBaseResource(Resource.newResource("public"));
-    resourceHandler.setDirectoriesListed(false);
-    ContextHandler resourceContext = new ContextHandler("/static");
-    resourceContext.setHandler(resourceHandler);
-    
+
     // Export metrics and health checks using the admin servlet
     context.setAttribute(MetricsServlet.METRICS_REGISTRY, metrics);
     context.setAttribute(HealthCheckServlet.HEALTH_CHECK_REGISTRY, healthChecks);
@@ -407,7 +396,7 @@ public class Main {
 
     // Install both the servlet handler and the logging handler
     HandlerCollection handlers = new HandlerCollection();
-    handlers.setHandlers(new Handler[]{resourceContext, context, requestLogHandler});
+    handlers.setHandlers(new Handler[]{context, requestLogHandler});
 
     OldJsonData ojd = OldJsonData.createFromStream(
         Main.class.getResourceAsStream("service_list.json"));
