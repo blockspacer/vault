@@ -47,7 +47,7 @@ public class VerifyAccountServlet extends HttpServlet {
   private static final Logger logger = LoggerFactory.getLogger(VerifyAccountServlet.class);
   private static final long serialVersionUID = 1L;
   /** Destination where successful requests are redirected. */
-  public static final String SUCCESS_DESTINATION = "/verified.html";
+  public static final String SUCCESS_DESTINATION = "https://vaultapp.xyz/verified";
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)

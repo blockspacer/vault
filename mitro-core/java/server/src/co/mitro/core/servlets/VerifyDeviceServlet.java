@@ -58,7 +58,7 @@ public class VerifyDeviceServlet extends HttpServlet {
   private static final Logger logger = LoggerFactory.getLogger(VerifyDeviceServlet.class);
   private static final long serialVersionUID = 1L;
   /** Destination where successful requests are redirected. */
-  public static final String SUCCESS_DESTINATION = "/verified-device.html";
+  public static final String SUCCESS_DESTINATION = "https://vaultapp.xyz/verified-device";
   /** How long a device token is valid, which must permit long email delays. */
   static final long VALIDITY_TIMEOUT_MS = TimeUnit.HOURS.toMillis(12);
 

@@ -45,7 +45,7 @@ public class WebSignupServlet extends MitroWebServlet {
   public static final String WEB_SERVER_SCHEME = "https";
   public static final String WEB_SERVER_HOST = "www.vaultapp.xyz";
   public static final int WEB_SERVER_PORT = 443;
-  public static final String INSTALL_PATH = "/static/html/install.html";
+  public static final String INSTALL_PATH = "install";
 
   @Override
   protected void handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {

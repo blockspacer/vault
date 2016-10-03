@@ -256,7 +256,7 @@ public class GetMyPrivateKey extends MitroServlet {
 
     final long now = System.currentTimeMillis();
 
-    // Checks for a matching receipient email and a matching device id
+    // Checks for a matching recipient email and a matching device id
     // If email is over 15 minutes old, we allow a new email to be sent
     for (DBEmailQueue email : queuedEmails) {
       String[] args = email.getArguments();
