@@ -53,7 +53,7 @@ $(document).ready(function () {
             $('.has-secrets').removeClass('hide');
         } else {
             $('.has-no-secrets').removeClass('hide');
-            $('#tutorial-modal').modal({backdrop: 'static'}).modal('show');
+            $('#tutorial-modal').modal().modal('show');
         }
 
         _.each(secrets, processServiceInstanceForRendering);

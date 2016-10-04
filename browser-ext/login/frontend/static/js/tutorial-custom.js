@@ -47,7 +47,7 @@ $(document).ready(function() {
             if (id === 2) {
                 $('.prev').removeClass('hidden');
             }
-            if (id === 5) {
+            if (id === 4) {
                 $(this).addClass('hidden');
                 $('.done').removeClass('hidden');
             }
@@ -56,7 +56,7 @@ $(document).ready(function() {
             if (id === 1) {
                 $('.prev').addClass('hidden');
             }
-            if (id === 4) {
+            if (id === 3) {
                 $('.next').removeClass('hidden');
                 $('.done').addClass('hidden');
             }
