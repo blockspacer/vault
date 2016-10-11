@@ -2,7 +2,7 @@
   "name": "Vault Login Manager",
   "short_name": "Vault",
   "manifest_version": 2,
-  "version": "0.1",
+  "version": "2016.10.11",
   "background": {
     "scripts": []
   },
