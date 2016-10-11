@@ -370,7 +370,8 @@ public class Main {
     // Export metrics and health checks using the admin servlet
     context.setAttribute(MetricsServlet.METRICS_REGISTRY, metrics);
     context.setAttribute(HealthCheckServlet.HEALTH_CHECK_REGISTRY, healthChecks);
-    context.addServlet(new ServletHolder(new AdminServlet()), "/admin/*");
+    // (sully) disable access to admin until further access control is configured
+    //    context.addServlet(new ServletHolder(new AdminServlet()), "/admin/*");
 
 
     // Add the deadlock health check and built-in JVM metrics
