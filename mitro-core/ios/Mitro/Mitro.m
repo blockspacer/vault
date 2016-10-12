@@ -11,7 +11,7 @@
 #import "SessionManager.h"
 
 //NSString* const kMitroHost = @"localhost:8443";
-NSString* const kMitroHost = @"www.mitro.co";
+NSString* const kMitroHost = @"api.vaultapp.xyz";
 
 NSString* const kMitroErrorDomain = @"MitroErrorDomain";
 

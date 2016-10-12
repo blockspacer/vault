@@ -1,6 +1,6 @@
 #include "keyczar_json/mitrokey.h"
 
-#include <tr1/unordered_map>
+#include <unordered_map>
 
 #include <keyczar/base/stl_util-inl.h>
 
@@ -269,7 +269,7 @@ class MemoryKeysetReaderWriter : public keyczar::rw::KeysetWriter, public keycza
   }
 
   scoped_ptr<Value> metadata_;
-  typedef std::tr1::unordered_map<int, Value*> KeyMap;
+  typedef std::unordered_map<int, Value*> KeyMap;
   KeyMap keys_;
 
   DISALLOW_COPY_AND_ASSIGN(MemoryKeysetReaderWriter);

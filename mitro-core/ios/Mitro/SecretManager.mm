@@ -9,8 +9,8 @@
 #import "SecretManager.h"
 
 #include "base/bind.h"
-#include "mitro_api/mitro_api.h"
-#include "mitro_api/mitro_api_types.h"
+#include "mitro_api.h"
+#include "mitro_api_types.h"
 #include "base/mac/mac_util.h"
 #include "base/strings/string_number_conversions.h"
 #include "base/strings/sys_string_conversions.h"
@@ -108,15 +108,15 @@ private:
 + (Secret*)secretFromCppSecret:(const mitro_api::Secret*)cpp_secret {
     Secret* secret = [[Secret alloc] init];
 
-    secret.id = cpp_secret->get_secretId();
-    secret.userTitle = base::SysUTF8ToNSString(cpp_secret->get_clientData().get_title());
-    secret.defaultTitle = base::SysUTF8ToNSString(cpp_secret->get_title());
-    secret.type = base::SysUTF8ToNSString(cpp_secret->get_clientData().get_type());
-    secret.url = base::SysUTF8ToNSString(cpp_secret->get_clientData().get_loginUrl());
+    secret.id = cpp_secret->secretId;
+    secret.userTitle = base::SysUTF8ToNSString(cpp_secret->clientData.title);
+    secret.defaultTitle = base::SysUTF8ToNSString(cpp_secret->title);
+    secret.type = base::SysUTF8ToNSString(cpp_secret->clientData.type);
+    secret.url = base::SysUTF8ToNSString(cpp_secret->clientData.loginUrl);
     secret.domain = [SecretManager domainForURL:secret.url];
-    secret.username = base::SysUTF8ToNSString(cpp_secret->get_clientData().get_username());
-    secret.usernameField = base::SysUTF8ToNSString(cpp_secret->get_clientData().get_usernameField());
-    secret.passwordField = base::SysUTF8ToNSString(cpp_secret->get_clientData().get_passwordField());
+    secret.username = base::SysUTF8ToNSString(cpp_secret->clientData.username);
+    secret.usernameField = base::SysUTF8ToNSString(cpp_secret->clientData.usernameField);
+    secret.passwordField = base::SysUTF8ToNSString(cpp_secret->clientData.passwordField);
 
     return secret;
 }
@@ -132,6 +132,9 @@ private:
 - (void)onListSecrets:(const mitro_api::ListMySecretsAndGroupKeysResponse&)response error:(mitro_api::MitroApiError*)list_secrets_error {
     NSLog(@"onListSecrets");
 
+  LOG(INFO) << "listing secrets: ---- " << std::endl;
+  response.printTo(std::cout);
+
     base::StopRunLoop();
 
     mitro_api::ListMySecretsAndGroupKeysResponse* response_copy =
@@ -141,8 +144,8 @@ private:
     NSMutableArray* secrets = [[NSMutableArray alloc] init];
 
     if (list_secrets_error == NULL) {
-        const std::map<std::string, mitro_api::GroupInfo>& groups = response.get_groups();
-        const std::map<std::string, mitro_api::Secret>& cpp_secrets = response.get_secretToPath();
+        const std::map<std::string, mitro_api::GroupInfo>& groups = response.groups;
+        const std::map<std::string, mitro_api::Secret>& cpp_secrets = response.secretToPath;
         std::map<std::string, mitro_api::Secret>::const_iterator secret_iter;
 
         NSInteger total = cpp_secrets.size();
@@ -158,6 +161,7 @@ private:
                 goto send_list_secrets_response;
             }
             Secret* secret = [SecretManager secretFromCppSecret:&cpp_secret];
+          NSLog(@"decoded secret: %@ %@ %@", secret.displayTitle, secret.userTitle, secret.usernameField);
             [secrets addObject:secret];
             [secretsMap setObject:secret forKey:[NSNumber numberWithInteger:secret.id]];
 
@@ -188,6 +192,7 @@ send_list_secrets_response:
 }
 
 - (void)listSecrets {
+  NSLog(@"list secrets...");
     dispatch_async(GetDispatchQueue(), ^(void) {
         mitro_api::GetSecretsListCallback callback =
             base::Bind(&mitro_ios::SecretManagerWrapper::OnListSecrets, base::Unretained(wrapper_));
@@ -206,16 +211,16 @@ send_list_secrets_response:
 
     if (get_secret_error == NULL) {
         mitro_api::Secret decrypted_secret(cpp_secret);
-        decrypted_secret.set_groupIdPath(group_id_path);
+        decrypted_secret.__set_groupIdPath(group_id_path);
         mitro_api::MitroApiError decryption_error;
         if (!api_client->DecryptSecret(&decrypted_secret, groups, &decryption_error)) {
             api_error = new mitro_api::MitroApiError(decryption_error);
         } else {
-            const mitro_api::SecretCriticalData& criticalData = decrypted_secret.get_criticalData();
-            if (decrypted_secret.get_clientData().get_type() == "note") {
-                password = base::SysUTF8ToNSString(criticalData.get_note());
+            const mitro_api::SecretCriticalData& criticalData = decrypted_secret.criticalData;
+            if (decrypted_secret.clientData.type == "note") {
+                password = base::SysUTF8ToNSString(criticalData.note);
             } else {
-                password = base::SysUTF8ToNSString(criticalData.get_password());
+                password = base::SysUTF8ToNSString(criticalData.password);
             }
         }
     } else {
@@ -242,21 +247,21 @@ send_list_secrets_response:
 - (void)getSecretCriticalData:(NSInteger)secretId {
     std::string secret_id_string = base::IntToString(secretId);
     std::map<std::string, mitro_api::Secret>::const_iterator secret_iter =
-        self->secrets_response_->get_secretToPath().find(secret_id_string);
+        self->secrets_response_->secretToPath.find(secret_id_string);
 
-    if (secret_iter == self->secrets_response_->get_secretToPath().end()) {
+    if (secret_iter == self->secrets_response_->secretToPath.end()) {
         // TODO: report error
         return;
     }
 
     const mitro_api::Secret& cpp_secret = secret_iter->second;
-    if (!cpp_secret.has_groupIdPath() || cpp_secret.get_groupIdPath().empty()) {
+    if (!cpp_secret.__isset.groupIdPath || cpp_secret.groupIdPath.empty()) {
         // TODO: report error
         return;
     }
-    const std::vector<int> group_id_path = cpp_secret.get_groupIdPath();
+    const std::vector<int> group_id_path = cpp_secret.groupIdPath;
     int group_id = group_id_path.back();
-    const std::map<std::string, mitro_api::GroupInfo> groups = self->secrets_response_->get_groups();
+    const std::map<std::string, mitro_api::GroupInfo> groups = self->secrets_response_->groups;
 
     dispatch_async(GetDispatchQueue(), ^(void) {
         mitro_api::GetSecretCallback callback =

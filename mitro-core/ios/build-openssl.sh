@@ -26,7 +26,7 @@ PLATFORM_ROOT="${DEVELOPER_ROOT}/Platforms/${PLATFORM}.platform/Developer"
 SDK_ROOT="${PLATFORM_ROOT}/SDKs/${PLATFORM}${SDK_VERSION}.sdk"
 
 CC="${TOOLCHAIN_ROOT}/usr/bin/cc"
-CFLAGS="-arch ${ARCH} -isysroot ${SDK_ROOT} -D_DARWIN_C_SOURCE -UOPENSLL_BN_ASM_PART_WORDS -miphoneos-version-min=7.0 -O3"
+CFLAGS="-arch ${ARCH} -isysroot ${SDK_ROOT} -D_DARWIN_C_SOURCE -UOPENSLL_BN_ASM_PART_WORDS -miphoneos-version-min=9.3 -O3"
 LDFLAGS="-arch ${ARCH} -dynamiclib"
 
 echo "Building openssl for ${PLATFORM}${SDK_VERSION}"

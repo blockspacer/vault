@@ -10,10 +10,12 @@
 #include "base/callback.h"
 #include "keyczar_json/mitrokey.h"
 #include "net/http_client.h"
+#include "json/json-forwards.h"
 
 namespace apache {
 namespace thrift {
-class TStruct;
+// (sully)
+//class TStruct;
 
 namespace transport {
 class TMemoryBuffer;
@@ -28,8 +30,10 @@ namespace mitro_api {
 
 class GroupInfo;
 class ListMySecretsAndGroupKeysResponse;
-class SecretClientData;
+  class SecretClientData;
+  class SecretCriticalData;
 class Secret;
+class SignedRequest;
 
 class MitroApiError {
  public:
@@ -114,21 +118,37 @@ class MitroApiClient {
 
   void SetUsername(const std::string& username) { username_ = username; }
 
-  std::string ThriftStructToJsonString(const apache::thrift::TStruct& message);
-  bool JsonStringToThriftStruct(const std::string& s,
-                                apache::thrift::TStruct* message,
-                                MitroApiError* error);
+  // (sully)
+  // std::string ThriftStructToJsonString(const apache::thrift::TStruct& message);
+  // bool JsonStringToThriftStruct(const std::string& s,
+  //                               apache::thrift::TStruct* message,
+  //                               MitroApiError* error);
 
+  // (sully)
   void PostRequest(const std::string& endpoint,
-                   const apache::thrift::TStruct& request,
+                   const SignedRequest& request,
                    const net::HttpRequestCallback& callback);
-  void MakeRequest(const std::string& endpoint,
-                   const apache::thrift::TStruct& request,
-                   const net::HttpRequestCallback& callback);
+  // void MakeRequest(const std::string& endpoint,
+  //                  const apache::thrift::TStruct& request,
+  //                  const net::HttpRequestCallback& callback);
+
+  // (sully)
+  // bool ParseResponse(const net::HttpResponse& response,
+  //                    apache::thrift::TStruct* message,
+  //                    MitroApiError* error);
 
   bool ParseResponse(const net::HttpResponse& response,
-                     apache::thrift::TStruct* message,
+                     Json::Value& root,
                      MitroApiError* error);
+
+  void ParseSecret(const Json::Value &json_secret,
+                   Secret &secret);
+  void ParseGroupInfo(const Json::Value &json_group_info,
+                      GroupInfo &group_info);
+  void ParseSecretClientData(const Json::Value &json_client_data,
+                             SecretClientData &clientData);
+  void ParseSecretCriticalData(const Json::Value &json_critical_data,
+                               SecretCriticalData &criticalData);
 
   void OnGetMyPrivateKey(const std::string& password,
                          const std::string& encrypted_private_key,

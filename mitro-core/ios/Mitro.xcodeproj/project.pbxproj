@@ -49,6 +49,8 @@
 		40EC7B7117E8F52400EE3900 /* mitro_icon_58.png in Resources */ = {isa = PBXBuildFile; fileRef = 40EC7B6E17E8F52400EE3900 /* mitro_icon_58.png */; };
 		40EC7B7217E8F52400EE3900 /* mitro_icon_80.png in Resources */ = {isa = PBXBuildFile; fileRef = 40EC7B6F17E8F52400EE3900 /* mitro_icon_80.png */; };
 		40EC7B7317E8F52400EE3900 /* mitro_icon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = 40EC7B7017E8F52400EE3900 /* mitro_icon_120.png */; };
+		7FF570721DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF570701DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp */; };
+		7FF5707E1DB018370059A7E3 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF5707D1DB018370059A7E3 /* jsoncpp.cpp */; };
 		990F279417BAAE1000435734 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 999ACDCA17BA893A00649AF6 /* MainStoryboard.storyboard */; };
 		990F27EE17BABAFD00435734 /* SecretsTableViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = 99AA6A9C17B98B96005B3496 /* SecretsTableViewController.h */; };
 		991E9BC717BABD9B001CB6DA /* SecretsTableViewController.m in Resources */ = {isa = PBXBuildFile; fileRef = 99AA6A9D17B98B96005B3496 /* SecretsTableViewController.m */; };
@@ -141,6 +143,11 @@
 		40F1C99517DB37D600A38CE3 /* Mitro-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Mitro-Prefix.pch"; sourceTree = "<group>"; };
 		40F1C99617DB387800A38CE3 /* Mitro_Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mitro_Tests.h; sourceTree = "<group>"; };
 		40F1C99717DB387800A38CE3 /* Mitro_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mitro_Tests.m; sourceTree = "<group>"; };
+		7FF570701DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TSimpleJSONProtocol.cpp; sourceTree = "<group>"; };
+		7FF570711DAFDE040059A7E3 /* TSimpleJSONProtocol.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TSimpleJSONProtocol.hpp; sourceTree = "<group>"; };
+		7FF5707B1DB018370059A7E3 /* json-forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "json-forwards.h"; sourceTree = "<group>"; };
+		7FF5707C1DB018370059A7E3 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
+		7FF5707D1DB018370059A7E3 /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsoncpp.cpp; sourceTree = "<group>"; };
 		9954B61917AADAEC0084C486 /* Mitro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mitro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9954B61D17AADAEC0084C486 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9954B61F17AADAEC0084C486 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -205,6 +212,8 @@
 				4020C4D71807311400E9A6DC /* mitro_api_constants.h */,
 				4020C4DD1807311400E9A6DC /* mitro_api_types.cpp */,
 				4020C4DE1807311400E9A6DC /* mitro_api_types.h */,
+				7FF570701DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp */,
+				7FF570711DAFDE040059A7E3 /* TSimpleJSONProtocol.hpp */,
 			);
 			name = mitro_api;
 			path = ../../cpp/mitro_api;
@@ -248,9 +257,28 @@
 			name = Chrome;
 			sourceTree = "<group>";
 		};
+		7FF570791DB018200059A7E3 /* jsoncpp-1.7.7 */ = {
+			isa = PBXGroup;
+			children = (
+				7FF5707A1DB018370059A7E3 /* json */,
+				7FF5707D1DB018370059A7E3 /* jsoncpp.cpp */,
+			);
+			name = "jsoncpp-1.7.7";
+			sourceTree = "<group>";
+		};
+		7FF5707A1DB018370059A7E3 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				7FF5707B1DB018370059A7E3 /* json-forwards.h */,
+				7FF5707C1DB018370059A7E3 /* json.h */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
 		99366A2517B9880F0077B0F1 /* Mitro */ = {
 			isa = PBXGroup;
 			children = (
+				7FF570791DB018200059A7E3 /* jsoncpp-1.7.7 */,
 				409533801817AE48003F9FE9 /* Chrome */,
 				4020C4BB1807311400E9A6DC /* mitro_api */,
 				999ACDD717BA8BFA00649AF6 /* AppDelegate.h */,
@@ -392,7 +420,7 @@
 			name = MitroTests;
 			productName = "Mitro Tests";
 			productReference = 9954B64317AADAEC0084C486 /* MitroTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -400,11 +428,12 @@
 		9954B61017AADAEC0084C486 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastTestingUpgradeCheck = 0730;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Lectorius, Inc.";
 				TargetAttributes = {
 					9954B61817AADAEC0084C486 = {
-						DevelopmentTeam = 2JVEB8KWV2;
+						DevelopmentTeam = V283NDQUJA;
 					};
 				};
 			};
@@ -485,6 +514,7 @@
 				4095337F1817AE3D003F9FE9 /* OpenInChromeController.m in Sources */,
 				999ACDD617BA8BE500649AF6 /* main.m in Sources */,
 				999ACDDB17BA8DD000649AF6 /* AppDelegate.m in Sources */,
+				7FF5707E1DB018370059A7E3 /* jsoncpp.cpp in Sources */,
 				40D1F9AA18075824000ABBE5 /* MitroApi.mm in Sources */,
 				407CA41417DB25300098D080 /* SecretDetailViewController.m in Sources */,
 				4012E52A17E65F8400B1F252 /* LoginViewController.m in Sources */,
@@ -500,6 +530,7 @@
 				4020C4F41807311400E9A6DC /* mitro_api.cc in Sources */,
 				4012E54217E79F8200B1F252 /* SecretsTableViewCell.m in Sources */,
 				4020C4FE1807311400E9A6DC /* mitro_api_types.cpp in Sources */,
+				7FF570721DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp in Sources */,
 				401D5347180D074B00B78549 /* MitroTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,6 +575,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Adam Hilss (WY3XY6GZS7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adam Hilss (WY3XY6GZS7)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -584,27 +616,29 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Adam Hilss (WY3XY6GZS7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adam Hilss (WY3XY6GZS7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mitro/Mitro-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Mitro/info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/Flurry";
 				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"$(inherited)",
-					"$(SRCROOT)/build/iPhoneOS7.0/lib",
+					"$(SRCROOT)/build/iPhoneOS9.3/lib",
 				);
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = (
 					"$(inherited)",
-					"$(SRCROOT)/build/iPhoneSimulator7.0/lib",
+					"$(SRCROOT)/build/iPhoneSimulator9.3/lib",
 				);
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.vaultapp.Vault;
 				PRODUCT_NAME = Mitro;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/build/iPhoneOS7.0/include";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/build/iPhoneOS9.3/include";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -614,27 +648,31 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Lectorius, Inc. (2JVEB8KWV2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lectorius, Inc. (2JVEB8KWV2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mitro/Mitro-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Mitro/info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/Flurry";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/Flurry",
+					"$(PROJECT_DIR)/build/src/poco-1.7.5/lib/iPhoneSimulator/i686",
+				);
 				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"$(inherited)",
-					"$(SRCROOT)/build/iPhoneOS7.0/lib",
+					"$(SRCROOT)/build/iPhoneOS9.3/lib",
 				);
 				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = (
 					"$(inherited)",
-					"$(SRCROOT)/build/iPhoneSimulator7.0/lib",
+					"$(SRCROOT)/build/iPhoneSimulator9.3/lib",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.vaultapp.Vault;
 				PRODUCT_NAME = Mitro;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/build/iPhoneOS7.0/include";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/build/iPhoneOS9.3/include";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -651,6 +689,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mitro/Mitro-Prefix.pch";
 				INFOPLIST_FILE = "Mitro Tests/MitroTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "Mitro.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MitroTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -668,6 +707,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mitro/Mitro-Prefix.pch";
 				INFOPLIST_FILE = "Mitro Tests/MitroTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "Mitro.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MitroTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;

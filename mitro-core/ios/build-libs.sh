@@ -17,7 +17,7 @@ PLATFORMS="iPhoneSimulator iPhoneOS"
 
 for PLATFORM in ${PLATFORMS}; do
   export PLATFORM=${PLATFORM}
-  export SDK_VERSION="7.0"
+  export SDK_VERSION="9.3"
 
   if [ "${PLATFORM}" == "iPhoneSimulator" ]; then
     ARCHS="i386"
