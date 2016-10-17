@@ -25,7 +25,7 @@ PLATFORM_ROOT="${DEVELOPER_ROOT}/Platforms/${PLATFORM}.platform/Developer"
 SDK_ROOT="${PLATFORM_ROOT}/SDKs/${PLATFORM}${SDK_VERSION}.sdk"
 
 CXX="${TOOLCHAIN_ROOT}/usr/bin/c++"
-CXXFLAGS="-arch ${ARCH} -isysroot ${SDK_ROOT} -miphoneos-version-min=9.3 -I\"${DST_DIR}/include\" -I\"${MITRO_API_SRC_DIR}/thrift_json/thrift/lib/cpp/src\""
+CXXFLAGS="-arch ${ARCH} -isysroot ${SDK_ROOT} -miphoneos-version-min=8.0 -I\"${DST_DIR}/include\" -I\"${MITRO_API_SRC_DIR}/thrift_json/thrift/lib/cpp/src\""
 OBJCXX="${CXX}"
 OBJCXXFLAGS="${CXXFLAGS}"
 LDFLAGS="-arch ${ARCH} -dynamiclib -L\"${DST_DIR}/lib\""
