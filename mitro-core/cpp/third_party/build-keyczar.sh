@@ -13,10 +13,11 @@ fi
 SRC_DIR="$1"
 DST_DIR="$2"
 
-KEYCZAR_TAR_GZ="keyczar-cpp-0.71-09062013.tar.gz"
+KEYCZAR_TAR_GZ="Cpp_release_0.71.tar.gz"
 KEYCZAR_SHA1="c7bc0fce0cdd6a150a6fdf457bb8aec28dcece8a"
-KEYCZAR_URL="https://keyczar.googlecode.com/files/${KEYCZAR_TAR_GZ}"
-KEYCZAR_SRC_DIR="${SRC_DIR}/keyczar-cpp"
+KEYCZAR_URL="https://github.com/google/keyczar/archive/${KEYCZAR_TAR_GZ}"
+KEYCZAR_SRC_DIR="${SRC_DIR}/keyczar-Cpp_release_0.71/cpp"
+KEYZAR_RELEASE_DIR="${SRC_DIR}/keyczar-Cpp_release_0.71"
 
 if [ ${PLATFORM} == 'iPhoneOS' ] || [ ${PLATFORM} == 'iPhoneSimulator' ]; then
   SCONS_MODE=opt-ios
@@ -29,8 +30,9 @@ echo "mode: ${SCONS_MODE}"
 if [ ! -e ${KEYCZAR_SRC_DIR} ]; then
   "${TOOLS_DIR}/download_and_extract.sh" ${KEYCZAR_URL} ${KEYCZAR_SHA1} ${SRC_DIR}
 
-  pushd ${SRC_DIR}
-  patch -p1 < "${PATCH_DIR}/keyczar-ios.patch"
+  pushd ${KEYZAR_RELEASE_DIR}
+  echo "pushd to ${KEYZAR_RELEASE_DIR}"
+  patch --verbose -p1 < "${PATCH_DIR}/keyczar-ios.patch"
   popd
 fi
 

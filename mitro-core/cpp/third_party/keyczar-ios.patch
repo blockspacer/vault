@@ -1,6 +1,6 @@
-diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/keyczar-cpp/src/keyczar/base/file_util_posix.cc keyczar-new/keyczar-cpp/src/keyczar/base/file_util_posix.cc
---- keyczar-old/keyczar-cpp/src/keyczar/base/file_util_posix.cc	2013-07-01 11:16:31.000000000 -0400
-+++ keyczar-new/keyczar-cpp/src/keyczar/base/file_util_posix.cc	2013-09-08 22:45:32.000000000 -0400
+diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/cpp/src/keyczar/base/file_util_posix.cc keyczar-new/cpp/src/keyczar/base/file_util_posix.cc
+--- keyczar-old/cpp/src/keyczar/base/file_util_posix.cc	2013-07-01 11:16:31.000000000 -0400
++++ keyczar-new/cpp/src/keyczar/base/file_util_posix.cc	2013-09-08 22:45:32.000000000 -0400
 @@ -21,7 +21,7 @@
  
  namespace {
@@ -10,9 +10,9 @@ diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/keyczar-
  typedef struct stat stat_s;
  
  static int Stat(const char* path, stat_s* buf) {
-diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/keyczar-cpp/src/keyczar/base_test/base_paths_mac.mm keyczar-new/keyczar-cpp/src/keyczar/base_test/base_paths_mac.mm
---- keyczar-old/keyczar-cpp/src/keyczar/base_test/base_paths_mac.mm	2013-07-01 11:16:31.000000000 -0400
-+++ keyczar-new/keyczar-cpp/src/keyczar/base_test/base_paths_mac.mm	2013-09-08 22:45:57.000000000 -0400
+diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/cpp/src/keyczar/base_test/base_paths_mac.mm keyczar-new/cpp/src/keyczar/base_test/base_paths_mac.mm
+--- keyczar-old/cpp/src/keyczar/base_test/base_paths_mac.mm	2013-07-01 11:16:31.000000000 -0400
++++ keyczar-new/cpp/src/keyczar/base_test/base_paths_mac.mm	2013-09-08 22:45:57.000000000 -0400
 @@ -4,7 +4,11 @@
  
  #include <keyczar/base_test/base_paths_mac.h>
@@ -25,9 +25,9 @@ diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/keyczar-
  
  #include <keyczar/base/file_path.h>
  #include <keyczar/base/logging.h>
-diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/keyczar-cpp/src/keyczar/build.scons keyczar-new/keyczar-cpp/src/keyczar/build.scons
---- keyczar-old/keyczar-cpp/src/keyczar/build.scons	2013-09-05 16:26:39.000000000 -0400
-+++ keyczar-new/keyczar-cpp/src/keyczar/build.scons	2013-10-10 14:43:17.000000000 -0400
+diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/cpp/src/keyczar/build.scons keyczar-new/cpp/src/keyczar/build.scons
+--- keyczar-old/cpp/src/keyczar/build.scons	2013-09-05 16:26:39.000000000 -0400
++++ keyczar-new/cpp/src/keyczar/build.scons	2013-10-10 14:43:17.000000000 -0400
 @@ -134,7 +134,7 @@ if env.Bit('bsd'):
  lib_sources = base_sources + keyczar_sources + openssl_sources + \
                rw_sources + keyczar_tool_sources
@@ -50,9 +50,9 @@ diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/keyczar-
 +  unittests_env.ComponentTestProgram('keyczar_unittests', keyczar_unittests)
 +  unittests_env.ComponentTestProgram('openssl_unittests', openssl_unittests)
 +  unittests_env.ComponentTestProgram('rw_unittests', rw_unittests)
-diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/keyczar-cpp/src/main.scons keyczar-new/keyczar-cpp/src/main.scons
---- keyczar-old/keyczar-cpp/src/main.scons	2013-10-02 12:19:44.000000000 -0400
-+++ keyczar-new/keyczar-cpp/src/main.scons	2013-10-16 17:39:30.000000000 -0400
+diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/cpp/src/main.scons keyczar-new/cpp/src/main.scons
+--- keyczar-old/cpp/src/main.scons	2013-10-02 12:19:44.000000000 -0400
++++ keyczar-new/cpp/src/main.scons	2013-10-16 17:39:30.000000000 -0400
 @@ -19,7 +19,7 @@ base_env.Append(
      CPPPATH = ['$MAIN_DIR'],
  
@@ -135,9 +135,9 @@ diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/keyczar-
 +    ios_optimized_env
  ])
  assert(len(matched_env) == 1)
-diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/keyczar-cpp/src/tools/swtoolkit/site_scons/site_tools/component_bits.py keyczar-new/keyczar-cpp/src/tools/swtoolkit/site_scons/site_tools/component_bits.py
---- keyczar-old/keyczar-cpp/src/tools/swtoolkit/site_scons/site_tools/component_bits.py	2013-07-01 11:16:31.000000000 -0400
-+++ keyczar-new/keyczar-cpp/src/tools/swtoolkit/site_scons/site_tools/component_bits.py	2013-10-02 12:06:19.000000000 -0400
+diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/cpp/src/tools/swtoolkit/site_scons/site_tools/component_bits.py keyczar-new/cpp/src/tools/swtoolkit/site_scons/site_tools/component_bits.py
+--- keyczar-old/cpp/src/tools/swtoolkit/site_scons/site_tools/component_bits.py	2013-07-01 11:16:31.000000000 -0400
++++ keyczar-new/cpp/src/tools/swtoolkit/site_scons/site_tools/component_bits.py	2013-10-02 12:06:19.000000000 -0400
 @@ -278,6 +278,7 @@ def generate(env):
    # Declare other common bits from target_ tools
    DeclareBit('debug', 'Build is debug, not optimized.')
@@ -146,9 +146,9 @@ diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/keyczar-
  
    # Set the appropriate host platform bit
    host_platform_to_bit = {
-diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/keyczar-cpp/src/tools/swtoolkit/site_scons/site_tools/component_builders.py keyczar-new/keyczar-cpp/src/tools/swtoolkit/site_scons/site_tools/component_builders.py
---- keyczar-old/keyczar-cpp/src/tools/swtoolkit/site_scons/site_tools/component_builders.py	2013-07-01 11:16:31.000000000 -0400
-+++ keyczar-new/keyczar-cpp/src/tools/swtoolkit/site_scons/site_tools/component_builders.py	2013-09-09 05:55:45.000000000 -0400
+diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/cpp/src/tools/swtoolkit/site_scons/site_tools/component_builders.py keyczar-new/cpp/src/tools/swtoolkit/site_scons/site_tools/component_builders.py
+--- keyczar-old/cpp/src/tools/swtoolkit/site_scons/site_tools/component_builders.py	2013-07-01 11:16:31.000000000 -0400
++++ keyczar-new/cpp/src/tools/swtoolkit/site_scons/site_tools/component_builders.py	2013-09-09 05:55:45.000000000 -0400
 @@ -311,6 +311,9 @@ def ComponentTestProgramDeferred(env):
  
    Sets up the aliases to compile and run the test program.
@@ -159,9 +159,9 @@ diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/keyczar-
    prog_name = env['PROGRAM_BASENAME']
  
    # Install program and resources
-diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/keyczar-cpp/src/tools/swtoolkit/site_scons/site_tools/target_optimized.py keyczar-new/keyczar-cpp/src/tools/swtoolkit/site_scons/site_tools/target_optimized.py
---- keyczar-old/keyczar-cpp/src/tools/swtoolkit/site_scons/site_tools/target_optimized.py	2013-07-01 11:16:31.000000000 -0400
-+++ keyczar-new/keyczar-cpp/src/tools/swtoolkit/site_scons/site_tools/target_optimized.py	2013-10-10 14:20:58.000000000 -0400
+diff -rupN -x config.log -x '*.pyc' -x '*.swp' -x scons-out keyczar-old/cpp/src/tools/swtoolkit/site_scons/site_tools/target_optimized.py keyczar-new/cpp/src/tools/swtoolkit/site_scons/site_tools/target_optimized.py
+--- keyczar-old/cpp/src/tools/swtoolkit/site_scons/site_tools/target_optimized.py	2013-07-01 11:16:31.000000000 -0400
++++ keyczar-new/cpp/src/tools/swtoolkit/site_scons/site_tools/target_optimized.py	2013-10-10 14:20:58.000000000 -0400
 @@ -44,7 +44,7 @@ def generate(env):
    env['TARGET_DEBUG'] = False
  

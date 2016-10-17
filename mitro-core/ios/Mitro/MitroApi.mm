@@ -14,7 +14,7 @@
 #include "base/strings/stringprintf.h"
 #include "base/strings/sys_string_conversions.h"
 #include "net/http_client.h"
-#include "mitro_api/mitro_api.h"
+#include "mitro_api.h"
 
 
 static NSString* const kDeviceIdKey = @"device_id";

@@ -1,4 +1,4 @@
-#include "mitro_api/mitro_api.h"
+#include "mitro_api.h"
 
 #include <map>
 #include <string>
@@ -7,7 +7,6 @@
 #include <keyczar/base/base64w.h>
 #include <keyczar/crypto_factory.h>
 #include <keyczar/keyczar.h>
-#include <thrift/protocol/TSimpleJSONProtocol.h>
 #include <thrift/transport/TBufferTransports.h>
 #include <thrift/Thrift.h>
 
@@ -18,13 +17,18 @@
 #include "base/strings/string_number_conversions.h"
 #include "base/strings/stringprintf.h"
 #include "keyczar_json/json_keyset_reader.h"
-#include "mitro_api/mitro_api_types.h"
+#include "mitro_api_types.h"
 #include "net/http_client.h"
 #include "net/uri.h"
+#include "TSimpleJSONProtocol.hpp"
+//#include "Poco/JSON/Parser.h"
+//#include "Poco/JSON/ParseHandler.h"
+//#include "Poco/JSON/Stringifier.h"
+#include "json/json.h"
 
 using apache::thrift::protocol::TSimpleJSONProtocol;
 using apache::thrift::transport::TMemoryBuffer;
-using apache::thrift::TStruct;
+// using apache::thrift::TStruct;
 using base::Bind;
 using base::Callback;
 using base::StringPrintf;
@@ -36,494 +40,910 @@ using net::HttpResponse;
 using std::map;
 using std::string;
 using std::vector;
+//using Poco::JSON::ParseHandler;
+//using Poco::JSON::Stringifier;
+//using Poco::JSON::Object;
+//using Poco::JSON::Parser;
+//using Poco::Dynamic::Var;
+//using Poco::DynamicStruct;
 
 namespace mitro_api {
 
-const char* MitroApiClient::kProtocol = "https";
-const char* MitroApiClient::kDefaultHost = "www.mitro.co";
-const char* MitroApiClient::kApiBasePath = "mitro-core/api";
+  const char* MitroApiClient::kProtocol = "https";
+  const char* MitroApiClient::kDefaultHost = "api.vaultapp.xyz";
+  const char* MitroApiClient::kApiBasePath = "mitro-core/api";
 
-MitroApiClient::MitroApiClient(HttpClient* http_client)
-    : host_(kDefaultHost),
-      http_client_(http_client),
-      transport_(new TMemoryBuffer(kTransportBufferSize)),
-      protocol_(new TSimpleJSONProtocol(transport_)) {
-}
-
-/* static */
-string MitroApiClient::GenerateDeviceID() {
-  string device_id;
-  CHECK(keyczar::CryptoFactory::Rand()->RandBytes(kDeviceIDSize, &device_id));
-
-  string device_id_string;
-  CHECK(keyczar::base::Base64WEncode(device_id, &device_id_string));
-
-  return device_id_string;
-}
-
-const string& MitroApiClient::GetDeviceID() {
-  if (device_id_.empty()) {
-    device_id_ = GenerateDeviceID();
+  MitroApiClient::MitroApiClient(HttpClient* http_client)
+  : host_(kDefaultHost),
+  http_client_(http_client),
+  transport_(new TMemoryBuffer(kTransportBufferSize)),
+  protocol_(new TSimpleJSONProtocol(transport_)) {
   }
 
-  return device_id_;
-}
+  /* static */
+  string MitroApiClient::GenerateDeviceID() {
+    string device_id;
+    CHECK(keyczar::CryptoFactory::Rand()->RandBytes(kDeviceIDSize, &device_id));
 
-string MitroApiClient::ThriftStructToJsonString(const TStruct& message) {
-  // TODO: an exception could be thrown here.
-  // It looks like none of these are exceptions that we should handle
-  // e.g. bad_alloc, strings larger than 2^31.
-  message.write(protocol_.get());
-  string json_string = transport_.get()->getBufferAsString();
-  transport_->resetBuffer();
-  return json_string;
-}
+    string device_id_string;
+    CHECK(keyczar::base::Base64WEncode(device_id, &device_id_string));
 
-bool MitroApiClient::JsonStringToThriftStruct(const std::string& s,
-                                              TStruct* message,
-                                              MitroApiError* error) {
-  bool result = true;
-
-  try {
-    transport_.get()->write(reinterpret_cast<const uint8_t*>(s.data()),
-                            s.size());
-    message->read(protocol_.get());
-  } catch (apache::thrift::TException e) {
-    LOG(ERROR) << e.what();
-    error->SetMessage(e.what());
-    result = false;
-
-    // TODO: json parser should reset it's own state on exception.
-    protocol_.reset(new TSimpleJSONProtocol(transport_));
+    return device_id_string;
   }
 
-  transport_->resetBuffer();
-
-  return result;
-}
-
-void MitroApiClient::PostRequest(const string& endpoint,
-                                 const TStruct& request,
-                                 const HttpRequestCallback& callback) {
-  const string& data = ThriftStructToJsonString(request);
-  LOG(INFO) << "request: " << data;
-
-  string url = net::BuildUri(kProtocol, GetHost(), kApiBasePath + endpoint);
-  HttpHeaders headers;
-  http_client_->Post(url, headers, data, callback);
-}
-
-void MitroApiClient::MakeRequest(const string& endpoint,
-                                 const TStruct& request,
-                                 const HttpRequestCallback& callback) {
-  SignedRequest request_wrapper;
-
-  string request_string = ThriftStructToJsonString(request);
-  request_wrapper.set_clientIdentifier(GetClientID());
-  request_wrapper.set_identity(GetUsername());
-  request_wrapper.set_request(request_string);
-
-  if (endpoint != "/GetMyPrivateKey") {
-    CHECK(user_private_key_.get() != NULL);
-    // TODO: Can signing fail?
-    string signature;
-    CHECK(user_private_key_->Sign(request_string, &signature));
-    request_wrapper.set_signature(signature);
-  }
-
-  LOG(INFO) << endpoint << " " << request_string;
-  PostRequest(endpoint, request_wrapper, callback);
-}
-
-bool MitroApiClient::ParseResponse(const HttpResponse& response,
-                                   TStruct* message,
-                                   MitroApiError* error) {
-  //LOG(INFO) << "response: " << response.GetBody();
-
-  if (!response.IsOk()) {
-    error->SetMessage(response.GetError().GetMessage());
-    return false;
-  }
-
-  MitroException exception;
-  if (!JsonStringToThriftStruct(response.GetBody(), &exception, error)) {
-    return false;
-  }
-
-  if (exception.has_exceptionType()) {
-    error->SetMessage(exception.get_userVisibleError());
-    error->SetExceptionType(exception.get_exceptionType());
-    return false;
-  }
-
-  if (!JsonStringToThriftStruct(response.GetBody(), message, error)) {
-    return false;
-  }
-
-  return true;
-}
-
-void MitroApiClient::Login(const string& username,
-                           const string& password,
-                           const string& two_factor_auth_code,
-                           const string& login_token,
-                           const string& login_token_signature,
-                           const string& encrypted_private_key,
-                           bool save_private_key,
-                           const LoginCallback& callback) {
-  if (IsLoggedIn()) {
-    Logout();
-  }
-
-  SetUsername(username);
-
-  GetMyPrivateKeyRequest request;
-  request.set_userId(GetUsername());
-  request.set_deviceId(GetDeviceID());
-  request.set_twoFactorCode(two_factor_auth_code);
-  request.set_loginToken(login_token);
-  request.set_loginTokenSignature(login_token_signature);
-
-  HttpRequestCallback request_callback =
-      Bind(&MitroApiClient::OnGetMyPrivateKey,
-           base::Unretained(this),
-           password,
-           encrypted_private_key,
-           save_private_key,
-           callback);
-
-  MakeRequest("/GetMyPrivateKey", request, request_callback);
-}
-
-void MitroApiClient::Logout() {
-  username_ = "";
-  user_private_key_.reset();
-
-  key_cache_.Clear();
-  decryption_cache_.clear();
-}
-
-void MitroApiClient::OnGetMyPrivateKey(const string& password,
-                                       const string& encrypted_private_key,
-                                       bool save_private_key,
-                                       const LoginCallback& callback,
-                                       const HttpResponse& response) {
-  MitroApiError error;
-  GetMyPrivateKeyResponse private_key_response;
-
-  if (ParseResponse(response, &private_key_response, &error)) {
-    if (!encrypted_private_key.empty() &&
-        private_key_response.has_deviceKeyString()) {
-      mitro::JsonKeysetReader reader;
-      reader.ReadKeyString(private_key_response.get_deviceKeyString());
-      scoped_ptr<keyczar::Keyczar> crypter(keyczar::Crypter::Read(reader));
-      string private_key_string = crypter->Decrypt(encrypted_private_key);
-
-      user_private_key_.reset(new MitroPrivateKey);
-      if (!user_private_key_->Read(private_key_string)) {
-        user_private_key_.reset();
-        error.SetMessage("Error decrypting private key");
-      }
-    } else if (private_key_response.has_encryptedPrivateKey()) {
-      user_private_key_.reset(new MitroPrivateKey);
-
-      if (!user_private_key_->ReadEncrypted(
-              private_key_response.get_encryptedPrivateKey(), password)) {
-        user_private_key_.reset();
-        error.SetMessage("Invalid password");
-      } else if (save_private_key) {
-        GetDeviceKeyCallback device_key_callback =
-            Bind(&MitroApiClient::OnGetMyPrivateKeyDeviceKeyCallback,
-                 base::Unretained(this),
-                 callback,
-                 private_key_response.get_unsignedLoginToken());
-        GetDeviceKey(device_key_callback);
-        return;
-      }
-    } else {
-      error.SetMessage("Missing encrypted private key");
-    }
-  } else if (error.GetMessage().empty()) {
-    error.SetMessage("Unknown error parsing private key response");
-  }
-
-  if (error.GetMessage().empty()) {
-    const string& login_token = private_key_response.get_unsignedLoginToken();
-    FinishGetMyPrivateKey(callback, login_token, "", NULL);
-  } else {
-    FinishGetMyPrivateKey(callback, "", "", &error);
-  }
-}
-
-void MitroApiClient::OnGetMyPrivateKeyDeviceKeyCallback(
-    const LoginCallback& callback,
-    const string& login_token,
-    const string& device_key_string,
-    MitroApiError* error) {
-  if (error == NULL) {
-    mitro::MitroPrivateKey device_key;
-
-    MitroApiError device_key_error;
-    if (!device_key.Read(device_key_string)) {
-      device_key_error.SetMessage("Error reading device key");
-      FinishGetMyPrivateKey(callback, login_token, "", &device_key_error);
+  const string& MitroApiClient::GetDeviceID() {
+    if (device_id_.empty()) {
+      device_id_ = GenerateDeviceID();
     }
 
-    // TODO: serialize and encrypt user private key using device string after
-    // json keyczar writer is done.
+    return device_id_;
   }
 
-  FinishGetMyPrivateKey(callback, login_token, "", error);
-}
+  // (sully)
+  // string MitroApiClient::ThriftStructToJsonString(const TStruct& message) {
+  //   // TODO: an exception could be thrown here.
+  //   // It looks like none of these are exceptions that we should handle
+  //   // e.g. bad_alloc, strings larger than 2^31.
+  //   message.write(protocol_.get());
+  //   string json_string = transport_.get()->getBufferAsString();
+  //   transport_->resetBuffer();
+  //   return json_string;
+  // }
 
-void MitroApiClient::FinishGetMyPrivateKey(
-      const LoginCallback& callback,
-      const string& login_token,
-      const string& encrypted_private_key,
-      MitroApiError* error) {
-  if (error != NULL) {
-    callback.Run(username_, "", "", "", error);
-    return;
+  // bool MitroApiClient::JsonStringToThriftStruct(const std::string& s,
+  //                                               TStruct* message,
+  //                                               MitroApiError* error) {
+  //   bool result = true;
+
+  //   try {
+  //     transport_.get()->write(reinterpret_cast<const uint8_t*>(s.data()),
+  //                             s.size());
+  //     message->read(protocol_.get());
+  //   } catch (apache::thrift::TException e) {
+  //     LOG(ERROR) << e.what();
+  //     error->SetMessage(e.what());
+  //     result = false;
+
+  //     // TODO: json parser should reset it's own state on exception.
+  //     protocol_.reset(new TJSONProtocol(transport_));
+  //   }
+
+  //   transport_->resetBuffer();
+
+  //   return result;
+  // }
+
+  void MitroApiClient::PostRequest(const string& endpoint,
+                                   const SignedRequest& request,
+                                   const HttpRequestCallback& callback) {
+    // (sully)
+    request.write(protocol_.get());
+    string json_string = transport_.get()->getBufferAsString();
+    transport_->resetBuffer();
+
+    const string& data = json_string;
+    LOG(INFO) << "request: " << data;
+
+    string url = net::BuildUri(kProtocol, GetHost(), kApiBasePath + endpoint);
+    LOG(INFO) << "url: " << url;
+    HttpHeaders headers;
+    http_client_->Post(url, headers, data, callback);
   }
 
-  string login_token_signature;
-  // TODO: Can signing fail?
-  CHECK(user_private_key_->Sign(login_token, &login_token_signature));
+  // void MitroApiClient::MakeRequest(const string& endpoint,
+  //                                  const TStruct& request,
+  //                                  const HttpRequestCallback& callback) {
+  //   SignedRequest request_wrapper;
 
-  callback.Run(username_, login_token, login_token_signature, encrypted_private_key, NULL);
-}
+  //   string request_string = ThriftStructToJsonString(request);
+  //   request_wrapper.set_clientIdentifier(GetClientID());
+  //   request_wrapper.set_identity(GetUsername());
+  //   request_wrapper.set_request(request_string);
 
-void MitroApiClient::GetDeviceKey(const GetDeviceKeyCallback& callback) {
-  GetMyDeviceKeyRequest request;
-  request.set_deviceId(GetDeviceID());
+  //   if (endpoint != "/GetMyPrivateKey") {
+  //     CHECK(user_private_key_.get() != NULL);
+  //     // TODO: Can signing fail?
+  //     string signature;
+  //     CHECK(user_private_key_->Sign(request_string, &signature));
+  //     request_wrapper.set_signature(signature);
+  //   }
 
-  HttpRequestCallback request_callback =
-      Bind(&MitroApiClient::OnGetMyDeviceKey, base::Unretained(this), callback);
+  //   LOG(INFO) << endpoint << " " << request_string;
+  //   PostRequest(endpoint, request_wrapper, callback);
+  // }
 
-  MakeRequest("/GetMyDeviceKey", request, request_callback);
-}
+  // bool MitroApiClient::ParseResponse(const HttpResponse& response,
+  //                                    TStruct* message,
+  //                                    MitroApiError* error) {
+  //   //LOG(INFO) << "response: " << response.GetBody();
 
-void MitroApiClient::OnGetMyDeviceKey(const GetDeviceKeyCallback& callback,
-                                      const HttpResponse& response) {
-  MitroApiError error;
-  GetMyDeviceKeyResponse device_key_response;
+  //   if (!response.IsOk()) {
+  //     error->SetMessage(response.GetError().GetMessage());
+  //     return false;
+  //   }
 
-  if (!ParseResponse(response, &device_key_response, &error)) {
-    callback.Run("", &error);
-    return;
+  //   MitroException exception;
+  //   if (!JsonStringToThriftStruct(response.GetBody(), &exception, error)) {
+  //     return false;
+  //   }
+
+  //   if (exception.has_exceptionType()) {
+  //     error->SetMessage(exception.get_userVisibleError());
+  //     error->SetExceptionType(exception.get_exceptionType());
+  //     return false;
+  //   }
+
+  //   if (!JsonStringToThriftStruct(response.GetBody(), message, error)) {
+  //     return false;
+  //   }
+
+  //   return true;
+  // }
+
+  void MitroApiClient::Login(const string& username,
+                             const string& password,
+                             const string& two_factor_auth_code,
+                             const string& login_token,
+                             const string& login_token_signature,
+                             const string& encrypted_private_key,
+                             bool save_private_key,
+                             const LoginCallback& callback) {
+    if (IsLoggedIn()) {
+      Logout();
+    }
+
+    SetUsername(username);
+
+    GetMyPrivateKeyRequest request;
+    request.__set_userId(GetUsername());
+    request.__set_deviceId(GetDeviceID());
+    request.__set_twoFactorCode(two_factor_auth_code);
+    request.__set_loginToken(login_token);
+    request.__set_loginTokenSignature(login_token_signature);
+
+    HttpRequestCallback request_callback =
+    Bind(&MitroApiClient::OnGetMyPrivateKey,
+         base::Unretained(this),
+         password,
+         encrypted_private_key,
+         save_private_key,
+         callback);
+
+    // Make request
+    SignedRequest request_wrapper;
+    string endpoint = "/GetMyPrivateKey";
+
+    request.write(protocol_.get());
+    string json_string = transport_.get()->getBufferAsString();
+    transport_->resetBuffer();
+    string request_string = json_string;
+
+    request_wrapper.__set_clientIdentifier(GetClientID());
+    request_wrapper.__set_identity(GetUsername());
+    request_wrapper.__set_request(request_string);
+
+    if (endpoint != "/GetMyPrivateKey") {
+      CHECK(user_private_key_.get() != NULL);
+      // TODO: Can signing fail?
+      string signature;
+      CHECK(user_private_key_->Sign(request_string, &signature));
+      request_wrapper.__set_signature(signature);
+    }
+
+    LOG(INFO) << endpoint << " " << request_string;
+    PostRequest(endpoint, request_wrapper, request_callback);
   }
 
-  string device_key_string = device_key_response.get_deviceKeyString();
-  LOG(INFO) << "device key: " << device_key_string;
+  void MitroApiClient::Logout() {
+    username_ = "";
+    user_private_key_.reset();
 
-  callback.Run(device_key_string, NULL);
-}
-
-void MitroApiClient::GetSecretsList(const GetSecretsListCallback& callback) {
-  ListMySecretsAndGroupKeysRequest request;
-
-  request.set_deviceId(GetDeviceID());
-
-  HttpRequestCallback request_callback =
-      Bind(&MitroApiClient::OnGetSecretsList,
-           base::Unretained(this),
-           callback);
-
-  MakeRequest("/ListMySecretsAndGroupKeys", request, request_callback);
-}
-
-void MitroApiClient::OnGetSecretsList(const GetSecretsListCallback& callback,
-                                      const HttpResponse& response) {
-  MitroApiError error;
-  ListMySecretsAndGroupKeysResponse secrets_list_response;
-
-  if (!ParseResponse(response, &secrets_list_response, &error)) {
-    callback.Run(secrets_list_response, &error);
-    return;
+    key_cache_.Clear();
+    decryption_cache_.clear();
   }
 
-  callback.Run(secrets_list_response, NULL);
-}
+  bool MitroApiClient::ParseResponse(const HttpResponse& response,
+                                     Json::Value& root,
+                                     MitroApiError* error) {
+    MitroException exception;
+    Json::Reader reader;
 
-void MitroApiClient::GetSecret(int secret_id,
-                               int group_id,
-                               bool include_critical_data,
-                               GetSecretCallback& callback) {
-  GetSecretRequest request;
-
-  request.set_deviceId(GetDeviceID());
-  request.set_userId(GetUsername());
-  request.set_secretId(secret_id);
-  request.set_groupId(group_id);
-  request.set_includeCriticalData(include_critical_data);
-
-  HttpRequestCallback request_callback =
-      Bind(&MitroApiClient::OnGetSecret,
-           base::Unretained(this),
-           callback);
-
-  MakeRequest("/GetSecret", request, request_callback);
-}
-
-void MitroApiClient::OnGetSecret(const GetSecretCallback& callback,
-                                 const net::HttpResponse& response) {
-  Secret empty_secret;
-  MitroApiError error;
-  GetSecretResponse secret_response;
-
-  if (!ParseResponse(response, &secret_response, &error)) {
-    callback.Run(empty_secret, &error);
-    return;
-  }
-
-  callback.Run(secret_response.get_secret(), NULL);
-}
-
-int MitroApiClient::GetUserGroupIdFromSecretsListResponse(
-    const ListMySecretsAndGroupKeysResponse& secrets_list_response) {
-  map<string, GroupInfo>::const_iterator group_iter;
-  map<string, GroupInfo>::const_iterator group_end_iter =
-      secrets_list_response.get_groups().end();
-
-  for (group_iter = secrets_list_response.get_groups().begin();
-       group_iter != group_end_iter;
-       ++group_iter) {
-      if (group_iter->second.get_name().empty()) {
-        return group_iter->second.get_groupId();
-      }
-  }
-
-  return -1;
-}
-
-bool MitroApiClient::DecryptUsingCache(const MitroPrivateKey& key,
-                                       const std::string& encrypted_data,
-                                       std::string* decrypted_data) {
-  DecryptionCache::const_iterator iter = decryption_cache_.find(encrypted_data);
-  if (iter == decryption_cache_.end()) {
-    if (!key.Decrypt(encrypted_data, decrypted_data)) {
+    // Check http response
+    if (!response.IsOk()) {
+      error->SetMessage(response.GetError().GetMessage());
       return false;
     }
-    decryption_cache_.insert(
-        std::pair<string, string>(encrypted_data, *decrypted_data));
-  } else {
-    *decrypted_data = iter->second;
+
+    if (!reader.parse(response.GetBody(), root))
+    {
+      // report to the user the failure and their locations in the document.
+      error->SetMessage(reader.getFormattedErrorMessages());
+      return false;
+    }
+
+    // Check for server exception
+    if (root.isMember("exceptionType")) {
+      // See cpp/mitro_api/mitro_api.thrift for optionals
+      exception.__set_exceptionId(root["exceptionId"].asString());
+      exception.__set_stackTraceString(root["stackTraceString"].asString());
+      exception.__set_rawMessage(root["rawMessage"].asString());
+      exception.__set_userVisibleError(root["userVisibleError"].asString());
+      if (root.isMember("exceptionType"))
+        exception.__set_exceptionType(root["exceptionType"].asString());
+
+      error->SetMessage(exception.userVisibleError);
+      error->SetExceptionType(exception.exceptionType);
+
+      return false;
+    }
+    return true;
   }
 
-  return true;
-}
+  void MitroApiClient::OnGetMyPrivateKey(const string& password,
+                                         const string& encrypted_private_key,
+                                         bool save_private_key,
+                                         const LoginCallback& callback,
+                                         const HttpResponse& response) {
+    LOG(INFO) << "response: " << response.GetBody();
 
-MitroPrivateKey* MitroApiClient::GetDecryptionKeyForSecret(
-    const Secret& secret,
-    const map<string, GroupInfo>& groups,
-    MitroApiError* error) {
-  if (!secret.has_groupIdPath()) {
-    error->SetMessage("Secret does not contain group id path");
-    return NULL;
+    MitroApiError error;
+    GetMyPrivateKeyResponse private_key_response;
+    Json::Value root;
+    bool success = true;
+
+    // Parse server exeption
+    if (!ParseResponse(response, root, &error)) {
+      success = false;
+    }
+
+    // Parse GetMyPrivateKeyResponse
+    if (success) {
+      // See cpp/mitro_api/mitro_api.thrift for optionals
+      private_key_response.__set_transactionId(root["transactionId"].asString());
+      private_key_response.__set_deviceId(root["deviceId"].asString());
+      private_key_response.__set_myUserId(root["myUserId"].asString());
+      if (root.isMember("encryptedPrivateKey"))
+        private_key_response.__set_encryptedPrivateKey(root["encryptedPrivateKey"].asString());
+      private_key_response.__set_changePasswordOnNextLogin(root["changePasswordOnNextLogin"].asBool());
+      private_key_response.__set_verified(root["verified"].asBool());
+      private_key_response.__set_unsignedLoginToken(root["unsignedLoginToken"].asString());
+      if (root.isMember("deviceKeyString"))
+        private_key_response.__set_deviceKeyString(root["deviceKeyString"].asString());
+    }
+
+    // Proccess response
+    if (success) {
+      if (!encrypted_private_key.empty() &&
+          private_key_response.__isset.deviceKeyString) {
+        mitro::JsonKeysetReader reader;
+        reader.ReadKeyString(private_key_response.deviceKeyString);
+        scoped_ptr<keyczar::Keyczar> crypter(keyczar::Crypter::Read(reader));
+        string private_key_string = crypter->Decrypt(encrypted_private_key);
+
+        user_private_key_.reset(new MitroPrivateKey);
+        if (!user_private_key_->Read(private_key_string)) {
+          user_private_key_.reset();
+          error.SetMessage("Error decrypting private key");
+        }
+      } else if (private_key_response.__isset.encryptedPrivateKey) {
+        user_private_key_.reset(new MitroPrivateKey);
+
+        if (!user_private_key_->ReadEncrypted(
+                                              private_key_response.encryptedPrivateKey, password)) {
+          user_private_key_.reset();
+          error.SetMessage("Invalid password");
+        } else if (save_private_key) {
+          GetDeviceKeyCallback device_key_callback =
+          Bind(&MitroApiClient::OnGetMyPrivateKeyDeviceKeyCallback,
+               base::Unretained(this),
+               callback,
+               private_key_response.unsignedLoginToken);
+          GetDeviceKey(device_key_callback);
+          return;
+        }
+      } else {
+        error.SetMessage("Missing encrypted private key");
+      }
+    } else if (error.GetMessage().empty()) {
+      error.SetMessage("Unknown error parsing private key response");
+    }
+
+    if (error.GetMessage().empty()) {
+      const string& login_token = private_key_response.unsignedLoginToken;
+      FinishGetMyPrivateKey(callback, login_token, "", NULL);
+    } else {
+      FinishGetMyPrivateKey(callback, "", "", &error);
+    }
   }
 
-  MitroPrivateKey* decryption_key = user_private_key_.get();
-  vector<int>::const_iterator group_id_iter;
+  void MitroApiClient::OnGetMyPrivateKeyDeviceKeyCallback(
+                                                          const LoginCallback& callback,
+                                                          const string& login_token,
+                                                          const string& device_key_string,
+                                                          MitroApiError* error) {
+    if (error == NULL) {
+      mitro::MitroPrivateKey device_key;
 
-  for (group_id_iter = secret.get_groupIdPath().begin();
-       group_id_iter != secret.get_groupIdPath().end();
-       ++group_id_iter) {
+      MitroApiError device_key_error;
+      if (!device_key.Read(device_key_string)) {
+        device_key_error.SetMessage("Error reading device key");
+        FinishGetMyPrivateKey(callback, login_token, "", &device_key_error);
+      }
+
+      // TODO: serialize and encrypt user private key using device string after
+      // json keyczar writer is done.
+    }
+
+    FinishGetMyPrivateKey(callback, login_token, "", error);
+  }
+
+  void MitroApiClient::FinishGetMyPrivateKey(
+                                             const LoginCallback& callback,
+                                             const string& login_token,
+                                             const string& encrypted_private_key,
+                                             MitroApiError* error) {
+    if (error != NULL) {
+      callback.Run(username_, "", "", "", error);
+      return;
+    }
+
+    string login_token_signature;
+    // TODO: Can signing fail?
+    CHECK(user_private_key_->Sign(login_token, &login_token_signature));
+
+    callback.Run(username_, login_token, login_token_signature, encrypted_private_key, NULL);
+  }
+
+  void MitroApiClient::GetDeviceKey(const GetDeviceKeyCallback& callback) {
+    GetMyDeviceKeyRequest request;
+    request.__set_deviceId(GetDeviceID());
+
+    HttpRequestCallback request_callback =
+    Bind(&MitroApiClient::OnGetMyDeviceKey, base::Unretained(this), callback);
+
+    // Make request
+    SignedRequest request_wrapper;
+    string endpoint = "/GetMyDeviceKey";
+
+    request.write(protocol_.get());
+    string json_string = transport_.get()->getBufferAsString();
+    transport_->resetBuffer();
+    string request_string = json_string;
+
+    request_wrapper.__set_clientIdentifier(GetClientID());
+    request_wrapper.__set_identity(GetUsername());
+    request_wrapper.__set_request(request_string);
+
+    if (endpoint != "/GetMyPrivateKey") {
+      CHECK(user_private_key_.get() != NULL);
+      // TODO: Can signing fail?
+      string signature;
+      CHECK(user_private_key_->Sign(request_string, &signature));
+      request_wrapper.__set_signature(signature);
+    }
+
+    LOG(INFO) << endpoint << " " << request_string;
+    PostRequest(endpoint, request_wrapper, request_callback);
+    // MakeRequest("/GetMyDeviceKey", request, request_callback);
+  }
+
+  void MitroApiClient::OnGetMyDeviceKey(const GetDeviceKeyCallback& callback,
+                                        const HttpResponse& response) {
+    // Parse response
+    MitroApiError error;
+    GetMyDeviceKeyResponse device_key_response;
+    Json::Value root;
+    bool success = true;
+
+    // Parse server exeption
+    if (!ParseResponse(response, root, &error)) {
+      success = false;
+    }
+
+    // Parse GetMyDeviceKeyResponse
+    if (success) {
+      device_key_response.__set_transactionId(root["transactionId"].asString());
+      device_key_response.__set_deviceId(root["deviceId"].asString());
+      device_key_response.__set_deviceKeyString(root["deviceKeyString"].asString());
+    }
+
+    if (!success) {
+      callback.Run("", &error);
+      return;
+    }
+
+    string device_key_string = device_key_response.deviceKeyString;
+    LOG(INFO) << "device key: " << device_key_string;
+
+    callback.Run(device_key_string, NULL);
+  }
+
+  void MitroApiClient::GetSecretsList(const GetSecretsListCallback& callback) {
+    ListMySecretsAndGroupKeysRequest request;
+
+    request.__set_deviceId(GetDeviceID());
+
+    HttpRequestCallback request_callback =
+    Bind(&MitroApiClient::OnGetSecretsList,
+         base::Unretained(this),
+         callback);
+
+    // Make request
+    SignedRequest request_wrapper;
+    string endpoint = "/ListMySecretsAndGroupKeys";
+
+    request.write(protocol_.get());
+    string json_string = transport_.get()->getBufferAsString();
+    transport_->resetBuffer();
+    string request_string = json_string;
+
+    request_wrapper.__set_clientIdentifier(GetClientID());
+    request_wrapper.__set_identity(GetUsername());
+    request_wrapper.__set_request(request_string);
+
+    if (endpoint != "/GetMyPrivateKey") {
+      CHECK(user_private_key_.get() != NULL);
+      // TODO: Can signing fail?
+      string signature;
+      CHECK(user_private_key_->Sign(request_string, &signature));
+      request_wrapper.__set_signature(signature);
+    }
+
+    LOG(INFO) << endpoint << " " << request_string;
+    PostRequest(endpoint, request_wrapper, request_callback);
+    //MakeRequest("/ListMySecretsAndGroupKeys", request, request_callback);
+  }
+
+  void MitroApiClient::ParseSecret(const Json::Value &json_secret,
+                                   Secret &secret) {
+/*
+ struct Secret {
+ 1: optional i32 secretId;
+ 2: optional string hostname;
+ 3: optional string encryptedClientData;
+ 4: optional string encryptedCriticalData;
+ 5: optional list<i32> groups;
+ 6: optional list<i32> hiddenGroups;
+ 7: optional list<string> users;
+ 8: optional list<string> icons;
+ 9: optional map<string, string> groupNames;
+ 10: optional string title;
+ 11: optional list<i32> groupIdPath;
+ 12: optional SecretClientData clientData;
+ 13: optional SecretCriticalData criticalData;
+ }
+*/
+    // Secret
+    if (json_secret.isMember("secretId"))
+      secret.__set_secretId(json_secret["secretId"].asInt());
+    if (json_secret.isMember("hostname"))
+      secret.__set_hostname(json_secret["hostname"].asString());
+    if (json_secret.isMember("encryptedClientData"))
+      secret.__set_encryptedClientData(json_secret["encryptedClientData"].asString());
+    if (json_secret.isMember("encryptedCriticalData"))
+      secret.__set_encryptedCriticalData(json_secret["encryptedCriticalData"].asString());
+    if (json_secret.isMember("groups")) {
+      Json::Value groups = json_secret["groups"];
+      for(Json::ValueIterator itr = groups.begin() ; itr != groups.end() ; itr++ ) {
+        secret.groups.push_back(itr->asInt());
+        secret.__isset.groups = true;
+      }
+    }
+    if (json_secret.isMember("hiddenGroups")) {
+      Json::Value hidden_groups = json_secret["hiddenGroups"];
+      for(Json::ValueIterator itr = hidden_groups.begin() ; itr != hidden_groups.end() ; itr++ ) {
+        secret.hiddenGroups.push_back(itr->asInt());
+        secret.__isset.hiddenGroups = true;
+      }
+    }
+    if (json_secret.isMember("users")) {
+      Json::Value users = json_secret["users"];
+      for(Json::ValueIterator itr = users.begin() ; itr != users.end() ; itr++ ) {
+        secret.users.push_back(itr->asString());
+        secret.__isset.users = true;
+      }
+    }
+    if (json_secret.isMember("icons")) {
+      Json::Value icons = json_secret["icons"];
+      for(Json::ValueIterator itr = icons.begin() ; itr != icons.end() ; itr++ ) {
+        secret.icons.push_back(itr->asString());
+        secret.__isset.icons = true;
+      }
+    }
+    if (json_secret.isMember("groupNames")) {
+
+      Json::Value group_names = json_secret["groupNames"];
+      Json::Value::Members group_names_keys = group_names.getMemberNames();
+      for (vector<string>::iterator it = group_names_keys.begin() ; it != group_names_keys.end(); ++it) {
+        string key = *it;
+        secret.groupNames[key] = group_names[key].asString();
+        secret.__isset.groupNames = true;
+      }
+    }
+    if (json_secret.isMember("title"))
+      secret.__set_title(json_secret["title"].asString());
+    if (json_secret.isMember("groupIdPath")) {
+      Json::Value group_id_path = json_secret["groupIdPath"];
+      for(Json::ValueIterator itr = group_id_path.begin() ; itr != group_id_path.end() ; itr++ ) {
+        secret.groupIdPath.push_back(itr->asInt());
+        secret.__isset.groupIdPath = true;
+      }
+    }
+
+    // SecretClientData
+    if (json_secret.isMember("clientData")) {
+      Json::Value client_data = json_secret["clientData"];
+      ParseSecretClientData(client_data, secret.clientData);
+      secret.__isset.clientData = true;
+    }
+
+    // SecretCriticalData
+    if (json_secret.isMember("criticalData")) {
+      Json::Value critical_data = json_secret["criticalData"];
+      ParseSecretCriticalData(critical_data, secret.criticalData);
+      secret.__isset.criticalData = true;
+    }
+  }
+
+  void MitroApiClient::ParseSecretClientData(const Json::Value &json_client_data,
+                             SecretClientData &clientData) {
+    // SecretClientData
+    /*
+     1: optional string type;
+     2: optional string loginUrl
+     3: optional string username;
+     4: optional string usernameField;
+     5: optional string passwordField;
+     6: optional string title;
+     */
+    if (json_client_data.isMember("type"))
+      clientData.__set_type(json_client_data["type"].asString());
+    if (json_client_data.isMember("loginUrl"))
+      clientData.__set_loginUrl(json_client_data["loginUrl"].asString());
+    if (json_client_data.isMember("username"))
+      clientData.__set_username(json_client_data["username"].asString());
+    if (json_client_data.isMember("usernameField"))
+      clientData.__set_usernameField(json_client_data["usernameField"].asString());
+    if (json_client_data.isMember("passwordField"))
+      clientData.__set_passwordField(json_client_data["passwordField"].asString());
+    if (json_client_data.isMember("title"))
+      clientData.__set_title(json_client_data["title"].asString());
+  }
+
+  void MitroApiClient::ParseSecretCriticalData(const Json::Value &json_critical_data,
+                               SecretCriticalData &criticalData) {
+    // SecretCriticalData
+    /*
+     1: optional string password;
+     2: optional string note;
+     */
+    if (json_critical_data.isMember("password"))
+      criticalData.__set_password(json_critical_data["password"].asString());
+    if (json_critical_data.isMember("note"))
+      criticalData.__set_note(json_critical_data["note"].asString());
+  }
+
+  void MitroApiClient::ParseGroupInfo(const Json::Value &json_group_info,
+                                      GroupInfo &group_info) {
+    /*
+     1:i32 groupId;
+     2:bool autoDelete;
+     3:string name;
+     4:string encryptedPrivateKey;
+     */
+    group_info.__set_groupId(json_group_info["groupId"].asInt());
+    group_info.__set_autoDelete(json_group_info["autoDelete"].asBool());
+    group_info.__set_name(json_group_info["name"].asString());
+    group_info.__set_encryptedPrivateKey(json_group_info["encryptedPrivateKey"].asString());
+  }
+
+
+  void MitroApiClient::OnGetSecretsList(const GetSecretsListCallback& callback,
+                                        const HttpResponse& response) {
+    LOG(INFO) << "response: " << response.GetBody();
+
+    MitroApiError error;
+    ListMySecretsAndGroupKeysResponse secrets_list_response;
+    Json::Value root;
+    bool success = true;
+
+    // Parse server exeption
+    if (!ParseResponse(response, root, &error)) {
+      success = false;
+    }
+
+    // Parse ListMySecretsAndGroupKeysResponse
+    /*
+     1:string transactionId;
+     2:string deviceId;
+     3:string myUserId;
+     4:map<string, Secret> secretToPath;
+     5:map<string, GroupInfo> groups;
+     6:list<string> autocompleteUsers;
+     */
+    if (success) {
+      secrets_list_response.__set_transactionId(root["transactionId"].asString());
+      secrets_list_response.__set_deviceId(root["deviceId"].asString());
+      secrets_list_response.__set_myUserId(root["myUserId"].asString());
+
+      Json::Value secret_to_path = root["secretToPath"];
+      Json::Value::Members secret_to_path_keys = secret_to_path.getMemberNames();
+      for (vector<string>::iterator it = secret_to_path_keys.begin() ; it != secret_to_path_keys.end(); ++it) {
+        string key = *it;
+        Secret secret;
+        Json::Value json_secret = secret_to_path[key];
+        ParseSecret(json_secret, secret);
+        secrets_list_response.secretToPath[key] = secret;
+        secrets_list_response.__isset.secretToPath = true;
+      }
+
+      Json::Value groups = root["groups"];
+      Json::Value::Members groups_keys = groups.getMemberNames();
+      for (vector<string>::iterator it = groups_keys.begin() ; it != groups_keys.end(); ++it) {
+        string key = *it;
+        GroupInfo group_info;
+        Json::Value json_group_info = groups[key];
+        ParseGroupInfo(json_group_info, group_info);
+        secrets_list_response.groups[key] = group_info;
+        secrets_list_response.__isset.groups = true;
+      }
+
+      Json::Value autocomplete_users = root["autocompleteUsers"];
+      for(Json::ValueIterator itr = autocomplete_users.begin() ; itr != autocomplete_users.end() ; itr++ ) {
+        secrets_list_response.autocompleteUsers.push_back(itr->asString());
+        secrets_list_response.__isset.autocompleteUsers = true;
+      }
+      LOG(INFO) << "parsed secrets --> " << std::endl;
+      secrets_list_response.printTo(std::cout);
+    }
+
+    if (!success) {
+      callback.Run(secrets_list_response, &error);
+      return;
+    }
+
+    callback.Run(secrets_list_response, NULL);
+  }
+
+  void MitroApiClient::GetSecret(int secret_id,
+                                 int group_id,
+                                 bool include_critical_data,
+                                 GetSecretCallback& callback) {
+    GetSecretRequest request;
+
+    request.__set_deviceId(GetDeviceID());
+    request.__set_userId(GetUsername());
+    request.__set_secretId(secret_id);
+    request.__set_groupId(group_id);
+    request.__set_includeCriticalData(include_critical_data);
+
+    HttpRequestCallback request_callback =
+    Bind(&MitroApiClient::OnGetSecret,
+         base::Unretained(this),
+         callback);
+
+    // Make request
+    SignedRequest request_wrapper;
+    string endpoint = "/GetSecret";
+
+    request.write(protocol_.get());
+    string json_string = transport_.get()->getBufferAsString();
+    transport_->resetBuffer();
+    string request_string = json_string;
+
+    request_wrapper.__set_clientIdentifier(GetClientID());
+    request_wrapper.__set_identity(GetUsername());
+    request_wrapper.__set_request(request_string);
+
+    if (endpoint != "/GetMyPrivateKey") {
+      CHECK(user_private_key_.get() != NULL);
+      // TODO: Can signing fail?
+      string signature;
+      CHECK(user_private_key_->Sign(request_string, &signature));
+      request_wrapper.__set_signature(signature);
+    }
+
+    LOG(INFO) << endpoint << " " << request_string;
+    PostRequest(endpoint, request_wrapper, request_callback);
+    //MakeRequest("/GetSecret", request, request_callback);
+  }
+
+  void MitroApiClient::OnGetSecret(const GetSecretCallback& callback,
+                                   const net::HttpResponse& response) {
+    Secret empty_secret;
+    MitroApiError error;
+    GetSecretResponse secret_response;
+    Json::Value root;
+    bool success = true;
+
+    // Parse server exeption
+    if (!ParseResponse(response, root, &error)) {
+      success = false;
+    }
+
+    // Parse GetSecretResponse
+    /*
+     1:string transactionId;
+     2:string deviceId;
+     3:Secret secret;
+     */
+    if (success) {
+      secret_response.__set_transactionId(root["transactionId"].asString());
+      secret_response.__set_deviceId(root["deviceId"].asString());
+      ParseSecret(root["secret"], secret_response.secret);
+      secret_response.__isset.secret = true;
+    }
+
+    if (!success) {
+      callback.Run(empty_secret, &error);
+      return;
+    }
+
+    LOG(INFO) << "OnGetSecret: ";
+    secret_response.secret.printTo(std::cout);
+    LOG(INFO) << "done" << std::endl;
+    callback.Run(secret_response.secret, NULL);
+  }
+
+  int MitroApiClient::GetUserGroupIdFromSecretsListResponse(
+                                                            const ListMySecretsAndGroupKeysResponse& secrets_list_response) {
     map<string, GroupInfo>::const_iterator group_iter;
-    group_iter = groups.find(base::IntToString(*group_id_iter));
+    map<string, GroupInfo>::const_iterator group_end_iter =
+    secrets_list_response.groups.end();
 
-    if (group_iter == groups.end()) {
-      error->SetMessage(StringPrintf("Group %d not found", *group_id_iter));
+    for (group_iter = secrets_list_response.groups.begin();
+         group_iter != group_end_iter;
+         ++group_iter) {
+      if (group_iter->second.name.empty()) {
+        return group_iter->second.groupId;
+      }
+    }
+
+    return -1;
+  }
+
+  bool MitroApiClient::DecryptUsingCache(const MitroPrivateKey& key,
+                                         const std::string& encrypted_data,
+                                         std::string* decrypted_data) {
+    DecryptionCache::const_iterator iter = decryption_cache_.find(encrypted_data);
+    if (iter == decryption_cache_.end()) {
+      if (!key.Decrypt(encrypted_data, decrypted_data)) {
+        return false;
+      }
+      decryption_cache_.insert(
+                               std::pair<string, string>(encrypted_data, *decrypted_data));
+    } else {
+      *decrypted_data = iter->second;
+    }
+
+    return true;
+  }
+
+  MitroPrivateKey* MitroApiClient::GetDecryptionKeyForSecret(
+                                                             const Secret& secret,
+                                                             const map<string, GroupInfo>& groups,
+                                                             MitroApiError* error) {
+    if (!secret.__isset.groupIdPath) {
+      error->SetMessage("Secret does not contain group id path");
       return NULL;
     }
 
-    string encrypted_group_key = group_iter->second.get_encryptedPrivateKey(); 
+    MitroPrivateKey* decryption_key = user_private_key_.get();
+    vector<int>::const_iterator group_id_iter;
 
-    MitroPrivateKey* next_decryption_key = key_cache_.Find(encrypted_group_key);
-    if (next_decryption_key == NULL) {
-      string group_key_string;
+    for (group_id_iter = secret.groupIdPath.begin();
+         group_id_iter != secret.groupIdPath.end();
+         ++group_id_iter) {
+      map<string, GroupInfo>::const_iterator group_iter;
+      group_iter = groups.find(base::IntToString(*group_id_iter));
+
+      if (group_iter == groups.end()) {
+        error->SetMessage(StringPrintf("Group %d not found", *group_id_iter));
+        return NULL;
+      }
+
+      string encrypted_group_key = group_iter->second.encryptedPrivateKey;
+
+      MitroPrivateKey* next_decryption_key = key_cache_.Find(encrypted_group_key);
+      if (next_decryption_key == NULL) {
+        string group_key_string;
+        if (!DecryptUsingCache(*decryption_key,
+                               encrypted_group_key,
+                               &group_key_string)) {
+          error->SetMessage("Error decrypting group key");
+          return NULL;
+        }
+
+        MitroPrivateKey* group_key = new MitroPrivateKey;
+        if (!group_key->Read(group_key_string)) {
+          delete group_key;
+          error->SetMessage("Error reading group key");
+          return NULL;
+        }
+
+        key_cache_.Insert(encrypted_group_key, group_key);
+        next_decryption_key = group_key;
+      }
+      decryption_key = next_decryption_key;
+    }
+
+    return decryption_key;
+  }
+
+  bool MitroApiClient::DecryptSecret(Secret* secret,
+                                     const map<string, GroupInfo>& groups,
+                                     MitroApiError* error) {
+    MitroPrivateKey* decryption_key =
+    GetDecryptionKeyForSecret(*secret, groups, error);
+
+    if (decryption_key == NULL) {
+      LOG(INFO) << "NO DECRYPTION KEY!!!" << std::endl;
+      // Error message set inside of GetDecryptionKeyForSecret.
+      return false;
+    }
+
+    if (secret->__isset.encryptedClientData) {
+      string client_data_string;
       if (!DecryptUsingCache(*decryption_key,
-                             encrypted_group_key,
-                             &group_key_string)) {
-        error->SetMessage("Error decrypting group key");
-        return NULL;
+                             secret->encryptedClientData,
+                             &client_data_string)) {
+        error->SetMessage("Error decrypting secret client data");
+        return false;
       }
 
-      MitroPrivateKey* group_key = new MitroPrivateKey;
-      if (!group_key->Read(group_key_string)) {
-        delete group_key;
-        error->SetMessage("Error reading group key");
-        return NULL;
+      // Parse json data
+      SecretClientData client_data;
+      Json::Reader reader;
+      Json::Value json_client_data;
+
+      if (reader.parse(client_data_string, json_client_data)) {
+        ParseSecretClientData(json_client_data, client_data);
+      } else {
+        error->SetMessage("Error decrypting secret client data");
+        return false;
       }
-
-      key_cache_.Insert(encrypted_group_key, group_key);
-      next_decryption_key = group_key;
+      secret->clientData = client_data;
     }
-    decryption_key = next_decryption_key;
+    
+    if (secret->__isset.encryptedCriticalData) {
+      string critical_data_string;
+      if (!decryption_key->Decrypt(secret->encryptedCriticalData,
+                                   &critical_data_string)) {
+        error->SetMessage("Error decrypting secret critical data");
+        return false;
+      }
+      
+      // Parse json data
+      SecretCriticalData critical_data;
+      Json::Reader reader;
+      Json::Value json_critical_data;
+
+      if (reader.parse(critical_data_string, json_critical_data)) {
+        ParseSecretCriticalData(json_critical_data, critical_data);
+      } else {
+        error->SetMessage("Error decrypting secret critical data");
+        return false;
+      }
+      secret->criticalData = critical_data;
+    }
+    
+    return true;
   }
-
-  return decryption_key;
-}
-
-bool MitroApiClient::DecryptSecret(Secret* secret,
-                                   const map<string, GroupInfo>& groups,
-                                   MitroApiError* error) {
-  MitroPrivateKey* decryption_key =
-      GetDecryptionKeyForSecret(*secret, groups, error);
-  if (decryption_key == NULL) {
-    // Error message set inside of GetDecryptionKeyForSecret.
-    return false;
+  
+  MitroApiClient::KeyCache::~KeyCache() {
+    STLDeleteValues(&cache_);
   }
-
-  if (secret->has_encryptedClientData()) {
-    string client_data_string;
-    if (!DecryptUsingCache(*decryption_key,
-                           secret->get_encryptedClientData(),
-                           &client_data_string)) {
-      error->SetMessage("Error decrypting secret client data");
-      return false;
-    }
-
-    if (!JsonStringToThriftStruct(client_data_string,
-                                  secret->mutable_clientData(),
-                                  error)) {
-      error->SetMessage("Error parsing secret client data");
-      return false;
-    }
+  
+  void MitroApiClient::KeyCache::Insert(const string& encrypted_key_string,
+                                        MitroPrivateKey* key) {
+    CHECK(Find(encrypted_key_string) == NULL);
+    cache_.insert(std::pair<string, MitroPrivateKey*>(encrypted_key_string, key));
   }
-
-  if (secret->has_encryptedCriticalData()) {
-    string critical_data_string;
-    if (!decryption_key->Decrypt(secret->get_encryptedCriticalData(),
-                                 &critical_data_string)) {
-      error->SetMessage("Error decrypting secret critical data");
-      return false;
-    }
-
-    if (!JsonStringToThriftStruct(critical_data_string,
-                                  secret->mutable_criticalData(),
-                                  error)) {
-      error->SetMessage("Error parsing secret critical data");
-      return false;
-    }
+  
+  MitroPrivateKey* MitroApiClient::KeyCache::Find(
+                                                  const string& encrypted_key_string) const {
+    KeyMap::const_iterator key_iter = cache_.find(encrypted_key_string);
+    return key_iter == cache_.end() ? NULL : key_iter->second;
   }
-
-  return true;
-}
-
-MitroApiClient::KeyCache::~KeyCache() {
-  STLDeleteValues(&cache_);
-}
-
-void MitroApiClient::KeyCache::Insert(const string& encrypted_key_string,
-                                      MitroPrivateKey* key) {
-  CHECK(Find(encrypted_key_string) == NULL);
-  cache_.insert(std::pair<string, MitroPrivateKey*>(encrypted_key_string, key));
-}
-
-MitroPrivateKey* MitroApiClient::KeyCache::Find(
-    const string& encrypted_key_string) const {
-  KeyMap::const_iterator key_iter = cache_.find(encrypted_key_string);
-  return key_iter == cache_.end() ? NULL : key_iter->second;
-}
-
+  
 }  // namespace mitro_api

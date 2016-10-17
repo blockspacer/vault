@@ -13,7 +13,7 @@
 #include "base/bind.h"
 #include "base/mac/mac_util.h"
 #include "base/strings/sys_string_conversions.h"
-#include "mitro_api/mitro_api.h"
+#include "mitro_api.h"
 
 #include "MitroApi.h"
 

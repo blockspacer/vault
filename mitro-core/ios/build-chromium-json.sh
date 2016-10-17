@@ -25,15 +25,22 @@ PLATFORM_ROOT="${DEVELOPER_ROOT}/Platforms/${PLATFORM}.platform/Developer"
 SDK_ROOT="${PLATFORM_ROOT}/SDKs/${PLATFORM}${SDK_VERSION}.sdk"
 
 CXX="${TOOLCHAIN_ROOT}/usr/bin/c++"
-CXXFLAGS="-arch ${ARCH} -isysroot ${SDK_ROOT} -miphoneos-version-min=7.0 -I\"${DST_DIR}/include\" -I\"${MITRO_API_SRC_DIR}/thrift_json/thrift/lib/cpp/src\""
+CXXFLAGS="-arch ${ARCH} -isysroot ${SDK_ROOT} -miphoneos-version-min=8.0 -I\"${DST_DIR}/include\" -I\"${MITRO_API_SRC_DIR}/thrift_json/thrift/lib/cpp/src\""
 OBJCXX="${CXX}"
 OBJCXXFLAGS="${CXXFLAGS}"
-LDFLAGS="-arch ${ARCH} -dynamiclib"
+LDFLAGS="-arch ${ARCH} -dynamiclib -L\"${DST_DIR}/lib\""
+
+HOST="armv-apple-darwin"
+if ["$ARCH" == "i386"]
+then
+  HOST="i386-apple-darwin"
+fi
+
 
 echo "Building chromium for ${PLATFORM}${SDK_VERSION}"
 pushd "${MITRO_API_SRC_DIR}"
 
-./configure --host=arm-iphoneos --prefix=${DST_DIR} --enable-third_party=no CXX="${CXX}" CXXFLAGS="${CXXFLAGS}" OBJCXX="${OBJCXX}" OBJCXXFLAGS="${OBJCXXFLAGS}" LDFLAGS="${LDFLAGS}"
+./configure --host="${HOST}" --prefix=${DST_DIR} --enable-third_party=no CXX="${CXX}" CXXFLAGS="${CXXFLAGS}" OBJCXX="${OBJCXX}" OBJCXXFLAGS="${OBJCXXFLAGS}" LDFLAGS="${LDFLAGS}"
 
 make clean
 cd base
