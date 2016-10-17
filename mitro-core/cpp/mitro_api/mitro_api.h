@@ -118,29 +118,14 @@ class MitroApiClient {
 
   void SetUsername(const std::string& username) { username_ = username; }
 
-  // (sully)
-  // std::string ThriftStructToJsonString(const apache::thrift::TStruct& message);
-  // bool JsonStringToThriftStruct(const std::string& s,
-  //                               apache::thrift::TStruct* message,
-  //                               MitroApiError* error);
-
-  // (sully)
   void PostRequest(const std::string& endpoint,
                    const SignedRequest& request,
                    const net::HttpRequestCallback& callback);
-  // void MakeRequest(const std::string& endpoint,
-  //                  const apache::thrift::TStruct& request,
-  //                  const net::HttpRequestCallback& callback);
 
-  // (sully)
-  // bool ParseResponse(const net::HttpResponse& response,
-  //                    apache::thrift::TStruct* message,
-  //                    MitroApiError* error);
-
+  // Parsing
   bool ParseResponse(const net::HttpResponse& response,
                      Json::Value& root,
                      MitroApiError* error);
-
   void ParseSecret(const Json::Value &json_secret,
                    Secret &secret);
   void ParseGroupInfo(const Json::Value &json_group_info,
@@ -150,6 +135,7 @@ class MitroApiClient {
   void ParseSecretCriticalData(const Json::Value &json_critical_data,
                                SecretCriticalData &criticalData);
 
+  // Handlers
   void OnGetMyPrivateKey(const std::string& password,
                          const std::string& encrypted_private_key,
                          bool save_private_key,

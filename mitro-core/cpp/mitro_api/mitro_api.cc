@@ -21,14 +21,10 @@
 #include "net/http_client.h"
 #include "net/uri.h"
 #include "TSimpleJSONProtocol.hpp"
-//#include "Poco/JSON/Parser.h"
-//#include "Poco/JSON/ParseHandler.h"
-//#include "Poco/JSON/Stringifier.h"
 #include "json/json.h"
 
 using apache::thrift::protocol::TSimpleJSONProtocol;
 using apache::thrift::transport::TMemoryBuffer;
-// using apache::thrift::TStruct;
 using base::Bind;
 using base::Callback;
 using base::StringPrintf;
@@ -40,12 +36,6 @@ using net::HttpResponse;
 using std::map;
 using std::string;
 using std::vector;
-//using Poco::JSON::ParseHandler;
-//using Poco::JSON::Stringifier;
-//using Poco::JSON::Object;
-//using Poco::JSON::Parser;
-//using Poco::Dynamic::Var;
-//using Poco::DynamicStruct;
 
 namespace mitro_api {
 
@@ -79,40 +69,6 @@ namespace mitro_api {
     return device_id_;
   }
 
-  // (sully)
-  // string MitroApiClient::ThriftStructToJsonString(const TStruct& message) {
-  //   // TODO: an exception could be thrown here.
-  //   // It looks like none of these are exceptions that we should handle
-  //   // e.g. bad_alloc, strings larger than 2^31.
-  //   message.write(protocol_.get());
-  //   string json_string = transport_.get()->getBufferAsString();
-  //   transport_->resetBuffer();
-  //   return json_string;
-  // }
-
-  // bool MitroApiClient::JsonStringToThriftStruct(const std::string& s,
-  //                                               TStruct* message,
-  //                                               MitroApiError* error) {
-  //   bool result = true;
-
-  //   try {
-  //     transport_.get()->write(reinterpret_cast<const uint8_t*>(s.data()),
-  //                             s.size());
-  //     message->read(protocol_.get());
-  //   } catch (apache::thrift::TException e) {
-  //     LOG(ERROR) << e.what();
-  //     error->SetMessage(e.what());
-  //     result = false;
-
-  //     // TODO: json parser should reset it's own state on exception.
-  //     protocol_.reset(new TJSONProtocol(transport_));
-  //   }
-
-  //   transport_->resetBuffer();
-
-  //   return result;
-  // }
-
   void MitroApiClient::PostRequest(const string& endpoint,
                                    const SignedRequest& request,
                                    const HttpRequestCallback& callback) {
@@ -129,56 +85,6 @@ namespace mitro_api {
     HttpHeaders headers;
     http_client_->Post(url, headers, data, callback);
   }
-
-  // void MitroApiClient::MakeRequest(const string& endpoint,
-  //                                  const TStruct& request,
-  //                                  const HttpRequestCallback& callback) {
-  //   SignedRequest request_wrapper;
-
-  //   string request_string = ThriftStructToJsonString(request);
-  //   request_wrapper.set_clientIdentifier(GetClientID());
-  //   request_wrapper.set_identity(GetUsername());
-  //   request_wrapper.set_request(request_string);
-
-  //   if (endpoint != "/GetMyPrivateKey") {
-  //     CHECK(user_private_key_.get() != NULL);
-  //     // TODO: Can signing fail?
-  //     string signature;
-  //     CHECK(user_private_key_->Sign(request_string, &signature));
-  //     request_wrapper.set_signature(signature);
-  //   }
-
-  //   LOG(INFO) << endpoint << " " << request_string;
-  //   PostRequest(endpoint, request_wrapper, callback);
-  // }
-
-  // bool MitroApiClient::ParseResponse(const HttpResponse& response,
-  //                                    TStruct* message,
-  //                                    MitroApiError* error) {
-  //   //LOG(INFO) << "response: " << response.GetBody();
-
-  //   if (!response.IsOk()) {
-  //     error->SetMessage(response.GetError().GetMessage());
-  //     return false;
-  //   }
-
-  //   MitroException exception;
-  //   if (!JsonStringToThriftStruct(response.GetBody(), &exception, error)) {
-  //     return false;
-  //   }
-
-  //   if (exception.has_exceptionType()) {
-  //     error->SetMessage(exception.get_userVisibleError());
-  //     error->SetExceptionType(exception.get_exceptionType());
-  //     return false;
-  //   }
-
-  //   if (!JsonStringToThriftStruct(response.GetBody(), message, error)) {
-  //     return false;
-  //   }
-
-  //   return true;
-  // }
 
   void MitroApiClient::Login(const string& username,
                              const string& password,
@@ -424,7 +330,6 @@ namespace mitro_api {
 
     LOG(INFO) << endpoint << " " << request_string;
     PostRequest(endpoint, request_wrapper, request_callback);
-    // MakeRequest("/GetMyDeviceKey", request, request_callback);
   }
 
   void MitroApiClient::OnGetMyDeviceKey(const GetDeviceKeyCallback& callback,
@@ -491,28 +396,10 @@ namespace mitro_api {
 
     LOG(INFO) << endpoint << " " << request_string;
     PostRequest(endpoint, request_wrapper, request_callback);
-    //MakeRequest("/ListMySecretsAndGroupKeys", request, request_callback);
   }
 
   void MitroApiClient::ParseSecret(const Json::Value &json_secret,
                                    Secret &secret) {
-/*
- struct Secret {
- 1: optional i32 secretId;
- 2: optional string hostname;
- 3: optional string encryptedClientData;
- 4: optional string encryptedCriticalData;
- 5: optional list<i32> groups;
- 6: optional list<i32> hiddenGroups;
- 7: optional list<string> users;
- 8: optional list<string> icons;
- 9: optional map<string, string> groupNames;
- 10: optional string title;
- 11: optional list<i32> groupIdPath;
- 12: optional SecretClientData clientData;
- 13: optional SecretCriticalData criticalData;
- }
-*/
     // Secret
     if (json_secret.isMember("secretId"))
       secret.__set_secretId(json_secret["secretId"].asInt());
@@ -588,14 +475,6 @@ namespace mitro_api {
   void MitroApiClient::ParseSecretClientData(const Json::Value &json_client_data,
                              SecretClientData &clientData) {
     // SecretClientData
-    /*
-     1: optional string type;
-     2: optional string loginUrl
-     3: optional string username;
-     4: optional string usernameField;
-     5: optional string passwordField;
-     6: optional string title;
-     */
     if (json_client_data.isMember("type"))
       clientData.__set_type(json_client_data["type"].asString());
     if (json_client_data.isMember("loginUrl"))
@@ -613,10 +492,6 @@ namespace mitro_api {
   void MitroApiClient::ParseSecretCriticalData(const Json::Value &json_critical_data,
                                SecretCriticalData &criticalData) {
     // SecretCriticalData
-    /*
-     1: optional string password;
-     2: optional string note;
-     */
     if (json_critical_data.isMember("password"))
       criticalData.__set_password(json_critical_data["password"].asString());
     if (json_critical_data.isMember("note"))
@@ -625,12 +500,7 @@ namespace mitro_api {
 
   void MitroApiClient::ParseGroupInfo(const Json::Value &json_group_info,
                                       GroupInfo &group_info) {
-    /*
-     1:i32 groupId;
-     2:bool autoDelete;
-     3:string name;
-     4:string encryptedPrivateKey;
-     */
+    // GroupInfo
     group_info.__set_groupId(json_group_info["groupId"].asInt());
     group_info.__set_autoDelete(json_group_info["autoDelete"].asBool());
     group_info.__set_name(json_group_info["name"].asString());
@@ -653,14 +523,6 @@ namespace mitro_api {
     }
 
     // Parse ListMySecretsAndGroupKeysResponse
-    /*
-     1:string transactionId;
-     2:string deviceId;
-     3:string myUserId;
-     4:map<string, Secret> secretToPath;
-     5:map<string, GroupInfo> groups;
-     6:list<string> autocompleteUsers;
-     */
     if (success) {
       secrets_list_response.__set_transactionId(root["transactionId"].asString());
       secrets_list_response.__set_deviceId(root["deviceId"].asString());
@@ -745,7 +607,6 @@ namespace mitro_api {
 
     LOG(INFO) << endpoint << " " << request_string;
     PostRequest(endpoint, request_wrapper, request_callback);
-    //MakeRequest("/GetSecret", request, request_callback);
   }
 
   void MitroApiClient::OnGetSecret(const GetSecretCallback& callback,
@@ -762,11 +623,6 @@ namespace mitro_api {
     }
 
     // Parse GetSecretResponse
-    /*
-     1:string transactionId;
-     2:string deviceId;
-     3:Secret secret;
-     */
     if (success) {
       secret_response.__set_transactionId(root["transactionId"].asString());
       secret_response.__set_deviceId(root["deviceId"].asString());
