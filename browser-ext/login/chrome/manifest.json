@@ -2,7 +2,7 @@
   "name": "Vault",
   "short_name": "Vault",
   "manifest_version": 2,
-  "version": "2016.10.11",
+  "version": "2016.10.19",
   "background": {
     "scripts": []
   },
