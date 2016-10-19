@@ -35,7 +35,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SMP-4c-3g6">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" image="mitro_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Wtj-yE-K38">
+                                    <imageView userInteractionEnabled="NO" contentMode="center" image="vault_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Wtj-yE-K38">
                                         <rect key="frame" x="0.0" y="20" width="320" height="63"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -51,7 +51,7 @@
                                     <constraint firstItem="Wtj-yE-K38" firstAttribute="trailing" secondItem="SMP-4c-3g6" secondAttribute="trailing" id="i2z-eF-6Bi"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="rocket.png" translatesAutoresizingMaskIntoConstraints="NO" id="AaE-Up-zOO">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" image="mountain.png" translatesAutoresizingMaskIntoConstraints="NO" id="AaE-Up-zOO">
                                 <rect key="frame" x="0.0" y="268" width="320" height="212"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="14e-F0-MYI" customClass="MitroTextField">
@@ -95,7 +95,7 @@
                                     <action selector="onSignInTouched:" destination="fhb-q5-g63" eventType="touchUpInside" id="36L-bS-21M"/>
                                 </connections>
                             </button>
-                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" offImage="mitro_icon_58.png" translatesAutoresizingMaskIntoConstraints="NO" id="BbS-EZ-xe4">
+                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BbS-EZ-xe4">
                                 <rect key="frame" x="24" y="216" width="51" height="31"/>
                                 <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="onTintColor" red="0.2666666667" green="0.66274509800000003" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -119,7 +119,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.96470588235294119" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="jPR-lK-1Pt" firstAttribute="trailing" secondItem="fMo-CI-K6N" secondAttribute="trailing" id="1cS-D0-Xel"/>
                             <constraint firstItem="a0g-ih-4Ad" firstAttribute="trailing" secondItem="fMo-CI-K6N" secondAttribute="trailing" id="44n-BD-ZcA"/>
@@ -228,7 +228,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="rocket.png" translatesAutoresizingMaskIntoConstraints="NO" id="TGn-he-fBL">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" image="mountain.png" translatesAutoresizingMaskIntoConstraints="NO" id="TGn-he-fBL">
                                 <rect key="frame" x="0.0" y="268" width="320" height="212"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Username:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ve-gc-YeZ">
@@ -345,7 +345,7 @@
                                 <rect key="frame" x="112" y="322" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" red="0.96470588235294119" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="G7j-0f-5qG" firstAttribute="top" secondItem="Q1m-mM-LhN" secondAttribute="bottom" constant="8" id="2J9-BH-sw9"/>
                             <constraint firstItem="9ve-gc-YeZ" firstAttribute="top" secondItem="iAS-6x-N39" secondAttribute="bottom" constant="12" id="76k-Hy-4jv"/>
@@ -403,7 +403,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="rocket.png" translatesAutoresizingMaskIntoConstraints="NO" id="fvi-n2-wXR">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" image="mountain.png" translatesAutoresizingMaskIntoConstraints="NO" id="fvi-n2-wXR">
                                 <rect key="frame" x="0.0" y="268" width="320" height="212"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xi1-VN-Zo6" customClass="MitroButton">
@@ -456,7 +456,7 @@
                                 <rect key="frame" x="150" y="218" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" red="0.96470588239999999" green="0.97254901959999995" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="SNN-pH-5VE" firstAttribute="leading" secondItem="RTe-bg-7Ef" secondAttribute="leading" id="9HV-oU-k5J"/>
                             <constraint firstItem="SNN-pH-5VE" firstAttribute="top" secondItem="RTe-bg-7Ef" secondAttribute="bottom" constant="2" id="Bxg-86-Un7"/>
@@ -487,9 +487,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="mitro_icon_58.png" width="58" height="58"/>
-        <image name="mitro_logo.png" width="120" height="39"/>
-        <image name="rocket.png" width="320" height="212"/>
+        <image name="mountain.png" width="320" height="220"/>
+        <image name="vault_logo.png" width="120" height="31"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

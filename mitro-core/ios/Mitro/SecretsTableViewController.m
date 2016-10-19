@@ -36,7 +36,7 @@
 
     self.navigationController.navigationBar.tintColor = [UIColor tintColor];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title_logo"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"vault_logo"]];
     self.navigationItem.titleView = imageView;
 
     UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Log out" style:UIBarButtonItemStylePlain target:self action:@selector(onLogoutButton)];

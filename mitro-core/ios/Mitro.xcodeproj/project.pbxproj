@@ -7,17 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4012E52617E65F2000B1F252 /* mitro_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4012E52417E65F2000B1F252 /* mitro_logo.png */; };
-		4012E52717E65F2000B1F252 /* mitro_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4012E52517E65F2000B1F252 /* mitro_logo@2x.png */; };
 		4012E52A17E65F8400B1F252 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4012E52917E65F8400B1F252 /* LoginViewController.m */; };
 		4012E52D17E660E300B1F252 /* MitroTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4012E52C17E660E300B1F252 /* MitroTextField.m */; };
 		4012E53017E66BE300B1F252 /* MitroColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4012E52F17E66BE300B1F252 /* MitroColor.m */; };
-		4012E53317E696F800B1F252 /* rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = 4012E53117E696F800B1F252 /* rocket.png */; };
-		4012E53417E696F800B1F252 /* rocket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4012E53217E696F800B1F252 /* rocket@2x.png */; };
 		4012E53717E69C4B00B1F252 /* MitroButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4012E53617E69C4A00B1F252 /* MitroButton.m */; };
 		4012E53917E6A36E00B1F252 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4012E53817E6A36E00B1F252 /* QuartzCore.framework */; };
-		4012E53D17E7777800B1F252 /* title_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4012E53C17E7777800B1F252 /* title_logo.png */; };
-		4012E53F17E779E200B1F252 /* title_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4012E53E17E779E200B1F252 /* title_logo@2x.png */; };
 		4012E54217E79F8200B1F252 /* SecretsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4012E54117E79F8100B1F252 /* SecretsTableViewCell.m */; };
 		401A3A1C18A39C2A00347B90 /* ProgressOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 401A3A1B18A39C2A00347B90 /* ProgressOverlayView.m */; };
 		401D5347180D074B00B78549 /* MitroTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 401D5346180D074B00B78549 /* MitroTextView.m */; };
@@ -29,8 +23,6 @@
 		4044870F17FDB1F500F0F76E /* libchromiumbase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4044870E17FDB1F500F0F76E /* libchromiumbase.a */; };
 		4044871317FDB37B00F0F76E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4044871217FDB37B00F0F76E /* CoreText.framework */; };
 		40534BBC180E4C7B00F13036 /* libFlurry_4.2.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40534BBB180E4C7B00F13036 /* libFlurry_4.2.4.a */; };
-		407CA40F17DA745D0098D080 /* rocket_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 407CA40E17DA745D0098D080 /* rocket_light.png */; };
-		407CA41117DB20D40098D080 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 407CA41017DB20D40098D080 /* Default-568h@2x.png */; };
 		407CA41417DB25300098D080 /* SecretDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 407CA41317DB25300098D080 /* SecretDetailViewController.m */; };
 		4083DD0118A3C7DB00B63D77 /* search_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4083DD0018A3C7DB00B63D77 /* search_background.png */; };
 		4095337F1817AE3D003F9FE9 /* OpenInChromeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4095337E1817AE3D003F9FE9 /* OpenInChromeController.m */; };
@@ -46,9 +38,13 @@
 		40D1F9AD1808526A000ABBE5 /* SecretManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 40D1F9AC1808526A000ABBE5 /* SecretManager.mm */; };
 		40D1F9B0180CCB37000ABBE5 /* NoteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D1F9AF180CCB37000ABBE5 /* NoteDetailViewController.m */; };
 		40D1F9B3180CCB6E000ABBE5 /* PasswordDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D1F9B2180CCB6E000ABBE5 /* PasswordDetailViewController.m */; };
-		40EC7B7117E8F52400EE3900 /* mitro_icon_58.png in Resources */ = {isa = PBXBuildFile; fileRef = 40EC7B6E17E8F52400EE3900 /* mitro_icon_58.png */; };
-		40EC7B7217E8F52400EE3900 /* mitro_icon_80.png in Resources */ = {isa = PBXBuildFile; fileRef = 40EC7B6F17E8F52400EE3900 /* mitro_icon_80.png */; };
-		40EC7B7317E8F52400EE3900 /* mitro_icon_120.png in Resources */ = {isa = PBXBuildFile; fileRef = 40EC7B7017E8F52400EE3900 /* mitro_icon_120.png */; };
+		7F44DEA21DB67ACC00543158 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEA11DB67ACC00543158 /* Images.xcassets */; };
+		7F44DEA41DB67EB900543158 /* mountain.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEA31DB67EB900543158 /* mountain.png */; };
+		7F44DEA61DB680A200543158 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEA51DB680A200543158 /* LaunchScreen.xib */; };
+		7F44DEA81DB6812200543158 /* mountain@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEA71DB6812200543158 /* mountain@2x.png */; };
+		7F44DEAC1DB6843800543158 /* vault_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEA91DB6843800543158 /* vault_logo.png */; };
+		7F44DEAD1DB6843800543158 /* vault_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEAA1DB6843800543158 /* vault_logo@2x.png */; };
+		7F44DEAE1DB6843800543158 /* vault_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEAB1DB6843800543158 /* vault_logo@3x.png */; };
 		7FF570721DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF570701DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp */; };
 		7FF5707E1DB018370059A7E3 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF5707D1DB018370059A7E3 /* jsoncpp.cpp */; };
 		990F279417BAAE1000435734 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 999ACDCA17BA893A00649AF6 /* MainStoryboard.storyboard */; };
@@ -79,21 +75,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4012E52417E65F2000B1F252 /* mitro_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mitro_logo.png; path = Images/mitro_logo.png; sourceTree = "<group>"; };
-		4012E52517E65F2000B1F252 /* mitro_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mitro_logo@2x.png"; path = "Images/mitro_logo@2x.png"; sourceTree = "<group>"; };
 		4012E52817E65F8400B1F252 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		4012E52917E65F8400B1F252 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		4012E52B17E660E300B1F252 /* MitroTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MitroTextField.h; sourceTree = "<group>"; };
 		4012E52C17E660E300B1F252 /* MitroTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MitroTextField.m; sourceTree = "<group>"; };
 		4012E52E17E66BE300B1F252 /* MitroColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MitroColor.h; sourceTree = "<group>"; };
 		4012E52F17E66BE300B1F252 /* MitroColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MitroColor.m; sourceTree = "<group>"; };
-		4012E53117E696F800B1F252 /* rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rocket.png; path = Images/rocket.png; sourceTree = "<group>"; };
-		4012E53217E696F800B1F252 /* rocket@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rocket@2x.png"; path = "Images/rocket@2x.png"; sourceTree = "<group>"; };
 		4012E53517E69C4A00B1F252 /* MitroButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MitroButton.h; sourceTree = "<group>"; };
 		4012E53617E69C4A00B1F252 /* MitroButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MitroButton.m; sourceTree = "<group>"; };
 		4012E53817E6A36E00B1F252 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		4012E53C17E7777800B1F252 /* title_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = title_logo.png; path = Images/title_logo.png; sourceTree = "<group>"; };
-		4012E53E17E779E200B1F252 /* title_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "title_logo@2x.png"; path = "Images/title_logo@2x.png"; sourceTree = "<group>"; };
 		4012E54017E79F8100B1F252 /* SecretsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecretsTableViewCell.h; sourceTree = "<group>"; };
 		4012E54117E79F8100B1F252 /* SecretsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecretsTableViewCell.m; sourceTree = "<group>"; };
 		401A3A1A18A39C2900347B90 /* ProgressOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressOverlayView.h; sourceTree = "<group>"; };
@@ -112,8 +102,6 @@
 		4044870E17FDB1F500F0F76E /* libchromiumbase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libchromiumbase.a; sourceTree = "<group>"; };
 		4044871217FDB37B00F0F76E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		40534BBB180E4C7B00F13036 /* libFlurry_4.2.4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.2.4.a; path = Flurry/libFlurry_4.2.4.a; sourceTree = "<group>"; };
-		407CA40E17DA745D0098D080 /* rocket_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rocket_light.png; path = Images/rocket_light.png; sourceTree = "<group>"; };
-		407CA41017DB20D40098D080 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		407CA41217DB25300098D080 /* SecretDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecretDetailViewController.h; sourceTree = "<group>"; };
 		407CA41317DB25300098D080 /* SecretDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecretDetailViewController.m; sourceTree = "<group>"; };
 		4083DD0018A3C7DB00B63D77 /* search_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = search_background.png; path = Images/search_background.png; sourceTree = "<group>"; };
@@ -137,18 +125,22 @@
 		40D1F9AF180CCB37000ABBE5 /* NoteDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteDetailViewController.m; sourceTree = "<group>"; };
 		40D1F9B1180CCB6E000ABBE5 /* PasswordDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordDetailViewController.h; sourceTree = "<group>"; };
 		40D1F9B2180CCB6E000ABBE5 /* PasswordDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordDetailViewController.m; sourceTree = "<group>"; };
-		40EC7B6E17E8F52400EE3900 /* mitro_icon_58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mitro_icon_58.png; path = Images/mitro_icon_58.png; sourceTree = "<group>"; };
-		40EC7B6F17E8F52400EE3900 /* mitro_icon_80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mitro_icon_80.png; path = Images/mitro_icon_80.png; sourceTree = "<group>"; };
-		40EC7B7017E8F52400EE3900 /* mitro_icon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mitro_icon_120.png; path = Images/mitro_icon_120.png; sourceTree = "<group>"; };
 		40F1C99517DB37D600A38CE3 /* Mitro-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Mitro-Prefix.pch"; sourceTree = "<group>"; };
 		40F1C99617DB387800A38CE3 /* Mitro_Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mitro_Tests.h; sourceTree = "<group>"; };
 		40F1C99717DB387800A38CE3 /* Mitro_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mitro_Tests.m; sourceTree = "<group>"; };
+		7F44DEA11DB67ACC00543158 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7F44DEA31DB67EB900543158 /* mountain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mountain.png; path = Images/mountain.png; sourceTree = "<group>"; };
+		7F44DEA51DB680A200543158 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		7F44DEA71DB6812200543158 /* mountain@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mountain@2x.png"; path = "Images/mountain@2x.png"; sourceTree = "<group>"; };
+		7F44DEA91DB6843800543158 /* vault_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vault_logo.png; path = Images/vault_logo.png; sourceTree = "<group>"; };
+		7F44DEAA1DB6843800543158 /* vault_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vault_logo@2x.png"; path = "Images/vault_logo@2x.png"; sourceTree = "<group>"; };
+		7F44DEAB1DB6843800543158 /* vault_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vault_logo@3x.png"; path = "Images/vault_logo@3x.png"; sourceTree = "<group>"; };
 		7FF570701DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TSimpleJSONProtocol.cpp; sourceTree = "<group>"; };
 		7FF570711DAFDE040059A7E3 /* TSimpleJSONProtocol.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TSimpleJSONProtocol.hpp; sourceTree = "<group>"; };
 		7FF5707B1DB018370059A7E3 /* json-forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "json-forwards.h"; sourceTree = "<group>"; };
 		7FF5707C1DB018370059A7E3 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
 		7FF5707D1DB018370059A7E3 /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsoncpp.cpp; sourceTree = "<group>"; };
-		9954B61917AADAEC0084C486 /* Mitro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mitro.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9954B61917AADAEC0084C486 /* Vault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9954B61D17AADAEC0084C486 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9954B61F17AADAEC0084C486 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9954B62117AADAEC0084C486 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -222,10 +214,10 @@
 		407CA40C17DA731A0098D080 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				407CA41017DB20D40098D080 /* Default-568h@2x.png */,
 				999ACDC717BA890600649AF6 /* info.plist */,
 				999ACDD517BA8BE500649AF6 /* main.m */,
 				40F1C99517DB37D600A38CE3 /* Mitro-Prefix.pch */,
+				7F44DEA51DB680A200543158 /* LaunchScreen.xib */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -233,17 +225,12 @@
 		407CA40D17DA73DE0098D080 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7F44DEA91DB6843800543158 /* vault_logo.png */,
+				7F44DEAA1DB6843800543158 /* vault_logo@2x.png */,
+				7F44DEAB1DB6843800543158 /* vault_logo@3x.png */,
+				7F44DEA71DB6812200543158 /* mountain@2x.png */,
+				7F44DEA31DB67EB900543158 /* mountain.png */,
 				4083DD0018A3C7DB00B63D77 /* search_background.png */,
-				40EC7B6E17E8F52400EE3900 /* mitro_icon_58.png */,
-				40EC7B6F17E8F52400EE3900 /* mitro_icon_80.png */,
-				40EC7B7017E8F52400EE3900 /* mitro_icon_120.png */,
-				4012E52417E65F2000B1F252 /* mitro_logo.png */,
-				4012E52517E65F2000B1F252 /* mitro_logo@2x.png */,
-				4012E53117E696F800B1F252 /* rocket.png */,
-				4012E53217E696F800B1F252 /* rocket@2x.png */,
-				407CA40E17DA745D0098D080 /* rocket_light.png */,
-				4012E53C17E7777800B1F252 /* title_logo.png */,
-				4012E53E17E779E200B1F252 /* title_logo@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -315,6 +302,7 @@
 				40C8352018064EF90087C168 /* SessionManager.h */,
 				40C8352118064EF90087C168 /* SessionManager.mm */,
 				407CA40D17DA73DE0098D080 /* Images */,
+				7F44DEA11DB67ACC00543158 /* Images.xcassets */,
 				407CA40C17DA731A0098D080 /* Supporting Files */,
 			);
 			path = Mitro;
@@ -335,7 +323,7 @@
 		9954B61A17AADAEC0084C486 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9954B61917AADAEC0084C486 /* Mitro.app */,
+				9954B61917AADAEC0084C486 /* Vault.app */,
 				9954B64317AADAEC0084C486 /* MitroTests.octest */,
 			);
 			name = Products;
@@ -400,7 +388,7 @@
 			);
 			name = Mitro;
 			productName = Mitro;
-			productReference = 9954B61917AADAEC0084C486 /* Mitro.app */;
+			productReference = 9954B61917AADAEC0084C486 /* Vault.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9954B64217AADAEC0084C486 /* MitroTests */ = {
@@ -433,7 +421,7 @@
 				ORGANIZATIONNAME = "Lectorius, Inc.";
 				TargetAttributes = {
 					9954B61817AADAEC0084C486 = {
-						DevelopmentTeam = V283NDQUJA;
+						DevelopmentTeam = XZJ7PQBYC8;
 					};
 				};
 			};
@@ -461,20 +449,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				991E9BC717BABD9B001CB6DA /* SecretsTableViewController.m in Resources */,
+				7F44DEA21DB67ACC00543158 /* Images.xcassets in Resources */,
+				7F44DEAE1DB6843800543158 /* vault_logo@3x.png in Resources */,
 				990F27EE17BABAFD00435734 /* SecretsTableViewController.h in Resources */,
+				7F44DEA41DB67EB900543158 /* mountain.png in Resources */,
 				990F279417BAAE1000435734 /* MainStoryboard.storyboard in Resources */,
-				40EC7B7117E8F52400EE3900 /* mitro_icon_58.png in Resources */,
-				40EC7B7217E8F52400EE3900 /* mitro_icon_80.png in Resources */,
-				407CA40F17DA745D0098D080 /* rocket_light.png in Resources */,
-				407CA41117DB20D40098D080 /* Default-568h@2x.png in Resources */,
-				4012E52617E65F2000B1F252 /* mitro_logo.png in Resources */,
-				4012E52717E65F2000B1F252 /* mitro_logo@2x.png in Resources */,
-				4012E53317E696F800B1F252 /* rocket.png in Resources */,
-				40EC7B7317E8F52400EE3900 /* mitro_icon_120.png in Resources */,
-				4012E53417E696F800B1F252 /* rocket@2x.png in Resources */,
+				7F44DEA81DB6812200543158 /* mountain@2x.png in Resources */,
 				4083DD0118A3C7DB00B63D77 /* search_background.png in Resources */,
-				4012E53D17E7777800B1F252 /* title_logo.png in Resources */,
-				4012E53F17E779E200B1F252 /* title_logo@2x.png in Resources */,
+				7F44DEAC1DB6843800543158 /* vault_logo.png in Resources */,
+				7F44DEA61DB680A200543158 /* LaunchScreen.xib in Resources */,
+				7F44DEAD1DB6843800543158 /* vault_logo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,14 +600,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mitro/Mitro-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Mitro/info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/Flurry";
 				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"$(inherited)",
@@ -635,7 +625,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.vaultapp.Vault;
-				PRODUCT_NAME = Mitro;
+				PRODUCT_NAME = Vault;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/build/iPhoneOS9.3/include";
@@ -648,14 +638,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mitro/Mitro-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Mitro/info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/Flurry",
 					"$(PROJECT_DIR)/build/src/poco-1.7.5/lib/iPhoneSimulator/i686",
@@ -669,7 +665,7 @@
 					"$(SRCROOT)/build/iPhoneSimulator9.3/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.vaultapp.Vault;
-				PRODUCT_NAME = Mitro;
+				PRODUCT_NAME = Vault;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/build/iPhoneOS9.3/include";
