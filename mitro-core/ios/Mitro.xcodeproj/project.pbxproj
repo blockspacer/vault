@@ -51,8 +51,6 @@
 		7FF570721DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF570701DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp */; };
 		7FF5707E1DB018370059A7E3 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF5707D1DB018370059A7E3 /* jsoncpp.cpp */; };
 		990F279417BAAE1000435734 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 999ACDCA17BA893A00649AF6 /* MainStoryboard.storyboard */; };
-		990F27EE17BABAFD00435734 /* SecretsTableViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = 99AA6A9C17B98B96005B3496 /* SecretsTableViewController.h */; };
-		991E9BC717BABD9B001CB6DA /* SecretsTableViewController.m in Resources */ = {isa = PBXBuildFile; fileRef = 99AA6A9D17B98B96005B3496 /* SecretsTableViewController.m */; };
 		9954B61E17AADAEC0084C486 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9954B61D17AADAEC0084C486 /* UIKit.framework */; };
 		9954B62017AADAEC0084C486 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9954B61F17AADAEC0084C486 /* Foundation.framework */; };
 		9954B62217AADAEC0084C486 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9954B62117AADAEC0084C486 /* CoreGraphics.framework */; };
@@ -506,10 +504,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				991E9BC717BABD9B001CB6DA /* SecretsTableViewController.m in Resources */,
 				7F44DEA21DB67ACC00543158 /* Images.xcassets in Resources */,
 				7F44DEAE1DB6843800543158 /* vault_logo@3x.png in Resources */,
-				990F27EE17BABAFD00435734 /* SecretsTableViewController.h in Resources */,
 				7F44DEA41DB67EB900543158 /* mountain.png in Resources */,
 				990F279417BAAE1000435734 /* MainStoryboard.storyboard in Resources */,
 				7F44DEA81DB6812200543158 /* mountain@2x.png in Resources */,
