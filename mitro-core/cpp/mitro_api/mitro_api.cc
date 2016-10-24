@@ -81,7 +81,6 @@ namespace mitro_api {
     LOG(INFO) << "request: " << data;
 
     string url = net::BuildUri(kProtocol, GetHost(), kApiBasePath + endpoint);
-    LOG(INFO) << "url: " << url;
     HttpHeaders headers;
     http_client_->Post(url, headers, data, callback);
   }
@@ -190,7 +189,7 @@ namespace mitro_api {
                                          bool save_private_key,
                                          const LoginCallback& callback,
                                          const HttpResponse& response) {
-    LOG(INFO) << "response: " << response.GetBody();
+    //LOG(INFO) << "response: " << response.GetBody();
 
     MitroApiError error;
     GetMyPrivateKeyResponse private_key_response;
@@ -510,7 +509,7 @@ namespace mitro_api {
 
   void MitroApiClient::OnGetSecretsList(const GetSecretsListCallback& callback,
                                         const HttpResponse& response) {
-    LOG(INFO) << "response: " << response.GetBody();
+    //LOG(INFO) << "response: " << response.GetBody();
 
     MitroApiError error;
     ListMySecretsAndGroupKeysResponse secrets_list_response;
@@ -555,7 +554,6 @@ namespace mitro_api {
         secrets_list_response.autocompleteUsers.push_back(itr->asString());
         secrets_list_response.__isset.autocompleteUsers = true;
       }
-      LOG(INFO) << "parsed secrets --> " << std::endl;
       secrets_list_response.printTo(std::cout);
     }
 
@@ -635,9 +633,7 @@ namespace mitro_api {
       return;
     }
 
-    LOG(INFO) << "OnGetSecret: ";
     secret_response.secret.printTo(std::cout);
-    LOG(INFO) << "done" << std::endl;
     callback.Run(secret_response.secret, NULL);
   }
 
@@ -733,7 +729,6 @@ namespace mitro_api {
     GetDecryptionKeyForSecret(*secret, groups, error);
 
     if (decryption_key == NULL) {
-      LOG(INFO) << "NO DECRYPTION KEY!!!" << std::endl;
       // Error message set inside of GetDecryptionKeyForSecret.
       return false;
     }
