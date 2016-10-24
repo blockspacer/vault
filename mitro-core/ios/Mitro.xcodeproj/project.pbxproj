@@ -476,10 +476,10 @@
 			attributes = {
 				LastTestingUpgradeCheck = 0730;
 				LastUpgradeCheck = 0730;
-				ORGANIZATIONNAME = "Lectorius, Inc.";
+				ORGANIZATIONNAME = "Aquarious, Inc.";
 				TargetAttributes = {
 					9954B61817AADAEC0084C486 = {
-						DevelopmentTeam = XZJ7PQBYC8;
+						DevelopmentTeam = TF6UXUMP3V;
 					};
 				};
 			};
