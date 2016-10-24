@@ -33,6 +33,7 @@ if [ ! -e ${KEYCZAR_SRC_DIR} ]; then
   pushd ${KEYZAR_RELEASE_DIR}
   echo "pushd to ${KEYZAR_RELEASE_DIR}"
   patch --verbose -p1 < "${PATCH_DIR}/keyczar-ios.patch"
+  patch --verbose -p1 < "${PATCH_DIR}/keyczar-arm64.patch"
   popd
 fi
 

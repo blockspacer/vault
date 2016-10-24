@@ -22,7 +22,7 @@ for PLATFORM in ${PLATFORMS}; do
   if [ "${PLATFORM}" == "iPhoneSimulator" ]; then
     ARCHS="i386"
   else
-    ARCHS="armv7 armv7s"
+    ARCHS="arm64 armv7 armv7s"
   fi
 
   for ARCH in ${ARCHS}; do

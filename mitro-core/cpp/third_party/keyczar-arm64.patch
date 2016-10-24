@@ -1,0 +1,30 @@
+diff --git a/src/keyczar-cpp/src/keyczar/base/build_config.h b/src/keyczar-cpp/src/keyczar/base/build_config.h
+index 62616cd..6dd9d6e 100644
+--- keyczar/cpp/src/keyczar/base/build_config.h
++++ keyczar/cpp/src/keyczar/base/build_config.h
+@@ -66,6 +66,10 @@
+ #define ARCH_CPU_ARM_FAMILY 1
+ #define ARCH_CPU_ARMEL 1
+ #define ARCH_CPU_32_BITS 1
++#elif defined(__aarch64__)
++#define ARCH_CPU_ARM_FAMILY 1
++#define ARCH_CPU_ARMEL 1
++#define ARCH_CPU_64_BITS 1
+ #else
+ #error Please add support for your architecture in keyczar/base/build_config.h
+ #endif
+diff --git a/src/keyczar-cpp/src/main.scons b/src/keyczar-cpp/src/main.scons
+index 05d335a..45aef4d 100644
+--- keyczar/cpp/src/main.scons
++++ keyczar/cpp/src/main.scons
+@@ -9,7 +9,8 @@ AddOption('--compat',
+           action="store_true",
+           help='Maintains compatibility with Keyczar 0.6b')
+ 
+-
++num_cpu = int(os.environ.get('NUM_CPU', 2))
++SetOption('num_jobs', num_cpu)
+ 
+ #### Creates a base environment to describe what is common between platforms.
+ base_env = Environment()
+2.6.0
