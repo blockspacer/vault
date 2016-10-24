@@ -78,23 +78,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0g-ih-4Ad" customClass="MitroButton">
-                                <rect key="frame" x="24" y="234" width="272" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="s19-or-KYG"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
-                                <state key="normal" title="SIGN IN">
-                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onSignInTouched:" destination="fhb-q5-g63" eventType="touchUpInside" id="36L-bS-21M"/>
-                                </connections>
-                            </button>
                             <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BbS-EZ-xe4">
                                 <rect key="frame" x="24" y="216" width="51" height="31"/>
                                 <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -118,6 +101,23 @@
                                 <color key="textColor" red="0.30196078430000001" green="0.34901960780000002" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0g-ih-4Ad" customClass="MitroButton">
+                                <rect key="frame" x="24" y="234" width="272" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="s19-or-KYG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                <state key="normal" title="SIGN IN">
+                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onSignInTouched:" destination="fhb-q5-g63" eventType="touchUpInside" id="36L-bS-21M"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -233,10 +233,9 @@
                                 <rect key="frame" x="0.0" y="260" width="320" height="220"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Username:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ve-gc-YeZ">
-                                <rect key="frame" x="24" y="134" width="87" height="21"/>
+                                <rect key="frame" x="24" y="134" width="272" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Ko5-3x-aSL"/>
-                                    <constraint firstAttribute="width" constant="87" id="i3T-3d-1h5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.30196078431372547" green="0.34901960784313724" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
@@ -245,7 +244,6 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O0g-hF-s2T" customClass="MitroTextField">
                                 <rect key="frame" x="24" y="155" width="272" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="272" id="Gzx-hD-0rI"/>
                                     <constraint firstAttribute="height" constant="36" id="Rkb-mG-xKQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -349,15 +347,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="G7j-0f-5qG" firstAttribute="top" secondItem="Q1m-mM-LhN" secondAttribute="bottom" constant="8" id="2J9-BH-sw9"/>
+                            <constraint firstItem="9ve-gc-YeZ" firstAttribute="trailing" secondItem="AQJ-ld-18Y" secondAttribute="trailing" id="6K2-su-Vwq"/>
                             <constraint firstItem="9ve-gc-YeZ" firstAttribute="top" secondItem="iAS-6x-N39" secondAttribute="bottom" constant="12" id="76k-Hy-4jv"/>
                             <constraint firstAttribute="trailing" secondItem="TGn-he-fBL" secondAttribute="trailing" id="8Ic-tU-GDO"/>
+                            <constraint firstItem="O0g-hF-s2T" firstAttribute="trailing" secondItem="iAS-6x-N39" secondAttribute="trailing" id="C9p-SE-snG"/>
                             <constraint firstItem="Dsj-Cx-HWN" firstAttribute="top" secondItem="1za-Q8-6V0" secondAttribute="bottom" constant="12" id="ET6-DC-xhi"/>
                             <constraint firstItem="Q1m-mM-LhN" firstAttribute="leading" secondItem="AQJ-ld-18Y" secondAttribute="leading" id="GFk-p4-bbh"/>
                             <constraint firstItem="iAS-6x-N39" firstAttribute="trailing" secondItem="Dsj-Cx-HWN" secondAttribute="trailing" id="HEr-Mn-ZOp"/>
                             <constraint firstItem="1za-Q8-6V0" firstAttribute="top" secondItem="O0g-hF-s2T" secondAttribute="bottom" constant="8" id="ICL-j6-68y"/>
                             <constraint firstItem="O0g-hF-s2T" firstAttribute="leading" secondItem="9ve-gc-YeZ" secondAttribute="leading" id="QKu-rH-FWC"/>
+                            <constraint firstAttribute="trailing" secondItem="iAS-6x-N39" secondAttribute="trailing" constant="24" id="Uaf-Sg-00u"/>
                             <constraint firstItem="TGn-he-fBL" firstAttribute="leading" secondItem="ud7-UZ-zva" secondAttribute="leading" id="Ucw-t1-C0k"/>
                             <constraint firstItem="iAS-6x-N39" firstAttribute="top" secondItem="Una-5v-O7o" secondAttribute="bottom" constant="40" id="UnF-S4-6W8"/>
+                            <constraint firstItem="iAS-6x-N39" firstAttribute="leading" secondItem="ud7-UZ-zva" secondAttribute="leading" constant="24" id="Vme-R0-epw"/>
                             <constraint firstItem="TGn-he-fBL" firstAttribute="bottom" secondItem="ud7-UZ-zva" secondAttribute="bottom" id="Wtg-8E-tSf"/>
                             <constraint firstItem="G7j-0f-5qG" firstAttribute="leading" secondItem="SET-vW-RDg" secondAttribute="trailing" constant="8" id="XFm-Mt-wTO"/>
                             <constraint firstItem="SET-vW-RDg" firstAttribute="top" secondItem="Q1m-mM-LhN" secondAttribute="bottom" constant="8" id="XGQ-OT-m0z"/>
@@ -466,6 +468,7 @@
                             <constraint firstItem="RTe-bg-7Ef" firstAttribute="leading" secondItem="1Kd-Gv-BHi" secondAttribute="leading" constant="24" id="Sct-kk-GNq"/>
                             <constraint firstAttribute="bottom" secondItem="fvi-n2-wXR" secondAttribute="bottom" id="UTc-kJ-cY8"/>
                             <constraint firstItem="fvi-n2-wXR" firstAttribute="centerX" secondItem="SNN-pH-5VE" secondAttribute="centerX" id="Xsp-iZ-UP5"/>
+                            <constraint firstAttribute="trailing" secondItem="RTe-bg-7Ef" secondAttribute="trailing" constant="24" id="Yxp-8a-Us0"/>
                             <constraint firstItem="RTe-bg-7Ef" firstAttribute="leading" secondItem="xi1-VN-Zo6" secondAttribute="leading" id="bQC-A9-QXr"/>
                             <constraint firstItem="RTe-bg-7Ef" firstAttribute="trailing" secondItem="lb0-Kn-3A3" secondAttribute="trailing" id="cC3-bs-DMU"/>
                             <constraint firstItem="fvi-n2-wXR" firstAttribute="leading" secondItem="1Kd-Gv-BHi" secondAttribute="leading" id="esK-AS-rto"/>
