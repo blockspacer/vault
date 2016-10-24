@@ -686,7 +686,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = xyz.vaultapp.Vault;
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.vaultapp.ios.Vault;
 				PRODUCT_NAME = Vault;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -728,7 +728,7 @@
 					"$(SRCROOT)/build/iPhoneSimulator9.3/lib",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = xyz.vaultapp.Vault;
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.vaultapp.ios.Vault;
 				PRODUCT_NAME = Vault;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
