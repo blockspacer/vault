@@ -51,8 +51,8 @@
                                     <constraint firstItem="Wtj-yE-K38" firstAttribute="trailing" secondItem="SMP-4c-3g6" secondAttribute="trailing" id="i2z-eF-6Bi"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" image="mountain.png" translatesAutoresizingMaskIntoConstraints="NO" id="AaE-Up-zOO">
-                                <rect key="frame" x="0.0" y="268" width="320" height="212"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="mountain.png" translatesAutoresizingMaskIntoConstraints="NO" id="AaE-Up-zOO">
+                                <rect key="frame" x="0.0" y="260" width="320" height="220"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="14e-F0-MYI" customClass="MitroTextField">
                                 <rect key="frame" x="24" y="116" width="272" height="36"/>
@@ -72,8 +72,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                             </textField>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Code" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jPR-lK-1Pt" customClass="MitroTextField">
-                                <rect key="frame" x="24" y="172" width="272" height="36"/>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Code" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jPR-lK-1Pt" customClass="MitroTextField">
+                                <rect key="frame" x="24" y="178" width="272" height="30"/>
                                 <color key="textColor" red="0.89777938180000005" green="0.89777938180000005" blue="0.89777938180000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
@@ -141,6 +141,7 @@
                             <constraint firstItem="kwn-WA-3iN" firstAttribute="leading" secondItem="TY0-ht-sOP" secondAttribute="leading" constant="20" symbolic="YES" id="ZV2-CZ-mp6"/>
                             <constraint firstItem="UPN-MG-cHS" firstAttribute="top" secondItem="kwn-WA-3iN" secondAttribute="bottom" constant="60" id="Zhv-Yd-Rrn"/>
                             <constraint firstItem="jPR-lK-1Pt" firstAttribute="leading" secondItem="BbS-EZ-xe4" secondAttribute="leading" id="aK1-1Q-AVU"/>
+                            <constraint firstAttribute="trailing" secondItem="AaE-Up-zOO" secondAttribute="trailing" id="aW6-VE-DtY"/>
                             <constraint firstItem="kwn-WA-3iN" firstAttribute="top" secondItem="14e-F0-MYI" secondAttribute="top" constant="-24" id="dAF-1V-9qD"/>
                             <constraint firstAttribute="trailing" secondItem="UPN-MG-cHS" secondAttribute="trailing" constant="63" id="fLA-fn-dLM"/>
                             <constraint firstItem="SMP-4c-3g6" firstAttribute="leading" secondItem="TY0-ht-sOP" secondAttribute="leading" id="fk6-wr-cqY"/>
@@ -228,8 +229,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" image="mountain.png" translatesAutoresizingMaskIntoConstraints="NO" id="TGn-he-fBL">
-                                <rect key="frame" x="0.0" y="268" width="320" height="212"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="mountain.png" translatesAutoresizingMaskIntoConstraints="NO" id="TGn-he-fBL">
+                                <rect key="frame" x="0.0" y="260" width="320" height="220"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Username:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ve-gc-YeZ">
                                 <rect key="frame" x="24" y="134" width="87" height="21"/>
@@ -339,16 +340,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="g6L-r7-U9O" userLabel="View Activity Indicator">
-                                <rect key="frame" x="43" y="322" width="20" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                             </activityIndicatorView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="OLs-D7-YmV" userLabel="Copy Activity Indicator">
-                                <rect key="frame" x="112" y="322" width="20" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="G7j-0f-5qG" firstAttribute="top" secondItem="Q1m-mM-LhN" secondAttribute="bottom" constant="8" id="2J9-BH-sw9"/>
                             <constraint firstItem="9ve-gc-YeZ" firstAttribute="top" secondItem="iAS-6x-N39" secondAttribute="bottom" constant="12" id="76k-Hy-4jv"/>
+                            <constraint firstAttribute="trailing" secondItem="TGn-he-fBL" secondAttribute="trailing" id="8Ic-tU-GDO"/>
                             <constraint firstItem="Dsj-Cx-HWN" firstAttribute="top" secondItem="1za-Q8-6V0" secondAttribute="bottom" constant="12" id="ET6-DC-xhi"/>
                             <constraint firstItem="Q1m-mM-LhN" firstAttribute="leading" secondItem="AQJ-ld-18Y" secondAttribute="leading" id="GFk-p4-bbh"/>
                             <constraint firstItem="iAS-6x-N39" firstAttribute="trailing" secondItem="Dsj-Cx-HWN" secondAttribute="trailing" id="HEr-Mn-ZOp"/>
@@ -403,8 +405,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" image="mountain.png" translatesAutoresizingMaskIntoConstraints="NO" id="fvi-n2-wXR">
-                                <rect key="frame" x="0.0" y="268" width="320" height="212"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="mountain.png" translatesAutoresizingMaskIntoConstraints="NO" id="fvi-n2-wXR">
+                                <rect key="frame" x="0.0" y="260" width="320" height="220"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xi1-VN-Zo6" customClass="MitroButton">
                                 <rect key="frame" x="24" y="336" width="62" height="36"/>
@@ -453,11 +455,12 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ae6-6n-Pb0" userLabel="Note Activity Indicator">
-                                <rect key="frame" x="150" y="218" width="20" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="fvi-n2-wXR" secondAttribute="trailing" id="5iX-Gz-NqA"/>
                             <constraint firstItem="SNN-pH-5VE" firstAttribute="leading" secondItem="RTe-bg-7Ef" secondAttribute="leading" id="9HV-oU-k5J"/>
                             <constraint firstItem="SNN-pH-5VE" firstAttribute="top" secondItem="RTe-bg-7Ef" secondAttribute="bottom" constant="2" id="Bxg-86-Un7"/>
                             <constraint firstItem="RTe-bg-7Ef" firstAttribute="leading" secondItem="1Kd-Gv-BHi" secondAttribute="leading" constant="24" id="Sct-kk-GNq"/>
@@ -465,6 +468,7 @@
                             <constraint firstItem="fvi-n2-wXR" firstAttribute="centerX" secondItem="SNN-pH-5VE" secondAttribute="centerX" id="Xsp-iZ-UP5"/>
                             <constraint firstItem="RTe-bg-7Ef" firstAttribute="leading" secondItem="xi1-VN-Zo6" secondAttribute="leading" id="bQC-A9-QXr"/>
                             <constraint firstItem="RTe-bg-7Ef" firstAttribute="trailing" secondItem="lb0-Kn-3A3" secondAttribute="trailing" id="cC3-bs-DMU"/>
+                            <constraint firstItem="fvi-n2-wXR" firstAttribute="leading" secondItem="1Kd-Gv-BHi" secondAttribute="leading" id="esK-AS-rto"/>
                             <constraint firstItem="SNN-pH-5VE" firstAttribute="centerX" secondItem="1Kd-Gv-BHi" secondAttribute="centerX" id="gpI-KE-GzP"/>
                             <constraint firstItem="xi1-VN-Zo6" firstAttribute="top" secondItem="SNN-pH-5VE" secondAttribute="bottom" constant="8" id="ho9-XD-2QT"/>
                             <constraint firstItem="RTe-bg-7Ef" firstAttribute="top" secondItem="lb0-Kn-3A3" secondAttribute="bottom" constant="-1" id="sGI-NO-uA2"/>
