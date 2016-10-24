@@ -32,7 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [Flurry logAllPageViews:self.navigationController];
+    // TODO: switch to GA
+    //[Flurry logAllPageViews:self.navigationController];
 
     self.navigationController.navigationBar.tintColor = [UIColor tintColor];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];

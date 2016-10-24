@@ -22,7 +22,6 @@
 		4020C50218073F7B00E9A6DC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4020C50118073F7B00E9A6DC /* libz.dylib */; };
 		4044870F17FDB1F500F0F76E /* libchromiumbase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4044870E17FDB1F500F0F76E /* libchromiumbase.a */; };
 		4044871317FDB37B00F0F76E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4044871217FDB37B00F0F76E /* CoreText.framework */; };
-		40534BBC180E4C7B00F13036 /* libFlurry_4.2.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40534BBB180E4C7B00F13036 /* libFlurry_4.2.4.a */; };
 		407CA41417DB25300098D080 /* SecretDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 407CA41317DB25300098D080 /* SecretDetailViewController.m */; };
 		4083DD0118A3C7DB00B63D77 /* search_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4083DD0018A3C7DB00B63D77 /* search_background.png */; };
 		4095337F1817AE3D003F9FE9 /* OpenInChromeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4095337E1817AE3D003F9FE9 /* OpenInChromeController.m */; };
@@ -45,6 +44,10 @@
 		7F44DEAC1DB6843800543158 /* vault_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEA91DB6843800543158 /* vault_logo.png */; };
 		7F44DEAD1DB6843800543158 /* vault_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEAA1DB6843800543158 /* vault_logo@2x.png */; };
 		7F44DEAE1DB6843800543158 /* vault_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEAB1DB6843800543158 /* vault_logo@3x.png */; };
+		7FD6CD221DBE67C30088359B /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD6CCD41DBE67C30088359B /* libAdIdAccess.a */; };
+		7FD6CD231DBE67C30088359B /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD6CCD51DBE67C30088359B /* libGoogleAnalyticsServices.a */; };
+		7FD6CD2C1DBE69030088359B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD6CD2B1DBE69030088359B /* libsqlite3.tbd */; };
+		7FD6CD2E1DBE6A540088359B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD6CD2D1DBE6A530088359B /* CoreData.framework */; };
 		7FF570721DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF570701DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp */; };
 		7FF5707E1DB018370059A7E3 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF5707D1DB018370059A7E3 /* jsoncpp.cpp */; };
 		990F279417BAAE1000435734 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 999ACDCA17BA893A00649AF6 /* MainStoryboard.storyboard */; };
@@ -101,7 +104,6 @@
 		4044870917FDB00E00F0F76E /* libmitroapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmitroapi.a; sourceTree = "<group>"; };
 		4044870E17FDB1F500F0F76E /* libchromiumbase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libchromiumbase.a; sourceTree = "<group>"; };
 		4044871217FDB37B00F0F76E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		40534BBB180E4C7B00F13036 /* libFlurry_4.2.4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.2.4.a; path = Flurry/libFlurry_4.2.4.a; sourceTree = "<group>"; };
 		407CA41217DB25300098D080 /* SecretDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecretDetailViewController.h; sourceTree = "<group>"; };
 		407CA41317DB25300098D080 /* SecretDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecretDetailViewController.m; sourceTree = "<group>"; };
 		4083DD0018A3C7DB00B63D77 /* search_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = search_background.png; path = Images/search_background.png; sourceTree = "<group>"; };
@@ -135,6 +137,20 @@
 		7F44DEA91DB6843800543158 /* vault_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vault_logo.png; path = Images/vault_logo.png; sourceTree = "<group>"; };
 		7F44DEAA1DB6843800543158 /* vault_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vault_logo@2x.png"; path = "Images/vault_logo@2x.png"; sourceTree = "<group>"; };
 		7F44DEAB1DB6843800543158 /* vault_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vault_logo@3x.png"; path = "Images/vault_logo@3x.png"; sourceTree = "<group>"; };
+		7FD6CC881DBE67C30088359B /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		7FD6CC891DBE67C30088359B /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		7FD6CC8A1DBE67C30088359B /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		7FD6CC8B1DBE67C30088359B /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		7FD6CC8C1DBE67C30088359B /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		7FD6CC8D1DBE67C30088359B /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		7FD6CC8E1DBE67C30088359B /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		7FD6CC8F1DBE67C30088359B /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		7FD6CC901DBE67C30088359B /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		7FD6CC911DBE67C30088359B /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		7FD6CCD41DBE67C30088359B /* libAdIdAccess.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdIdAccess.a; sourceTree = "<group>"; };
+		7FD6CCD51DBE67C30088359B /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		7FD6CD2B1DBE69030088359B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		7FD6CD2D1DBE6A530088359B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		7FF570701DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TSimpleJSONProtocol.cpp; sourceTree = "<group>"; };
 		7FF570711DAFDE040059A7E3 /* TSimpleJSONProtocol.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TSimpleJSONProtocol.hpp; sourceTree = "<group>"; };
 		7FF5707B1DB018370059A7E3 /* json-forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "json-forwards.h"; sourceTree = "<group>"; };
@@ -163,7 +179,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40534BBC180E4C7B00F13036 /* libFlurry_4.2.4.a in Frameworks */,
+				7FD6CD2E1DBE6A540088359B /* CoreData.framework in Frameworks */,
+				7FD6CD2C1DBE69030088359B /* libsqlite3.tbd in Frameworks */,
 				40D1F9A218074374000ABBE5 /* libkeyczarjson.a in Frameworks */,
 				40D1F9A018074352000ABBE5 /* libhttpclient.a in Frameworks */,
 				40964F9C17FE02A30068E4A5 /* libchromiumjson.a in Frameworks */,
@@ -172,7 +189,9 @@
 				40964FA117FE0D270068E4A5 /* libkeyczar.a in Frameworks */,
 				40964F9A17FE02660068E4A5 /* libthrift.a in Frameworks */,
 				4044870F17FDB1F500F0F76E /* libchromiumbase.a in Frameworks */,
+				7FD6CD221DBE67C30088359B /* libAdIdAccess.a in Frameworks */,
 				4012E53917E6A36E00B1F252 /* QuartzCore.framework in Frameworks */,
+				7FD6CD231DBE67C30088359B /* libGoogleAnalyticsServices.a in Frameworks */,
 				99F90FE417B9750300A6A786 /* Security.framework in Frameworks */,
 				9954B61E17AADAEC0084C486 /* UIKit.framework in Frameworks */,
 				401D5349180E472800B78549 /* SystemConfiguration.framework in Frameworks */,
@@ -244,6 +263,41 @@
 			name = Chrome;
 			sourceTree = "<group>";
 		};
+		7FD6CC5A1DBE67C30088359B /* GoogleAnalyticsServicesiOS_3.17 */ = {
+			isa = PBXGroup;
+			children = (
+				7FD6CC5B1DBE67C30088359B /* GoogleAnalytics */,
+				7FD6CCD41DBE67C30088359B /* libAdIdAccess.a */,
+				7FD6CCD51DBE67C30088359B /* libGoogleAnalyticsServices.a */,
+			);
+			path = GoogleAnalyticsServicesiOS_3.17;
+			sourceTree = "<group>";
+		};
+		7FD6CC5B1DBE67C30088359B /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				7FD6CC871DBE67C30088359B /* Library */,
+			);
+			path = GoogleAnalytics;
+			sourceTree = "<group>";
+		};
+		7FD6CC871DBE67C30088359B /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				7FD6CC881DBE67C30088359B /* GAI.h */,
+				7FD6CC891DBE67C30088359B /* GAIDictionaryBuilder.h */,
+				7FD6CC8A1DBE67C30088359B /* GAIEcommerceFields.h */,
+				7FD6CC8B1DBE67C30088359B /* GAIEcommerceProduct.h */,
+				7FD6CC8C1DBE67C30088359B /* GAIEcommerceProductAction.h */,
+				7FD6CC8D1DBE67C30088359B /* GAIEcommercePromotion.h */,
+				7FD6CC8E1DBE67C30088359B /* GAIFields.h */,
+				7FD6CC8F1DBE67C30088359B /* GAILogger.h */,
+				7FD6CC901DBE67C30088359B /* GAITrackedViewController.h */,
+				7FD6CC911DBE67C30088359B /* GAITracker.h */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
 		7FF570791DB018200059A7E3 /* jsoncpp-1.7.7 */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +365,7 @@
 		9954B60E17AADAEC0084C486 = {
 			isa = PBXGroup;
 			children = (
+				7FD6CC5A1DBE67C30088359B /* GoogleAnalyticsServicesiOS_3.17 */,
 				4012E53817E6A36E00B1F252 /* QuartzCore.framework */,
 				99366A2517B9880F0077B0F1 /* Mitro */,
 				99F90FE317B9750300A6A786 /* Security.framework */,
@@ -318,7 +373,9 @@
 				9954B61C17AADAEC0084C486 /* Frameworks */,
 				9954B61A17AADAEC0084C486 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		9954B61A17AADAEC0084C486 /* Products */ = {
 			isa = PBXGroup;
@@ -332,7 +389,8 @@
 		9954B61C17AADAEC0084C486 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				40534BBB180E4C7B00F13036 /* libFlurry_4.2.4.a */,
+				7FD6CD2D1DBE6A530088359B /* CoreData.framework */,
+				7FD6CD2B1DBE69030088359B /* libsqlite3.tbd */,
 				401D5348180E472800B78549 /* SystemConfiguration.framework */,
 				40D1F9A118074374000ABBE5 /* libkeyczarjson.a */,
 				40D1F99F18074352000ABBE5 /* libhttpclient.a */,
@@ -614,7 +672,10 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Mitro/info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/Flurry";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/Flurry",
+					"$(PROJECT_DIR)/GoogleAnalyticsServicesiOS_3.17",
+				);
 				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"$(inherited)",
 					"$(SRCROOT)/build/iPhoneOS9.3/lib",
@@ -624,6 +685,7 @@
 					"$(SRCROOT)/build/iPhoneSimulator9.3/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.vaultapp.Vault;
 				PRODUCT_NAME = Vault;
 				PROVISIONING_PROFILE = "";
@@ -655,6 +717,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/Flurry",
 					"$(PROJECT_DIR)/build/src/poco-1.7.5/lib/iPhoneSimulator/i686",
+					"$(PROJECT_DIR)/GoogleAnalyticsServicesiOS_3.17",
 				);
 				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"$(inherited)",
@@ -664,6 +727,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/build/iPhoneSimulator9.3/lib",
 				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.vaultapp.Vault;
 				PRODUCT_NAME = Vault;
 				PROVISIONING_PROFILE = "";

@@ -13,7 +13,7 @@
 
 @implementation AppDelegate
 
-static NSString* const kFlurryAppId = @"JJMW92HZ2CC24YYTQXNB";
+static NSString *const kTrackingId = @"redacted";
 
 static void onLockStateChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
     if ([Mitro sessionManager].isLoggedIn) {
@@ -22,9 +22,9 @@ static void onLockStateChanged(CFNotificationCenterRef center, void *observer, C
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [Flurry setSecureTransportEnabled:YES];
-    [Flurry setCrashReportingEnabled:YES];
-    [Flurry startSession:kFlurryAppId];
+
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    [[GAI sharedInstance] trackerWithTrackingId:kTrackingId];
 
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
