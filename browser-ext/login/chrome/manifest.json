@@ -1,12 +1,12 @@
 {
-  "name": "Vault Login Manager",
+  "name": "Vault",
   "short_name": "Vault",
   "manifest_version": 2,
-  "version": "2016.10.11",
+  "version": "2016.10.19",
   "background": {
     "scripts": []
   },
-  "description": "Securely saves passwords and lets you share them with others",
+  "description": "Vault creates and stores strong passwords to keep you safe online.",
   "icons" : {
     "16": "img/mitro_logo-16.png",
     "128": "img/mitro_logo-128.png"
@@ -16,7 +16,7 @@
       "19": "img/mitro_logo_gray-19.png",
       "38": "img/mitro_logo_gray-38.png"
     },
-    "default_title": "Vault Login Manager",
+    "default_title": "Vault",
     "default_popup": "html/popup.html"
   },
   "content_scripts": [

@@ -43,7 +43,7 @@ $(document).ready(function() {
 
     // process the "stay logged in" checkbox
     $('#remember-me').click(function() {
-        var $checkboxEl = $(this);
+        var $checkboxEl = $(this).children('div');
         var $checkboxInput = $checkboxEl.find('#remember-me-input');
         var $alertEl = $('#remember-me-alert');
         if ($checkboxEl.hasClass('checked')) {
