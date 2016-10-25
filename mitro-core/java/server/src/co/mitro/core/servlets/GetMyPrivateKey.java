@@ -62,7 +62,7 @@ public class GetMyPrivateKey extends MitroServlet {
   private static final long serialVersionUID = 1L;
   private static final long newDeviceVerificationEmailTimeout = 1000 * 60 * 15L;  // 15 mins
 
-  public static final String DEMO_ACCOUNT = "mitro.demo@gmail.com";
+  public static final String DEMO_ACCOUNT = "vaultapp.demo@gmail.com";
   public static boolean doEmailVerification = true;
 
   public GetMyPrivateKey(ManagerFactory mf, KeyFactory keyFactory) {
