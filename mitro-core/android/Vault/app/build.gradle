@@ -7,8 +7,8 @@ android {
         applicationId "xyz.vaultapp.vault"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -22,14 +22,13 @@ android {
 dependencies {
     // Flurry
     compile 'com.flurry.android:analytics:6.3.1'
-//    compile fileTree(include: ['*.jar'], dir: 'libs')
+
+    // Libraries compiled from mitrocoreandroid
+    //compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:23.4.0'
     testCompile 'junit:junit:4.12'
-//    compile files('libs/keyczar-0.71f-040513.jar')
-    compile files('libs/gson-2.2.4.jar')
-    compile files('libs/guava-14.0.1.jar')
     compile project(':mitrocoreandroid')
 }
