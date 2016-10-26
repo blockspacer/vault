@@ -394,7 +394,7 @@ public class SecretListActivity extends MitroActivity implements SecretManager.L
             copyText("password", criticalDataForSwipeToGo);
             notificationManager.cancel(4123);
             PackageManager pm = getPackageManager();
-            Intent queryIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.mitro.co"));
+            Intent queryIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.vaultapp.xyz"));
             ActivityInfo af = queryIntent.resolveActivityInfo(pm, 0);
             Intent launchIntent = new Intent(Intent.ACTION_MAIN);
             launchIntent.setClassName(af.packageName, af.name);

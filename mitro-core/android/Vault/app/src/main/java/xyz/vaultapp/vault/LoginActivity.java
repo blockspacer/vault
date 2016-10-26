@@ -95,7 +95,7 @@ public class LoginActivity extends MitroActivity {
   public void onClickSignUp(View unused) {
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
     builder.setMessage("We are still working on signup support in the app.  " +
-        "For now, sign up at mitro.co using the desktop version of Chrome.");
+        "For now, sign up at vaultapp.xyz using the desktop version of Chrome.");
     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
       public void onClick(DialogInterface dialog, int id) {
         dialog.cancel();
