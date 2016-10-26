@@ -67,15 +67,12 @@ public class MitroActivity extends AppCompatActivity {
     if (receiver != null) {
       unregisterReceiver(receiver);
     }
+    if (getApp().isLoggedIn() && this instanceof SecretListActivity) {
+      // Main activity is being destroyed.  We will not receive screen off events in this state
+      // so we should log out.
+      maybeLogout();
+    }
     super.onDestroy();
-  }
-
-  @Override
-  protected void onSaveInstanceState(Bundle outState) {
-    // Activity is being destroyed.  We will not receive screen off events in this state
-    // so we should log out.
-    maybeLogout();
-    super.onSaveInstanceState(outState);
   }
 
   @Override
