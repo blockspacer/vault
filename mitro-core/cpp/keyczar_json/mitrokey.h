@@ -93,6 +93,11 @@ public:
   // Serializes this key to JSON, encrypted with encrypting_key.
   std::string ToJsonEncrypted(const MitroPublicKey& encrypting_key) const;
 
+  // Returns this key serialized to JSON.
+  std::string ToJson() const {
+    return keys_.ToJson();
+  }
+
   // Decrypts encrypted_key with this key, returning a new MitroPrivateKey.
   MitroPrivateKey* DecryptPrivateKey(const std::string& encrypted_key) const;
 

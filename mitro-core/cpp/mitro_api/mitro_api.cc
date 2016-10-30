@@ -266,20 +266,24 @@ namespace mitro_api {
                                                           const string& login_token,
                                                           const string& device_key_string,
                                                           MitroApiError* error) {
-    if (error == NULL) {
-      mitro::MitroPrivateKey device_key;
-
-      MitroApiError device_key_error;
-      if (!device_key.Read(device_key_string)) {
-        device_key_error.SetMessage("Error reading device key");
-        FinishGetMyPrivateKey(callback, login_token, "", &device_key_error);
-      }
-
-      // TODO: serialize and encrypt user private key using device string after
-      // json keyczar writer is done.
+    if (error != NULL) {
+      FinishGetMyPrivateKey(callback, login_token, "", error);
+      return;
     }
 
-    FinishGetMyPrivateKey(callback, login_token, "", error);
+    MitroApiError device_key_error;
+    mitro::JsonKeysetReader reader;
+    string encrypted_private_key_string;
+
+    if (!reader.ReadKeyString(device_key_string)) {
+      device_key_error.SetMessage("Error reading device key");
+      FinishGetMyPrivateKey(callback, login_token, "", &device_key_error);
+      return;
+    }
+
+    scoped_ptr<keyczar::Keyczar> crypter(keyczar::Crypter::Read(reader));
+    encrypted_private_key_string = crypter->Encrypt(user_private_key_->ToJson());
+    FinishGetMyPrivateKey(callback, login_token, encrypted_private_key_string, NULL);
   }
 
   void MitroApiClient::FinishGetMyPrivateKey(

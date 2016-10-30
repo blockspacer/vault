@@ -24,5 +24,6 @@
 - (void)login:(NSString*)username withPassword:(NSString*)password withTwoFactorAuthCode:(NSString*)code;
 - (void)logout;
 - (NSString*)savedUsername;
+- (NSString*)savedEncryptedPrivateKey;
 
 @end

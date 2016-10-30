@@ -18,6 +18,13 @@
 
 @implementation LoginViewController
 
+typedef NS_ENUM(NSInteger, LoginViewMode) {
+    LoginViewModeUsername,
+    LoginViewMode2FA,
+    LoginViewModeSpinner
+};
+
+
 static const NSUInteger kHeaderBorderColor = 0xcccccc;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -48,6 +55,15 @@ static const NSUInteger kHeaderBorderColor = 0xcccccc;
     self.usernameText.delegate = self;
     self.passwordText.delegate = self;
     self.verificationCodeText.delegate = self;
+
+    // Auto login with saved credentials
+    if ([[Mitro sessionManager] savedUsername] != nil &&
+        [[Mitro sessionManager] savedEncryptedPrivateKey] != nil) {
+        // Hide login UI
+        [self configureViewWithMode:LoginViewModeSpinner];
+
+        [self tryLogin];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -66,6 +82,9 @@ static const NSUInteger kHeaderBorderColor = 0xcccccc;
     NSString* username = [self.usernameText.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString* password = self.passwordText.text;
     NSString* code = self.verificationCodeText.text;
+
+    [[Mitro sessionManager] setShouldKeepLoggedIn:[self.savePasswordSwitch isOn]];
+
     [[Mitro sessionManager] login:username withPassword:password withTwoFactorAuthCode:code];
 }
 
@@ -92,6 +111,50 @@ static const NSUInteger kHeaderBorderColor = 0xcccccc;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)configureViewWithMode:(LoginViewMode)mode {
+    switch (mode) {
+        case LoginViewMode2FA:
+            // Configure for 2FA code
+            self.usernameText.hidden = YES;
+            self.passwordText.hidden = YES;
+            self.savePasswordSwitch.hidden = YES;
+            self.savePasswordLabel.hidden = YES;
+            self.signInButton.hidden = YES;
+
+            self.verificationCodeText.hidden = NO;
+            self.verificationCodeLabel.hidden = NO;
+            self.verifyButton.hidden = NO;
+            break;
+
+        case LoginViewModeUsername:
+            // Default is just spinner
+            self.usernameText.hidden = NO;
+            self.passwordText.hidden = NO;
+            self.savePasswordSwitch.hidden = NO;
+            self.savePasswordLabel.hidden = NO;
+            self.signInButton.hidden = NO;
+
+            self.verificationCodeText.hidden = YES;
+            self.verificationCodeLabel.hidden = YES;
+            self.verifyButton.hidden = YES;
+            break;
+
+        case LoginViewModeSpinner:
+        default:
+            // Default is just spinner
+            self.usernameText.hidden = YES;
+            self.passwordText.hidden = YES;
+            self.savePasswordSwitch.hidden = YES;
+            self.savePasswordLabel.hidden = YES;
+            self.signInButton.hidden = YES;
+
+            self.verificationCodeText.hidden = YES;
+            self.verificationCodeLabel.hidden = YES;
+            self.verifyButton.hidden = YES;
+            break;
+    }
+}
+
 - (void)onLoginFailed:(NSError*)error {
     [self.loginActivityIndicator stopAnimating];
 
@@ -99,11 +162,7 @@ static const NSUInteger kHeaderBorderColor = 0xcccccc;
 
     if ([exceptionType isEqualToString:@"DoTwoFactorAuthException"]) {
         if (self.verificationCodeText.hidden) {
-            self.usernameText.hidden = YES;
-            self.passwordText.hidden = YES;
-            self.verificationCodeLabel.hidden = NO;
-            self.verificationCodeText.hidden = NO;
-            [self.signInButton setTitle:@"VERIFY" forState:UIControlStateNormal];
+            [self configureViewWithMode:LoginViewMode2FA];
             [self.verificationCodeText becomeFirstResponder];
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid Code"
@@ -128,11 +187,7 @@ static const NSUInteger kHeaderBorderColor = 0xcccccc;
             alertMessage = error.localizedDescription;
 
             if ([error.localizedDescription isEqualToString:@"Invalid password"] && self.passwordText.hidden) {
-                self.usernameText.hidden = NO;
-                self.passwordText.hidden = NO;
-                self.verificationCodeLabel.hidden = YES;
-                self.verificationCodeText.hidden = YES;
-                [self.signInButton setTitle:@"SIGN IN" forState:UIControlStateNormal];
+                [self configureViewWithMode:LoginViewModeUsername];
             }
         }
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertTitle

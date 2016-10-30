@@ -93,6 +93,12 @@ static NSString* const kEncryptedPrivateKeyKey = @"encrypted_private_key";
     return [defaults stringForKey:kUsernameKey];
 }
 
+- (NSString*)savedEncryptedPrivateKey {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringForKey:kEncryptedPrivateKeyKey];
+}
+
+
 - (void)login:(NSString*)username withPassword:(NSString*)password withTwoFactorAuthCode:(NSString*)code {
     dispatch_async(GetDispatchQueue(), ^(void) {
         std::string username_string = base::SysNSStringToUTF8(username);
@@ -166,10 +172,14 @@ static NSString* const kEncryptedPrivateKeyKey = @"encrypted_private_key";
             [defaults setObject:loginToken forKey:[self loginTokenKey:username]];
             [defaults setObject:loginTokenSignature forKey:[self loginTokenSignatureKey:username]];
 
-            if (self.shouldKeepLoggedIn) {
-                [defaults setObject:encryptedPrivateKey forKey:kEncryptedPrivateKeyKey];
+            if ([self savedEncryptedPrivateKey]) {
+                // Pass
             } else {
-                [defaults removeObjectForKey:kEncryptedPrivateKeyKey];
+                if (self.shouldKeepLoggedIn) {
+                    [defaults setObject:encryptedPrivateKey forKey:kEncryptedPrivateKeyKey];
+                } else {
+                    [defaults removeObjectForKey:kEncryptedPrivateKeyKey];
+                }
             }
         } else {
             // DoEmailVerificationException will be returned if, for some reason, the

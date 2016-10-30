@@ -21,7 +21,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *verificationCodeLabel;
 @property (weak, nonatomic) IBOutlet MitroTextField *verificationCodeText;
 @property (weak, nonatomic) IBOutlet UISwitch *savePasswordSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *savePasswordLabel;
 @property (weak, nonatomic) IBOutlet MitroButton *signInButton;
+@property (weak, nonatomic) IBOutlet MitroButton *verifyButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loginActivityIndicator;
 
 @end
