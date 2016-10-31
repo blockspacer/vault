@@ -81,6 +81,10 @@
     [[Mitro sessionManager] setDelegate:nil];
 }
 
+- (IBAction)addSecretTapped:(id)sender {
+    
+}
+
 - (void)clearSecrets {
     if (self.secrets) {
         self.secrets = nil;
@@ -239,7 +243,22 @@
     if ([[segue identifier] isEqualToString:@"ViewPasswordDetails"] ||
         [[segue identifier] isEqualToString:@"ViewNoteDetails"]) {
         [[segue destinationViewController] setSecretId:self.selectedSecretId];
+    } else if ([[segue identifier] isEqualToString:@"AddSecret"]) {
+        UINavigationController *nav = [segue destinationViewController];
+        AddSecretViewController *destination = [[nav viewControllers] objectAtIndex:0];
+        destination.delegate = self;
     }
+}
+
+#pragma mark - AddSecretDelegate
+
+- (void)didCancel {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)didAddSecret {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self refreshSecrets];
 }
 
 @end

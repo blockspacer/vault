@@ -31,6 +31,8 @@
 - (void)onSecretsDecryptionProgress:(NSInteger)completed total:(NSInteger)total;
 - (void)onGetSecretCriticalData:(NSString*)criticalData;
 - (void)onGetSecretCriticalDataFailed:(NSError*)error;
+- (void)onAddSecret;
+- (void)onAddSecretFailed:(NSError*)error;
 @end
 
 @interface SecretManager : NSObject
@@ -40,5 +42,8 @@
 - (Secret*)getSecret:(NSInteger)secretId;
 - (void)listSecrets;
 - (void)getSecretCriticalData:(NSInteger)secretId;
+- (void)addSecretLoginTitle:(NSString *)title url:(NSString *)url username:(NSString *)username
+                   password:(NSString *)password;
+- (void)addSecretNoteTitle:(NSString *)title note:(NSString *)note;
 
 @end

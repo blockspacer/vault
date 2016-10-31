@@ -211,7 +211,14 @@
                             <outlet property="delegate" destination="12" id="15"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="36"/>
+                    <navigationItem key="navigationItem" id="36">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="eX5-T8-z63">
+                            <connections>
+                                <action selector="addSecretTapped:" destination="12" id="PZy-kz-jrW"/>
+                                <segue destination="h9u-S5-SPM" kind="modal" identifier="AddSecret" id="2NM-od-KGE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="Fou-9g-M9j" id="sQz-oE-jqA"/>
                         <outlet property="searchDisplayController" destination="6bW-FC-NzB" id="Lp2-dH-yhZ"/>
@@ -508,6 +515,139 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JtK-G4-JDa" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1003" y="632"/>
+        </scene>
+        <!--Detail-->
+        <scene sceneID="TTx-Y5-vbu">
+            <objects>
+                <viewController title="Detail" id="AuK-Ey-5gN" customClass="AddSecretViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QVO-01-t8Q"/>
+                        <viewControllerLayoutGuide type="bottom" id="CI1-W8-gv4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JvQ-fZ-XRi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="mountain.png" translatesAutoresizingMaskIntoConstraints="NO" id="8uN-tR-lXg">
+                                <rect key="frame" x="0.0" y="260" width="320" height="220"/>
+                            </imageView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fmt-y4-tSR">
+                                <rect key="frame" x="82" y="28" width="157" height="29"/>
+                                <segments>
+                                    <segment title="Web Login"/>
+                                    <segment title="Note"/>
+                                </segments>
+                                <connections>
+                                    <action selector="secretTypeChanged:" destination="AuK-Ey-5gN" eventType="valueChanged" id="SU6-nT-4ci"/>
+                                </connections>
+                            </segmentedControl>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="20Q-pr-Dug" customClass="MitroTextView">
+                                <rect key="frame" x="23" y="122" width="275" height="200"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="t5E-Hl-M72"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                            </textView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="URL (Optional)" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pul-Fg-mog" customClass="MitroTextField">
+                                <rect key="frame" x="23" y="127" width="275" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="9So-2z-i9E"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9aQ-DX-xTL" customClass="MitroTextField">
+                                <rect key="frame" x="23" y="183" width="275" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="t9p-JV-ULr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IJP-Wk-PHo" customClass="MitroTextField">
+                                <rect key="frame" x="23" y="239" width="275" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="cvA-LK-dAB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x39-7l-keu" customClass="MitroTextField">
+                                <rect key="frame" x="23" y="71" width="275" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="275" id="DQ1-9L-pIU"/>
+                                    <constraint firstAttribute="height" constant="36" id="glh-Aw-zm0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Pul-Fg-mog" firstAttribute="leading" secondItem="x39-7l-keu" secondAttribute="leading" id="18W-8s-don"/>
+                            <constraint firstItem="20Q-pr-Dug" firstAttribute="top" secondItem="x39-7l-keu" secondAttribute="bottom" constant="15" id="9lK-ns-Nuu"/>
+                            <constraint firstItem="fmt-y4-tSR" firstAttribute="centerX" secondItem="JvQ-fZ-XRi" secondAttribute="centerX" id="EAq-Vr-zKs"/>
+                            <constraint firstItem="20Q-pr-Dug" firstAttribute="trailing" secondItem="x39-7l-keu" secondAttribute="trailing" id="FsS-LX-ln1"/>
+                            <constraint firstItem="9aQ-DX-xTL" firstAttribute="trailing" secondItem="IJP-Wk-PHo" secondAttribute="trailing" id="HhC-hq-pfl"/>
+                            <constraint firstItem="x39-7l-keu" firstAttribute="top" secondItem="fmt-y4-tSR" secondAttribute="bottom" constant="15" id="KRq-LE-azu"/>
+                            <constraint firstItem="8uN-tR-lXg" firstAttribute="bottom" secondItem="JvQ-fZ-XRi" secondAttribute="bottom" id="LGs-sQ-s1U"/>
+                            <constraint firstItem="IJP-Wk-PHo" firstAttribute="leading" secondItem="9aQ-DX-xTL" secondAttribute="leading" id="SHb-Vb-ic6"/>
+                            <constraint firstAttribute="trailing" secondItem="8uN-tR-lXg" secondAttribute="trailing" id="TBC-1G-OcA"/>
+                            <constraint firstItem="IJP-Wk-PHo" firstAttribute="top" secondItem="9aQ-DX-xTL" secondAttribute="bottom" constant="20" id="TRu-Gl-Ztx"/>
+                            <constraint firstItem="8uN-tR-lXg" firstAttribute="leading" secondItem="JvQ-fZ-XRi" secondAttribute="leading" id="Za7-zo-6Us"/>
+                            <constraint firstItem="20Q-pr-Dug" firstAttribute="leading" secondItem="x39-7l-keu" secondAttribute="leading" id="d73-p4-Rnd"/>
+                            <constraint firstItem="Pul-Fg-mog" firstAttribute="top" secondItem="x39-7l-keu" secondAttribute="bottom" constant="20" id="d9g-Ug-sMX"/>
+                            <constraint firstItem="9aQ-DX-xTL" firstAttribute="trailing" secondItem="Pul-Fg-mog" secondAttribute="trailing" id="dQe-dc-Tcv"/>
+                            <constraint firstItem="fmt-y4-tSR" firstAttribute="top" secondItem="QVO-01-t8Q" secondAttribute="bottom" constant="8" id="dXK-aE-hvd"/>
+                            <constraint firstItem="9aQ-DX-xTL" firstAttribute="top" secondItem="Pul-Fg-mog" secondAttribute="bottom" constant="20" id="iGg-wM-SLS"/>
+                            <constraint firstItem="x39-7l-keu" firstAttribute="centerX" secondItem="JvQ-fZ-XRi" secondAttribute="centerX" id="rBV-sU-g2y"/>
+                            <constraint firstItem="Pul-Fg-mog" firstAttribute="trailing" secondItem="x39-7l-keu" secondAttribute="trailing" id="uC5-jH-UAL"/>
+                            <constraint firstItem="9aQ-DX-xTL" firstAttribute="leading" secondItem="Pul-Fg-mog" secondAttribute="leading" id="v32-iI-zYb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Secret" id="KfH-uG-vVr">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="e7q-Yd-bq1">
+                            <connections>
+                                <action selector="cancelTapped:" destination="AuK-Ey-5gN" id="xCv-pX-WtB"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="G1s-QL-zll">
+                            <connections>
+                                <action selector="saveTapped:" destination="AuK-Ey-5gN" id="Ifj-Ry-rfB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="noteView" destination="20Q-pr-Dug" id="JOH-fV-Ut4"/>
+                        <outlet property="passwordField" destination="IJP-Wk-PHo" id="pr0-SY-8VE"/>
+                        <outlet property="secretTypeControl" destination="fmt-y4-tSR" id="moB-dU-M3n"/>
+                        <outlet property="titleField" destination="x39-7l-keu" id="OQp-2v-hhn"/>
+                        <outlet property="urlField" destination="Pul-Fg-mog" id="0Kz-nI-Zza"/>
+                        <outlet property="usernameField" destination="9aQ-DX-xTL" id="zgE-km-vGq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ypS-R4-v99" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1964" y="151"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0rW-QM-1j1">
+            <objects>
+                <navigationController id="h9u-S5-SPM" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="mso-jZ-WOj"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="j9W-DI-rRe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="AuK-Ey-5gN" kind="relationship" relationship="rootViewController" id="Xsa-bN-CNg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gfh-Me-U8M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1539" y="151"/>
         </scene>
     </scenes>
     <resources>

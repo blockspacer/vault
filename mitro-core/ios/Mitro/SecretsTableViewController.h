@@ -11,8 +11,9 @@
 #import "ProgressOverlayView.h"
 #import "SecretManager.h"
 #import "SessionManager.h"
+#import "AddSecretViewController.h"
 
-@interface SecretsTableViewController : UITableViewController<UISearchBarDelegate, UISearchDisplayDelegate, SecretManagerDelegate, SessionManagerDelegate>
+@interface SecretsTableViewController : UITableViewController<UISearchBarDelegate, UISearchDisplayDelegate, SecretManagerDelegate, SessionManagerDelegate, AddSecretDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *secretsTableView;
 @property (strong, nonatomic) ProgressOverlayView *progressView;

@@ -41,6 +41,8 @@
               error:(mitro_api::MitroApiError*)get_secret_error
         groupIdPath:(const std::vector<int>&)group_id_path
              groups:(const std::map<std::string, mitro_api::GroupInfo>&)groups;
+- (void)onAddSecretError:(mitro_api::MitroApiError*)error;
+
 @end
 
 namespace mitro_ios {
@@ -60,6 +62,9 @@ public:
                      const mitro_api::Secret& secret,
                      mitro_api::MitroApiError* error) {
         [secretManager_ onGetSecret:secret error:error groupIdPath:group_id_path groups:groups];
+    }
+    void OnAddSecret(mitro_api::MitroApiError* error) {
+        [secretManager_ onAddSecretError:error];
     }
 
 private:
@@ -270,6 +275,57 @@ send_list_secrets_response:
         api_client->GetSecret(secretId, group_id, true, callback);
         base::StartRunLoop();
     });
+}
+
+- (void)onAddSecretError:(mitro_api::MitroApiError*)add_secret_error {
+    mitro_api::MitroApiError* api_error = NULL;
+
+    if (add_secret_error != NULL) {
+        api_error = new mitro_api::MitroApiError(*add_secret_error);
+    }
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (api_error == NULL) {
+            if ([self.delegate respondsToSelector:@selector(onAddSecret)]) {
+                [self.delegate onAddSecret];
+            }
+        } else {
+            if ([self.delegate respondsToSelector:@selector(onAddSecretFailed:)]) {
+                NSError* error = MitroApiErrorToNSError(*api_error);
+                [self.delegate onAddSecretFailed:error];
+            }
+            delete api_error;
+        }
+    });
+}
+
+- (void)addSecretLoginTitle:(NSString *)title url:(NSString *)url username:(NSString *)username
+                   password:(NSString *)password {
+    std::string cpp_title = base::SysNSStringToUTF8(title);
+    std::string cpp_login_url = base::SysNSStringToUTF8(url);
+    std::string cpp_username = base::SysNSStringToUTF8(username);
+    std::string cpp_password = base::SysNSStringToUTF8(password);
+
+    dispatch_async(GetDispatchQueue(), ^(void) {
+        mitro_api::AddSecretCallback callback =
+        base::Bind(&mitro_ios::SecretManagerWrapper::OnAddSecret, base::Unretained(wrapper_));
+
+        api_client->AddSecretPassword(cpp_title, cpp_login_url, cpp_username, cpp_password, callback);
+        base::StartRunLoop();
+    });
+}
+- (void)addSecretNoteTitle:(NSString *)title note:(NSString *)note {
+    std::string cpp_title = base::SysNSStringToUTF8(title);
+    std::string cpp_note = base::SysNSStringToUTF8(note);
+
+    dispatch_async(GetDispatchQueue(), ^(void) {
+        mitro_api::AddSecretCallback callback =
+        base::Bind(&mitro_ios::SecretManagerWrapper::OnAddSecret, base::Unretained(wrapper_));
+
+        api_client->AddSecretNote(cpp_title, cpp_note, callback);
+        base::StartRunLoop();
+    });
+
 }
 
 @end
