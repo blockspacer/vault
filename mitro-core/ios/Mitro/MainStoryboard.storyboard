@@ -214,15 +214,21 @@
                     <navigationItem key="navigationItem" id="36">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="eX5-T8-z63">
                             <connections>
-                                <action selector="addSecretTapped:" destination="12" id="PZy-kz-jrW"/>
                                 <segue destination="h9u-S5-SPM" kind="modal" identifier="AddSecret" id="2NM-od-KGE"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="T7f-ZA-dcz">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="12" eventType="valueChanged" id="fiP-6e-NSc"/>
+                        </connections>
+                    </refreshControl>
                     <connections>
                         <outlet property="searchBar" destination="Fou-9g-M9j" id="sQz-oE-jqA"/>
                         <outlet property="searchDisplayController" destination="6bW-FC-NzB" id="Lp2-dH-yhZ"/>
                         <outlet property="secretsTableView" destination="13" id="i3Z-d2-i9i"/>
+                        <outlet property="tableViewRefreshControl" destination="T7f-ZA-dcz" id="dqD-yc-dct"/>
                         <segue destination="fhb-q5-g63" kind="push" identifier="Login" id="Fqd-6x-3m2"/>
                         <segue destination="21" kind="push" identifier="ViewPasswordDetails" id="sTX-PE-OeN"/>
                         <segue destination="nIa-cI-QYf" kind="push" identifier="ViewNoteDetails" id="FA9-SS-v2h"/>

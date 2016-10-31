@@ -21,6 +21,8 @@
 @property (nonatomic, strong) NSArray *filteredSecrets;
 @property (nonatomic) NSInteger selectedSecretId;
 
+@property (weak, nonatomic) IBOutlet UIRefreshControl *tableViewRefreshControl;
+
 @end
 
 @implementation SecretsTableViewController
@@ -58,6 +60,7 @@
     self.progressView.detailLabel.hidden = YES;
     self.progressView.progressBar.hidden = YES;
     [self.view addSubview:self.progressView];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -80,9 +83,10 @@
     [[Mitro secretManager] setDelegate:nil];
     [[Mitro sessionManager] setDelegate:nil];
 }
-
-- (IBAction)addSecretTapped:(id)sender {
-    
+- (IBAction)refresh:(UIRefreshControl *)sender {
+    // Close refresh control and as progress view already has a spinner
+    [sender endRefreshing];
+    [self refreshSecrets];
 }
 
 - (void)clearSecrets {
