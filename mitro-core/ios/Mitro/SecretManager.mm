@@ -137,9 +137,6 @@ private:
 - (void)onListSecrets:(const mitro_api::ListMySecretsAndGroupKeysResponse&)response error:(mitro_api::MitroApiError*)list_secrets_error {
     NSLog(@"onListSecrets");
 
-  LOG(INFO) << "listing secrets: ---- " << std::endl;
-  response.printTo(std::cout);
-
     base::StopRunLoop();
 
     mitro_api::ListMySecretsAndGroupKeysResponse* response_copy =
@@ -166,7 +163,6 @@ private:
                 goto send_list_secrets_response;
             }
             Secret* secret = [SecretManager secretFromCppSecret:&cpp_secret];
-          NSLog(@"decoded secret: %@ %@ %@", secret.displayTitle, secret.userTitle, secret.usernameField);
             [secrets addObject:secret];
             [secretsMap setObject:secret forKey:[NSNumber numberWithInteger:secret.id]];
 
@@ -197,7 +193,6 @@ send_list_secrets_response:
 }
 
 - (void)listSecrets {
-  NSLog(@"list secrets...");
     dispatch_async(GetDispatchQueue(), ^(void) {
         mitro_api::GetSecretsListCallback callback =
             base::Bind(&mitro_ios::SecretManagerWrapper::OnListSecrets, base::Unretained(wrapper_));

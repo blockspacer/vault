@@ -203,7 +203,6 @@
     }
 
     Secret* secret = [[self getDataForTableView:tableView] objectAtIndex:indexPath.row];
-    NSLog(@"Secret: %@ %@ %@", secret.displayTitle, secret.domain, secret.userTitle);
     cell.textLabel.text = secret.displayTitle;
     cell.detailTextLabel.text = secret.domain;
     return cell;

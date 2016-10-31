@@ -18,7 +18,7 @@
 
 @end
 
-@interface AddSecretViewController : UIViewController <SecretManagerDelegate>
+@interface AddSecretViewController : UIViewController <UITextViewDelegate, SecretManagerDelegate>
 
 @property (weak, nonatomic) id<AddSecretDelegate> delegate;
 

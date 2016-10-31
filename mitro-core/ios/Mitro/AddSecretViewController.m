@@ -16,7 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    self.noteView.delegate = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self updateSaveEnabled:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -38,6 +44,25 @@
     self.usernameField.hidden = !loginType;
     self.passwordField.hidden = !loginType;
     self.noteView.hidden      = loginType;
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    [self updateSaveEnabled:self];
+}
+
+- (IBAction)updateSaveEnabled:(id)sender {
+    if (self.secretTypeControl.selectedSegmentIndex == 0) {
+        // Login type
+        BOOL canSave = (![self.usernameField.text isEqualToString:@""] &&
+                        ![self.titleField.text isEqualToString:@""] &&
+                        ![self.passwordField.text isEqualToString:@""]);
+        self.navigationItem.rightBarButtonItem.enabled = canSave;
+    } else {
+        // Note type
+        BOOL canSave = (![self.titleField.text isEqualToString:@""] &&
+                        ![self.noteView.text isEqualToString:@""]);
+        self.navigationItem.rightBarButtonItem.enabled = canSave;
+    }
 }
 
 - (IBAction)cancelTapped:(id)sender {

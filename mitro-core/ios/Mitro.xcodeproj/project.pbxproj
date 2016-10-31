@@ -37,6 +37,7 @@
 		40D1F9AD1808526A000ABBE5 /* SecretManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 40D1F9AC1808526A000ABBE5 /* SecretManager.mm */; };
 		40D1F9B0180CCB37000ABBE5 /* NoteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D1F9AF180CCB37000ABBE5 /* NoteDetailViewController.m */; };
 		40D1F9B3180CCB6E000ABBE5 /* PasswordDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D1F9B2180CCB6E000ABBE5 /* PasswordDetailViewController.m */; };
+		7F028F7D1DC6C7350020E370 /* AddSecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F028F7C1DC6C7350020E370 /* AddSecretViewController.m */; };
 		7F44DEA21DB67ACC00543158 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEA11DB67ACC00543158 /* Images.xcassets */; };
 		7F44DEA41DB67EB900543158 /* mountain.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEA31DB67EB900543158 /* mountain.png */; };
 		7F44DEA61DB680A200543158 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEA51DB680A200543158 /* LaunchScreen.xib */; };
@@ -128,6 +129,8 @@
 		40F1C99517DB37D600A38CE3 /* Mitro-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Mitro-Prefix.pch"; sourceTree = "<group>"; };
 		40F1C99617DB387800A38CE3 /* Mitro_Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mitro_Tests.h; sourceTree = "<group>"; };
 		40F1C99717DB387800A38CE3 /* Mitro_Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mitro_Tests.m; sourceTree = "<group>"; };
+		7F028F7B1DC6C7350020E370 /* AddSecretViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSecretViewController.h; sourceTree = "<group>"; };
+		7F028F7C1DC6C7350020E370 /* AddSecretViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddSecretViewController.m; sourceTree = "<group>"; };
 		7F44DEA11DB67ACC00543158 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7F44DEA31DB67EB900543158 /* mountain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mountain.png; path = Images/mountain.png; sourceTree = "<group>"; };
 		7F44DEA51DB680A200543158 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -224,9 +227,11 @@
 				7FF570701DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp */,
 				7FF570711DAFDE040059A7E3 /* TSimpleJSONProtocol.hpp */,
 			);
+			indentWidth = 2;
 			name = mitro_api;
 			path = ../../cpp/mitro_api;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		407CA40C17DA731A0098D080 /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -320,6 +325,10 @@
 				7FF570791DB018200059A7E3 /* jsoncpp-1.7.7 */,
 				409533801817AE48003F9FE9 /* Chrome */,
 				4020C4BB1807311400E9A6DC /* mitro_api */,
+				407CA40D17DA73DE0098D080 /* Images */,
+				7F44DEA11DB67ACC00543158 /* Images.xcassets */,
+				7F028F7B1DC6C7350020E370 /* AddSecretViewController.h */,
+				7F028F7C1DC6C7350020E370 /* AddSecretViewController.m */,
 				999ACDD717BA8BFA00649AF6 /* AppDelegate.h */,
 				999ACDDA17BA8DD000649AF6 /* AppDelegate.m */,
 				4012E52817E65F8400B1F252 /* LoginViewController.h */,
@@ -343,18 +352,16 @@
 				40D1F9B2180CCB6E000ABBE5 /* PasswordDetailViewController.m */,
 				401A3A1A18A39C2900347B90 /* ProgressOverlayView.h */,
 				401A3A1B18A39C2A00347B90 /* ProgressOverlayView.m */,
-				40D1F9AB1808526A000ABBE5 /* SecretManager.h */,
-				40D1F9AC1808526A000ABBE5 /* SecretManager.mm */,
 				407CA41217DB25300098D080 /* SecretDetailViewController.h */,
 				407CA41317DB25300098D080 /* SecretDetailViewController.m */,
-				99AA6A9C17B98B96005B3496 /* SecretsTableViewController.h */,
-				99AA6A9D17B98B96005B3496 /* SecretsTableViewController.m */,
+				40D1F9AB1808526A000ABBE5 /* SecretManager.h */,
+				40D1F9AC1808526A000ABBE5 /* SecretManager.mm */,
 				4012E54017E79F8100B1F252 /* SecretsTableViewCell.h */,
 				4012E54117E79F8100B1F252 /* SecretsTableViewCell.m */,
+				99AA6A9C17B98B96005B3496 /* SecretsTableViewController.h */,
+				99AA6A9D17B98B96005B3496 /* SecretsTableViewController.m */,
 				40C8352018064EF90087C168 /* SessionManager.h */,
 				40C8352118064EF90087C168 /* SessionManager.mm */,
-				407CA40D17DA73DE0098D080 /* Images */,
-				7F44DEA11DB67ACC00543158 /* Images.xcassets */,
 				407CA40C17DA731A0098D080 /* Supporting Files */,
 			);
 			path = Mitro;
@@ -565,6 +572,7 @@
 				4012E53717E69C4B00B1F252 /* MitroButton.m in Sources */,
 				40D1F9B3180CCB6E000ABBE5 /* PasswordDetailViewController.m in Sources */,
 				401A3A1C18A39C2A00347B90 /* ProgressOverlayView.m in Sources */,
+				7F028F7D1DC6C7350020E370 /* AddSecretViewController.m in Sources */,
 				4020C4F41807311400E9A6DC /* mitro_api.cc in Sources */,
 				4012E54217E79F8200B1F252 /* SecretsTableViewCell.m in Sources */,
 				4020C4FE1807311400E9A6DC /* mitro_api_types.cpp in Sources */,
@@ -687,7 +695,6 @@
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/build/iPhoneOS9.3/include";
-				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -729,7 +736,6 @@
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/build/iPhoneOS9.3/include";
-				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
