@@ -13,10 +13,13 @@
 
 @implementation AppDelegate
 
-static NSString *const kTrackingId = @"redacted";
+static NSString *const kTrackingId = @"";
 
 static void onLockStateChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
-    if ([Mitro sessionManager].isLoggedIn) {
+    // If we have a saved private key the user has selected "remember me"
+    BOOL rememberMe = ([[Mitro sessionManager] savedEncryptedPrivateKey] != nil ||
+                       [[[Mitro sessionManager] savedEncryptedPrivateKey] isEqualToString:@""]);
+    if ([Mitro sessionManager].isLoggedIn && !rememberMe) {
         [[Mitro sessionManager] logout];
     }
 }
