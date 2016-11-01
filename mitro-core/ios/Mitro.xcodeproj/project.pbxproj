@@ -45,12 +45,12 @@
 		7F44DEAC1DB6843800543158 /* vault_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEA91DB6843800543158 /* vault_logo.png */; };
 		7F44DEAD1DB6843800543158 /* vault_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEAA1DB6843800543158 /* vault_logo@2x.png */; };
 		7F44DEAE1DB6843800543158 /* vault_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F44DEAB1DB6843800543158 /* vault_logo@3x.png */; };
-		7FD6CD221DBE67C30088359B /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD6CCD41DBE67C30088359B /* libAdIdAccess.a */; };
 		7FD6CD231DBE67C30088359B /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD6CCD51DBE67C30088359B /* libGoogleAnalyticsServices.a */; };
 		7FD6CD2C1DBE69030088359B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD6CD2B1DBE69030088359B /* libsqlite3.tbd */; };
 		7FD6CD2E1DBE6A540088359B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD6CD2D1DBE6A530088359B /* CoreData.framework */; };
 		7FF570721DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF570701DAFDE040059A7E3 /* TSimpleJSONProtocol.cpp */; };
 		7FF5707E1DB018370059A7E3 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF5707D1DB018370059A7E3 /* jsoncpp.cpp */; };
+		7FFB105B1DC9078400454E20 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FFB105A1DC9078400454E20 /* GoogleService-Info.plist */; };
 		990F279417BAAE1000435734 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 999ACDCA17BA893A00649AF6 /* MainStoryboard.storyboard */; };
 		9954B61E17AADAEC0084C486 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9954B61D17AADAEC0084C486 /* UIKit.framework */; };
 		9954B62017AADAEC0084C486 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9954B61F17AADAEC0084C486 /* Foundation.framework */; };
@@ -148,7 +148,6 @@
 		7FD6CC8F1DBE67C30088359B /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
 		7FD6CC901DBE67C30088359B /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
 		7FD6CC911DBE67C30088359B /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
-		7FD6CCD41DBE67C30088359B /* libAdIdAccess.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdIdAccess.a; sourceTree = "<group>"; };
 		7FD6CCD51DBE67C30088359B /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		7FD6CD2B1DBE69030088359B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		7FD6CD2D1DBE6A530088359B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -157,6 +156,7 @@
 		7FF5707B1DB018370059A7E3 /* json-forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "json-forwards.h"; sourceTree = "<group>"; };
 		7FF5707C1DB018370059A7E3 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
 		7FF5707D1DB018370059A7E3 /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsoncpp.cpp; sourceTree = "<group>"; };
+		7FFB105A1DC9078400454E20 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9954B61917AADAEC0084C486 /* Vault.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vault.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9954B61D17AADAEC0084C486 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9954B61F17AADAEC0084C486 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -190,7 +190,6 @@
 				40964FA117FE0D270068E4A5 /* libkeyczar.a in Frameworks */,
 				40964F9A17FE02660068E4A5 /* libthrift.a in Frameworks */,
 				4044870F17FDB1F500F0F76E /* libchromiumbase.a in Frameworks */,
-				7FD6CD221DBE67C30088359B /* libAdIdAccess.a in Frameworks */,
 				4012E53917E6A36E00B1F252 /* QuartzCore.framework in Frameworks */,
 				7FD6CD231DBE67C30088359B /* libGoogleAnalyticsServices.a in Frameworks */,
 				99F90FE417B9750300A6A786 /* Security.framework in Frameworks */,
@@ -236,6 +235,7 @@
 		407CA40C17DA731A0098D080 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7FFB105A1DC9078400454E20 /* GoogleService-Info.plist */,
 				999ACDC717BA890600649AF6 /* info.plist */,
 				999ACDD517BA8BE500649AF6 /* main.m */,
 				40F1C99517DB37D600A38CE3 /* Mitro-Prefix.pch */,
@@ -270,7 +270,6 @@
 			isa = PBXGroup;
 			children = (
 				7FD6CC5B1DBE67C30088359B /* GoogleAnalytics */,
-				7FD6CCD41DBE67C30088359B /* libAdIdAccess.a */,
 				7FD6CCD51DBE67C30088359B /* libGoogleAnalyticsServices.a */,
 			);
 			path = GoogleAnalyticsServicesiOS_3.17;
@@ -518,6 +517,7 @@
 				7F44DEA81DB6812200543158 /* mountain@2x.png in Resources */,
 				4083DD0118A3C7DB00B63D77 /* search_background.png in Resources */,
 				7F44DEAC1DB6843800543158 /* vault_logo.png in Resources */,
+				7FFB105B1DC9078400454E20 /* GoogleService-Info.plist in Resources */,
 				7F44DEA61DB680A200543158 /* LaunchScreen.xib in Resources */,
 				7F44DEAD1DB6843800543158 /* vault_logo@2x.png in Resources */,
 			);

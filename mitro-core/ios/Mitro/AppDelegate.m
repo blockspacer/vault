@@ -8,12 +8,9 @@
 
 #import "AppDelegate.h"
 #import "Mitro.h"
-
-#import "Flurry.h"
+#import "GAI.h"
 
 @implementation AppDelegate
-
-static NSString *const kTrackingId = @"";
 
 static void onLockStateChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
     // If we have a saved private key the user has selected "remember me"
@@ -26,8 +23,10 @@ static void onLockStateChanged(CFNotificationCenterRef center, void *observer, C
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    [[GAI sharedInstance] trackerWithTrackingId:kTrackingId];
+    // Configure tracker from GoogleService-Info.plist.
+    NSString *googlePlistPath = [[NSBundle mainBundle] pathForResource:@"GoogleService-Info" ofType:@"plist"];
+    NSDictionary *googleInfo = [NSDictionary dictionaryWithContentsOfFile:googlePlistPath];
+    [[GAI sharedInstance] trackerWithTrackingId:googleInfo[@"TRACKING_ID"]];
 
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
