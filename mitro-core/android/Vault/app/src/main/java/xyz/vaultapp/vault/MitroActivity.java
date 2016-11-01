@@ -10,7 +10,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 
 public class MitroActivity extends AppCompatActivity {
   private BroadcastReceiver receiver = null;
@@ -78,18 +80,22 @@ public class MitroActivity extends AppCompatActivity {
   @Override
   public void onStart() {
     super.onStart();
+
     if (!getApp().isLoggedIn() && !(this instanceof LoginActivity)) {
       Log.d("Mitro", "starting login activity");
       Intent loginActivity = new Intent(MitroActivity.this, LoginActivity.class);
       startActivity(loginActivity);
       finish();
     }
-    FlurryAgent.onStartSession(this, MitroApplication.FLURRY_API_KEY);
+
+    // Track activity hit
+    Tracker mTracker = getApp().getDefaultTracker();
+    mTracker.setScreenName(this.getClass().getSimpleName());
+    mTracker.send(new HitBuilders.ScreenViewBuilder().build());
   }
 
   @Override
   public void onStop() {
     super.onStop();
-    FlurryAgent.onEndSession(this);
   }
 }
