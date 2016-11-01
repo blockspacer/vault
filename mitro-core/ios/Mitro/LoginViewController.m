@@ -34,6 +34,13 @@ static const NSUInteger kHeaderBorderColor = 0xcccccc;
     return self;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    // Style signup button
+    self.signUpButton.layer.cornerRadius = 5.0;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     CALayer *bottomBorder = [CALayer layer];
@@ -91,6 +98,16 @@ static const NSUInteger kHeaderBorderColor = 0xcccccc;
 - (IBAction)onSignInTouched:(id)sender {
     [self.view endEditing:YES];
     [self tryLogin];
+}
+
+- (IBAction)signUpTapped:(id)sender {
+    NSString *message = @"Please sign up at www.vaultapp.xyz using the desktop version of Chrome.";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up"
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

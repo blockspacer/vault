@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *savePasswordSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *savePasswordLabel;
 @property (weak, nonatomic) IBOutlet MitroButton *signInButton;
+@property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 @property (weak, nonatomic) IBOutlet MitroButton *verifyButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loginActivityIndicator;
 

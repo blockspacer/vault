@@ -131,6 +131,22 @@
                                     <action selector="onSignInTouched:" destination="fhb-q5-g63" eventType="touchUpInside" id="36L-bS-21M"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wk6-dc-fwE">
+                                <rect key="frame" x="190" y="416" width="110" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="SWD-Hl-sRh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                <state key="normal" title="SIGN UP">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signUpTapped:" destination="fhb-q5-g63" eventType="touchUpInside" id="N1A-Wn-Pg3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -139,6 +155,7 @@
                             <constraint firstItem="jPR-lK-1Pt" firstAttribute="trailing" secondItem="kwn-WA-3iN" secondAttribute="trailing" id="4JA-qd-ISZ"/>
                             <constraint firstItem="fMo-CI-K6N" firstAttribute="top" secondItem="TY0-ht-sOP" secondAttribute="top" constant="172" id="6cf-TB-bZP"/>
                             <constraint firstItem="SMP-4c-3g6" firstAttribute="centerX" secondItem="14e-F0-MYI" secondAttribute="centerX" id="761-8A-mG6"/>
+                            <constraint firstAttribute="trailing" secondItem="Wk6-dc-fwE" secondAttribute="trailing" constant="20" id="7V5-5K-FpP"/>
                             <constraint firstItem="fMo-CI-K6N" firstAttribute="trailing" secondItem="14e-F0-MYI" secondAttribute="trailing" id="7ZZ-nt-BLs"/>
                             <constraint firstItem="a0g-ih-4Ad" firstAttribute="leading" secondItem="fMo-CI-K6N" secondAttribute="leading" id="Awp-Za-tkj"/>
                             <constraint firstItem="E3i-2e-w6c" firstAttribute="top" secondItem="a0g-ih-4Ad" secondAttribute="bottom" constant="19" id="BEv-ks-Sgv"/>
@@ -156,6 +173,7 @@
                             <constraint firstItem="jPR-lK-1Pt" firstAttribute="baseline" secondItem="fMo-CI-K6N" secondAttribute="baseline" id="Z5F-Gd-7HY"/>
                             <constraint firstItem="kwn-WA-3iN" firstAttribute="leading" secondItem="TY0-ht-sOP" secondAttribute="leading" constant="20" symbolic="YES" id="ZV2-CZ-mp6"/>
                             <constraint firstItem="jPR-lK-1Pt" firstAttribute="leading" secondItem="BbS-EZ-xe4" secondAttribute="leading" id="aK1-1Q-AVU"/>
+                            <constraint firstItem="hsW-C2-GxO" firstAttribute="top" secondItem="Wk6-dc-fwE" secondAttribute="bottom" constant="20" id="aUL-SW-mNu"/>
                             <constraint firstAttribute="trailing" secondItem="AaE-Up-zOO" secondAttribute="trailing" id="aW6-VE-DtY"/>
                             <constraint firstItem="kwn-WA-3iN" firstAttribute="top" secondItem="14e-F0-MYI" secondAttribute="top" constant="-24" id="dAF-1V-9qD"/>
                             <constraint firstAttribute="trailing" secondItem="UPN-MG-cHS" secondAttribute="trailing" constant="8" id="fLA-fn-dLM"/>
@@ -177,6 +195,7 @@
                         <outlet property="savePasswordLabel" destination="UPN-MG-cHS" id="6JB-aN-uc2"/>
                         <outlet property="savePasswordSwitch" destination="BbS-EZ-xe4" id="Xbm-Oz-MFZ"/>
                         <outlet property="signInButton" destination="a0g-ih-4Ad" id="LOo-c4-wbD"/>
+                        <outlet property="signUpButton" destination="Wk6-dc-fwE" id="sMy-n6-auB"/>
                         <outlet property="usernameText" destination="14e-F0-MYI" id="5P3-OQ-BaT"/>
                         <outlet property="verificationCodeLabel" destination="kwn-WA-3iN" id="0fT-Ma-bpZ"/>
                         <outlet property="verificationCodeText" destination="jPR-lK-1Pt" id="A4h-Bg-2CU"/>
