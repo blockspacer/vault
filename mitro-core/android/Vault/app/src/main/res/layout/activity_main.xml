@@ -7,6 +7,7 @@
     tools:context=".SecretListActivity">
 
     <LinearLayout
+        android:id="@+id/list_container"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -41,7 +42,7 @@
         android:id="@+id/wait"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/titles"
+        android:layout_alignLeft="@+id/list_container"
         android:layout_below="@+id/decrypting_progress"
         android:layout_marginTop="17dp"
         android:gravity="center"
