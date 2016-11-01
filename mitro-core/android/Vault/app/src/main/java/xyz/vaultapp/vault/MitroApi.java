@@ -364,13 +364,14 @@ public class MitroApi {
           userPrivateKey = keyFactory.loadPrivateKey(deviceKey.decrypt(storedPrivateKey));
         } else {
           userPrivateKey = keyFactory
-              .loadEncryptedPrivateKey(privateKeyResponse.encryptedPrivateKey, password);
+                  .loadEncryptedPrivateKey(privateKeyResponse.encryptedPrivateKey, password);
 
           RPC.GetMyDeviceKeyResponse deviceKeyResponse = gson.fromJson(
               getDeviceKeyString(username), RPC.GetMyDeviceKeyResponse.class);
           String deviceKeyString = deviceKeyResponse.deviceKeyString;
 
-          userPrivateKey = decryptCryptoKey(privateKeyResponse.encryptedPrivateKey, password);
+          // This doesn't appear necessary
+          //userPrivateKey = decryptCryptoKey(privateKeyResponse.encryptedPrivateKey, password);
 
           if (globalData.shouldSavePrivateKey()) {
             KeyczarJsonReader reader = new KeyczarJsonReader(deviceKeyString);

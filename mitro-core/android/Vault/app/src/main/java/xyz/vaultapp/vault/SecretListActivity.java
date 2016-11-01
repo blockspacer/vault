@@ -22,6 +22,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
+import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -93,6 +94,7 @@ public class SecretListActivity extends MitroActivity implements SecretManager.L
   // View Elements
   private TextView waitMessage;
   private ProgressBar loading;
+  private SearchView searchView;
 
   // Secrets list view, model, and adapter
   private ListView secretsListView;
@@ -108,6 +110,9 @@ public class SecretListActivity extends MitroActivity implements SecretManager.L
   // Swipe to go Data
   private String criticalDataForSwipeToGo;
 
+  // Current search query filter
+  private String searchQuery;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -117,6 +122,7 @@ public class SecretListActivity extends MitroActivity implements SecretManager.L
     secretsListView = (ListView) findViewById(R.id.titles);
     waitMessage = (TextView) findViewById(R.id.wait);
     loading = (ProgressBar) findViewById(R.id.decrypting_progress);
+    searchView = (SearchView)findViewById(R.id.search_view);
 
     actionBar = getSupportActionBar();
 
@@ -172,6 +178,29 @@ public class SecretListActivity extends MitroActivity implements SecretManager.L
         Intent intent = new Intent(SecretListActivity.this, SecretViewActivity.class);
         intent.putExtra("secret_id", secret.id);
         startActivity(intent);
+      }
+    });
+
+    searchView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        searchView.setIconified(false);
+      }
+    });
+
+    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+      @Override
+      public boolean onQueryTextChange(String newText) {
+        searchQuery = newText;
+        filterSecrets();
+        return true;
+      }
+
+      @Override
+      public boolean onQueryTextSubmit(String query) {
+        searchQuery = query;
+        filterSecrets();
+        return true;
       }
     });
   }
@@ -231,27 +260,47 @@ public class SecretListActivity extends MitroActivity implements SecretManager.L
     getApp().getSecretManager().removeListener(this);
   }
 
+  /**
+   * Checks a secret against the current search query
+   * @param secret
+   * @return True if the secret title contains the search query or if there is no valid search query,
+   * otherwise False
+     */
+  private boolean containsSearchQuery(SecretIdentifier secret) {
+    if (searchQuery != null && !searchQuery.isEmpty()) {
+      return secret.title.contains(searchQuery);
+    }
+    return true;
+  }
+
   public void filterSecrets() {
     TabIndex tabIndex = TabIndex.values()[actionBar.getSelectedTab().getPosition()];
     filteredSecrets.clear();
-
     switch (tabIndex) {
       case NOTES_TAB_INDEX:
       for (int i = 0; i < allSecrets.size(); i++) {
-        if (allSecrets.get(i).getType().equals("note")) {
-          filteredSecrets.add(allSecrets.get(i));
+        SecretIdentifier secret = allSecrets.get(i);
+        if (secret.getType().equals("note")) {
+          if (containsSearchQuery(secret))
+            filteredSecrets.add(secret);
         }
       }
       break;
       case PASSWORDS_TAB_INDEX:
       for (int i = 0; i < allSecrets.size(); i++) {
-        if (!allSecrets.get(i).getType().equals("note")) {
-          filteredSecrets.add(allSecrets.get(i));
+        SecretIdentifier secret = allSecrets.get(i);
+        if (!secret.getType().equals("note")) {
+          if (containsSearchQuery(secret))
+            filteredSecrets.add(secret);
         }
       }
       break;
       case ALL_TAB_INDEX:
-      filteredSecrets.addAll(allSecrets);
+        for (int i = 0; i < allSecrets.size(); i++) {
+          SecretIdentifier secret = allSecrets.get(i);
+          if (containsSearchQuery(secret))
+            filteredSecrets.add(secret);
+        }
       break;
     }
 
