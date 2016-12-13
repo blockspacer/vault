@@ -47,7 +47,7 @@ import co.mitro.core.server.data.RPC.MitroRPC;
 import com.google.common.collect.Lists;
 
 
-@WebServlet("/api/GetGroup")
+@WebServlet("/mitro-core/api/GetGroup")
 public class GetGroup extends MitroServlet {
 	private static final long serialVersionUID = 1L;
 

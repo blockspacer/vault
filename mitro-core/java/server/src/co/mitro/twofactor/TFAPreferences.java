@@ -37,7 +37,7 @@ import co.mitro.core.server.Manager;
 import co.mitro.core.server.ManagerFactory;
 import co.mitro.core.server.data.DBIdentity;
 
-@WebServlet("/TwoFactorAuth/TFAPreferences")
+@WebServlet("/mitro-core/TwoFactorAuth/TFAPreferences")
 public class TFAPreferences extends UserSignedTwoFactorServlet {
   private static final long serialVersionUID = 1L;
   

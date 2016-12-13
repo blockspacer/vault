@@ -46,7 +46,7 @@ import com.google.common.collect.Sets;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.Where;
 
-@WebServlet("/api/GetAuditLog")
+@WebServlet("/mitro-core/api/GetAuditLog")
 public class GetAuditLog extends MitroServlet {
   private static final long serialVersionUID = 1L;
 

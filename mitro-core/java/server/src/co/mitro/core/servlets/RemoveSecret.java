@@ -45,7 +45,7 @@ import co.mitro.core.server.data.RPC.MitroRPC;
 import com.google.common.collect.Sets;
 
 
-@WebServlet("/api/RemoveSecret")
+@WebServlet("/mitro-core/api/RemoveSecret")
 public class RemoveSecret extends MitroServlet {
   private static final long serialVersionUID = 1L;
   @SuppressWarnings("unused")

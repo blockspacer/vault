@@ -44,7 +44,7 @@ import com.stripe.Stripe;
 import com.stripe.model.Customer;
 import com.stripe.model.CustomerSubscriptionCollection;
 
-@javax.servlet.annotation.WebServlet("/SubmitPayment")
+@javax.servlet.annotation.WebServlet("/mitro-core/SubmitPayment")
 public class SubmitPayment extends MitroWebServlet {
 
   private static final long serialVersionUID = 1L;

@@ -59,7 +59,7 @@ import com.google.common.collect.Sets;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.SelectArg;
 
-@WebServlet("/api/internal/AddPendingGroups")
+@WebServlet("/mitro-core/api/internal/AddPendingGroups")
 public class AddPendingGroupServlet extends MitroServlet {
   private static final long serialVersionUID = -6743381126604749211L;
   private static final Logger logger = LoggerFactory.getLogger(AddPendingGroupServlet.class);

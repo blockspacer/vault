@@ -55,7 +55,7 @@ import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
 
 
-@WebServlet("/api/CreateOrganization")
+@WebServlet("/mitro-core/api/CreateOrganization")
 public class CreateOrganization extends MitroServlet {
   private static final long serialVersionUID = 1L;
 

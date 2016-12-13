@@ -52,7 +52,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 
 
-@WebServlet("/user/VerifyDevice")
+@WebServlet("/mitro-core/user/VerifyDevice")
 public class VerifyDeviceServlet extends HttpServlet {
   private static final Gson gson = new Gson();
   private static final Logger logger = LoggerFactory.getLogger(VerifyDeviceServlet.class);

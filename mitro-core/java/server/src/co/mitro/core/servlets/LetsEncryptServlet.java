@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Lectorius, Inc.
+ * Copyright (c) 2016, Aquarious, Inc.
  * Authors:
- * Vijay Pandurangan (vijayp@mitro.co)
- * Evan Jones (ej@mitro.co)
- * Adam Hilss (ahilss@mitro.co)
+ * Vault Team (team@vaultapp.xyz)
  *
  *
  *     This program is free software: you can redistribute it and/or modify
@@ -19,36 +17,43 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *     
- *     You can contact the authors at inbound@mitro.co.
+ *     You can contact the authors at team@vaultapp.xyz
  *******************************************************************************/
 package co.mitro.core.servlets;
 
 import java.io.IOException;
+import java.io.StringReader;
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import co.mitro.build.BuildMetadata;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- * Displays the build metadata stored as a resource in /build.properties.
- * TODO: Make this authenticated so it is not publicly accessible?
- */
-@WebServlet("/mitro-core/api/BuildMetadata")
-public class BuildMetadataServlet extends HttpServlet {
+import com.google.common.base.Strings;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.TypeAdapter;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+
+@WebServlet("/.well-known/acme-challenge/*")
+public class LetsEncryptServlet extends HttpServlet {
+  private static final Logger logger = LoggerFactory.getLogger(ServerRejectsServlet.class);
   private static final long serialVersionUID = 1L;
 
   @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws IOException {
-    BuildMetadata metadata = BuildMetadata.get();
-    response.setContentType("text/plain; charset=UTF-8");
-    response.getWriter().format(
-        "commit: %s\n" +
-        "describe: %s\n" +
-        "build time: %s\n",
-        metadata.commit, metadata.describe, metadata.time);
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String acmeChallengeCode = System.getenv("LETS_ENCRYPT_CHALLENGE_CODE");
+    if (acmeChallengeCode == null) {
+      acmeChallengeCode = "unknown";
+    }
+
+    response.getWriter().write(acmeChallengeCode);
   }
 }

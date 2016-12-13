@@ -37,7 +37,7 @@ import co.mitro.core.server.data.RPC;
 import co.mitro.core.server.data.RPC.MitroRPC;
 
 
-@WebServlet("/api/EditSecret")
+@WebServlet("/mitro-core/api/EditSecret")
 public class EditSecret extends AbstractAddEditGroup {
   private static final long serialVersionUID = 1L;
   private static final Logger logger = LoggerFactory.getLogger(EditSecret.class);

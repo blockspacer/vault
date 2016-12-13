@@ -51,7 +51,7 @@ import com.google.common.collect.Sets;
 /**
  * Returns a map of <uid -> public keys> for a list of identities.
  */
-@WebServlet("/api/GetPublicKeyForIdentity")
+@WebServlet("/mitro-core/api/GetPublicKeyForIdentity")
 public class GetPublicKeyForIdentity extends MitroServlet {
 	private static final long serialVersionUID = 1L;
 

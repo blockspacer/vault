@@ -32,7 +32,7 @@ import javax.servlet.annotation.WebServlet;
 import co.mitro.core.crypto.KeyInterfaces.KeyFactory;
 import co.mitro.core.server.ManagerFactory;
 
-@WebServlet("/TwoFactorAuth/NewUser")
+@WebServlet("/mitro-core/TwoFactorAuth/NewUser")
 public class NewUser extends UserSignedTwoFactorServlet {
   private final static long serialVersionUID = 1L;
 

@@ -39,7 +39,7 @@ import co.mitro.core.server.data.DBStripeCustomer;
 
 import com.google.common.base.Strings;
 
-@javax.servlet.annotation.WebServlet("/CreateCustomer")
+@javax.servlet.annotation.WebServlet("/mitro-core/CreateCustomer")
 public class CreateCustomer extends MitroWebServlet {
 
   private static Logger logger = LoggerFactory.getLogger(CreateCustomer.class);

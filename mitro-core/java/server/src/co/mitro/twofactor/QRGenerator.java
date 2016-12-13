@@ -40,7 +40,7 @@ import net.glxn.qrgen.image.ImageType;
 
 import com.google.common.base.Preconditions;
 
-@WebServlet("/TwoFactorAuth/QRGenerator")
+@WebServlet("/mitro-core/TwoFactorAuth/QRGenerator")
 public class QRGenerator extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private static final String ISSUER = "Vault";

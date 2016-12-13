@@ -53,7 +53,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
-@WebServlet("/api/GetOrganizationState")
+@WebServlet("/mitro-core/api/GetOrganizationState")
 public class GetOrganizationState extends MitroServlet {
   private static final long serialVersionUID = 1L;
   private static final Logger logger = LoggerFactory

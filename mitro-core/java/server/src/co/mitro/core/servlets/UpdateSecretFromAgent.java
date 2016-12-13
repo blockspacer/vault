@@ -55,7 +55,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 
 
-@WebServlet("/api/internal/UpdateSecretFromAgent")
+@WebServlet("/mitro-core/api/internal/UpdateSecretFromAgent")
 public class UpdateSecretFromAgent extends MitroServlet {
   private static final long serialVersionUID = 1L;
   private static final Logger logger = LoggerFactory.getLogger(UpdateSecretFromAgent.class);

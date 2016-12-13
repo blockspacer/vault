@@ -43,7 +43,7 @@ import co.mitro.core.server.data.DBEmailRecord;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
-@WebServlet("/api/RecordEmail")
+@WebServlet("/mitro-core/api/RecordEmail")
 public class RecordEmail extends HttpServlet {
   private static final Logger logger = LoggerFactory.getLogger(AddIssue.class);
   private static final long serialVersionUID = 1L;

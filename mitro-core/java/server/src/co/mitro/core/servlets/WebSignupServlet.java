@@ -36,7 +36,7 @@ import co.mitro.core.server.data.DBSignup;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 
-@javax.servlet.annotation.WebServlet("/WebSignup")
+@javax.servlet.annotation.WebServlet("/mitro-core/WebSignup")
 public class WebSignupServlet extends MitroWebServlet {
   private static final long serialVersionUID = 1L;
   

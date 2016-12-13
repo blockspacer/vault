@@ -111,6 +111,7 @@ import co.mitro.core.servlets.UpdateSecretFromAgent;
 import co.mitro.core.servlets.VerifyAccountServlet;
 import co.mitro.core.servlets.VerifyDeviceServlet;
 import co.mitro.core.servlets.WebSignupServlet;
+import co.mitro.core.servlets.LetsEncryptServlet;
 import co.mitro.core.util.NullRequestRateLimiter;
 import co.mitro.metrics.BatchStatsDClient;
 import co.mitro.metrics.StatsDReporter;
@@ -254,7 +255,7 @@ public class Main {
     ServerRejectsServlet.class, CreateOrganization.class, MutateOrganization.class,
     CheckTwoFactorRequired.class, RecordEmail.class, EditSecretContent.class,
     CreateCustomer.class, GetCustomer.class, SubmitPayment.class, ShareAccessEmailer.class, 
-    ManageAccessEmailer.class, UpdateSecretFromAgent.class);
+    ManageAccessEmailer.class, UpdateSecretFromAgent.class, LetsEncryptServlet.class);
 
   public static void exitIfAssertionsDisabled() {
     try {
@@ -362,7 +363,7 @@ public class Main {
 
     // Register all servlets, using the path specified by @WebServlet
     ServletContextHandler context = new ServletContextHandler();
-    context.setContextPath("/mitro-core");
+    context.setContextPath("/");
     for (HttpServlet servlet : servlets) {
       registerServlet(context, servlet);
     }

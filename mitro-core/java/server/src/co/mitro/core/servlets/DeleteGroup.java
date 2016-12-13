@@ -39,7 +39,7 @@ import co.mitro.core.server.data.RPC;
 import co.mitro.core.server.data.RPC.MitroRPC;
 
 
-@WebServlet("/api/DeleteGroup")
+@WebServlet("/mitro-core/api/DeleteGroup")
 public class DeleteGroup extends MitroServlet {
   private static final long serialVersionUID = 1L;
 

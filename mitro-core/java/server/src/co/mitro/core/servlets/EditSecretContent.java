@@ -46,7 +46,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
 
-@WebServlet("/api/EditSecretContent")
+@WebServlet("/mitro-core/api/EditSecretContent")
 public class EditSecretContent extends MitroServlet {
   private static final long serialVersionUID = 1L;
   private static final Logger logger = LoggerFactory.getLogger(EditSecretContent.class);

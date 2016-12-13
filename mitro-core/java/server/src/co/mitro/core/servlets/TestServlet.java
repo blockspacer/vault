@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Servlet implementation class TestServlet
  */
-@WebServlet("/TestServlet")
+@WebServlet("/mitro-core/TestServlet")
 public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final AtomicInteger value = new AtomicInteger(42);

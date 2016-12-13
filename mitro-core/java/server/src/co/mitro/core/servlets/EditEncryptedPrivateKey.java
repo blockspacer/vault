@@ -38,7 +38,7 @@ import co.mitro.core.server.data.RPC.MitroRPC;
 import com.google.common.collect.Lists;
 
 
-@WebServlet("/api/EditEncryptedPrivateKey")
+@WebServlet("/mitro-core/api/EditEncryptedPrivateKey")
 public class EditEncryptedPrivateKey extends MitroServlet {
   private static final long serialVersionUID = 1L;
   private static final int MIN_KEY_LENGTH = 500;

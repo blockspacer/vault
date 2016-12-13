@@ -44,7 +44,7 @@ import com.j256.ormlite.stmt.SelectArg;
  * @author vijayp
  * 
  */
-@WebServlet("/api/RemovePendingGroupApprovals")
+@WebServlet("/mitro-core/api/RemovePendingGroupApprovals")
 public class RemoveAllPendingGroupApprovalsForScope extends MitroServlet {
 
   /**

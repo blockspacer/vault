@@ -42,7 +42,7 @@ import co.mitro.core.server.data.RPC;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 
-@WebServlet("/TwoFactorAuth/Verify")
+@WebServlet("/mitro-core/TwoFactorAuth/Verify")
 public class Verify extends ServerSignedTwoFactorServlet {
   private static final long serialVersionUID = 1L;
   private static final Gson gson = new Gson();

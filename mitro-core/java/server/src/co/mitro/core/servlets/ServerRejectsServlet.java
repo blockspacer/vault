@@ -44,7 +44,7 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
-@WebServlet("/ServerRejects")
+@WebServlet("/mitro-core/ServerRejects")
 public class ServerRejectsServlet extends HttpServlet {
   private static final Logger logger = LoggerFactory.getLogger(ServerRejectsServlet.class);
   private static final long serialVersionUID = 1L;

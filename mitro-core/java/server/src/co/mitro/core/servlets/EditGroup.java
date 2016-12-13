@@ -51,7 +51,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 
-@WebServlet("/api/EditGroup")
+@WebServlet("/mitro-core/api/EditGroup")
 public class EditGroup extends AbstractAddEditGroup {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = LoggerFactory.getLogger(EditGroup.class);

@@ -58,7 +58,7 @@ import com.google.common.collect.TreeMultimap;
 import com.j256.ormlite.dao.RawRowMapper;
 
 
-@WebServlet("/api/ListMySecretsAndGroupKeys")
+@WebServlet("/mitro-core/api/ListMySecretsAndGroupKeys")
 public class ListMySecretsAndGroupKeys extends MitroServlet {
   private static final long serialVersionUID = 1L;
   private static final Logger logger = LoggerFactory

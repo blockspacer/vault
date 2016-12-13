@@ -39,7 +39,7 @@ import com.google.gson.Gson;
 import com.j256.ormlite.stmt.SelectArg;
 import com.stripe.model.Plan;
 
-@javax.servlet.annotation.WebServlet("/GetCustomer")
+@javax.servlet.annotation.WebServlet("/mitro-core/GetCustomer")
 public class GetCustomer extends MitroWebServlet {
 
   private static final long serialVersionUID = 1L;

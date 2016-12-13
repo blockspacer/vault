@@ -49,7 +49,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
 
-@WebServlet("/api/AddIdentity")
+@WebServlet("/mitro-core/api/AddIdentity")
 public class AddIdentity extends MitroServlet {
   private static final long serialVersionUID = 1L;
   private static final Logger logger = LoggerFactory.getLogger(AddIdentity.class);

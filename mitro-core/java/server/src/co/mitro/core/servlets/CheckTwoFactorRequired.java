@@ -41,7 +41,7 @@ import co.mitro.twofactor.TwoFactorSigningService;
 
 import com.google.common.base.Strings;
 
-@WebServlet("/api/ChangePwdTwoFactorRequired")
+@WebServlet("/mitro-core/api/ChangePwdTwoFactorRequired")
 public class CheckTwoFactorRequired extends MitroServlet {
   private static final long serialVersionUID = 1L;
 

@@ -51,7 +51,7 @@ import com.google.common.collect.ImmutableMap;
  * Servlet used by the client to retrieve an AES key which 
  * it should use to encrypt stuff on local disk.
  */ 
-@WebServlet("/api/GetMyDeviceKey")
+@WebServlet("/mitro-core/api/GetMyDeviceKey")
 public class GetMyDeviceKey extends MitroServlet {
   private static final Logger logger = LoggerFactory.getLogger(GetMyDeviceKey.class);
   private static final long serialVersionUID = 1L;

@@ -48,7 +48,7 @@ import co.mitro.core.server.data.DBServerVisibleSecret;
 import co.mitro.core.server.data.RPC;
 import co.mitro.core.server.data.RPC.MitroRPC;
 
-@WebServlet("/api/AddSecret")
+@WebServlet("/mitro-core/api/AddSecret")
 public class AddSecret extends MitroServlet {
   private static final long serialVersionUID = 1L;
 

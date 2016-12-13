@@ -44,7 +44,7 @@ import co.mitro.core.server.data.RPCLogger;
 
 import com.google.gson.Gson;
 
-@WebServlet("/api/AddIssue")
+@WebServlet("/mitro-core/api/AddIssue")
 public class AddIssue extends HttpServlet {
   private static final Logger logger = LoggerFactory.getLogger(AddIssue.class);
   private static final long serialVersionUID = -8241025232603896888L;

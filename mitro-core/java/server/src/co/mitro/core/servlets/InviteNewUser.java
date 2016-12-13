@@ -52,7 +52,7 @@ import co.mitro.core.util.Random;
 
 import com.google.common.collect.Maps;
 
-@WebServlet("/api/InviteNewUsers")
+@WebServlet("/mitro-core/api/InviteNewUsers")
 public class InviteNewUser extends MitroServlet {
   private static final Logger logger = LoggerFactory.getLogger(InviteNewUser.class);
   private static final long serialVersionUID = 1L;

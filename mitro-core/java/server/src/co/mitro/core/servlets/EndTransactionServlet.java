@@ -36,7 +36,7 @@ import co.mitro.core.server.data.RPC.MitroRPC;
 /**
  * Servlet implementation class EndTransactionServlet
  */
-@WebServlet("/api/EndTransaction")
+@WebServlet("/mitro-core/api/EndTransaction")
 
 public class EndTransactionServlet extends MitroServlet {
 

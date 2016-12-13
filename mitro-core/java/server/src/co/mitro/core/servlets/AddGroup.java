@@ -43,7 +43,7 @@ import com.google.common.collect.Sets;
 /**
  * Servlet implementation class TestServlet
  */
-@WebServlet("/api/AddGroup")
+@WebServlet("/mitro-core/api/AddGroup")
 public class AddGroup extends AbstractAddEditGroup {
   private static final long serialVersionUID = 1L;
 

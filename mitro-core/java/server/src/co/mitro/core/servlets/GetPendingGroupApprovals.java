@@ -60,7 +60,7 @@ import com.google.common.collect.Sets;
  * @author vijayp
  * 
  */
-@WebServlet("/api/GetPendingGroups")
+@WebServlet("/mitro-core/api/GetPendingGroups")
 public class GetPendingGroupApprovals extends MitroServlet {
 
   /**

@@ -33,7 +33,7 @@ import co.mitro.core.server.ManagerFactory;
 
 import com.google.common.base.Strings;
 
-@WebServlet("/TwoFactorAuth")
+@WebServlet("/mitro-core/TwoFactorAuth")
 public class TwoFactorAuth extends ServerSignedTwoFactorServlet {
   private static final long serialVersionUID = 1L;
 

@@ -62,7 +62,7 @@ import com.google.common.collect.Sets;
 import com.j256.ormlite.stmt.DeleteBuilder;
 
 
-@WebServlet("/api/MutateOrganization")
+@WebServlet("/mitro-core/api/MutateOrganization")
 public class MutateOrganization extends MitroServlet {
   private static final long serialVersionUID = 1L;
   private static final Joiner COMMA_JOINER = Joiner.on(",");

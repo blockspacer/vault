@@ -42,7 +42,7 @@ import co.mitro.core.server.ManagerFactory;
 import co.mitro.core.server.data.DBIdentity;
 
 
-@WebServlet("/user/VerifyAccount")
+@WebServlet("/mitro-core/user/VerifyAccount")
 public class VerifyAccountServlet extends HttpServlet {
   private static final Logger logger = LoggerFactory.getLogger(VerifyAccountServlet.class);
   private static final long serialVersionUID = 1L;

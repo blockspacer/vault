@@ -42,7 +42,7 @@ import co.mitro.core.server.data.RPC.MitroRPC;
 /**
  * Servlet implementation class BeginTransactionServlet
  */
-@WebServlet("/api/BeginTransaction")
+@WebServlet("/mitro-core/api/BeginTransaction")
 
 public class BeginTransactionServlet extends MitroServlet {
   private static final long serialVersionUID = 1L;

@@ -49,7 +49,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 
-@WebServlet("/api/GetSecret")
+@WebServlet("/mitro-core/api/GetSecret")
 public class GetSecret extends MitroServlet {
 	private static final long serialVersionUID = 1L;
 	private static Set<String> viewOnlyPlatforms = ImmutableSet.of("ANDROID", "IOS");

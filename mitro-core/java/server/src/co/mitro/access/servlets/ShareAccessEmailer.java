@@ -44,7 +44,7 @@ import co.mitro.core.servlets.Util;
 /**
  * Class to process Share Access Link form on Mitro Access
  */
-@WebServlet("/ShareAccessLink")
+@WebServlet("/mitro-core/ShareAccessLink")
 public class ShareAccessEmailer extends MitroAccessEmailer {
   private static final Logger logger = LoggerFactory.getLogger(ShareAccessEmailer.class);
   private static final long serialVersionUID = 1L; 

@@ -44,7 +44,7 @@ import co.mitro.core.servlets.Util;
 /**
  * Class to process Manage Access Link form on Mitro Access
  */
-@WebServlet("/ManageAccessLink")
+@WebServlet("/mitro-core/ManageAccessLink")
 public class ManageAccessEmailer extends MitroAccessEmailer {
   private static final Logger logger = LoggerFactory.getLogger(ManageAccessEmailer.class);
   private static final long serialVersionUID = 1L;

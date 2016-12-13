@@ -56,7 +56,7 @@ import com.google.common.base.Strings;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 
-@WebServlet("/api/GetMyPrivateKey")
+@WebServlet("/mitro-core/api/GetMyPrivateKey")
 public class GetMyPrivateKey extends MitroServlet {
   private static final Logger logger = LoggerFactory.getLogger(MitroServlet.class);
   private static final long serialVersionUID = 1L;

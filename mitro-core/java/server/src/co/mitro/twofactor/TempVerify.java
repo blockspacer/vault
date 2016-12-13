@@ -37,7 +37,7 @@ import co.mitro.core.server.Manager;
 import co.mitro.core.server.ManagerFactory;
 import co.mitro.core.server.data.DBIdentity;
 
-@WebServlet("/TwoFactorAuth/TempVerify")
+@WebServlet("/mitro-core/TwoFactorAuth/TempVerify")
 public class TempVerify extends UserSignedTwoFactorServlet {
   private static final long serialVersionUID = 1L;
   private static final Logger logger = LoggerFactory.getLogger(TempVerify.class);
